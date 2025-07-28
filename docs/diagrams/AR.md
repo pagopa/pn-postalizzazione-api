@@ -64,7 +64,11 @@ stateDiagram-v2
 ```
 ## Esempio Mermaid flowchart
 ```mermaid
-%%{ init: { 'flowchart': {'defaultRenderer': 'elk' } } }%%
+---
+config:
+  flowchart:
+    defaultRenderer: "elk"
+---
 flowchart TD
   %% Nodi principali
   PresaInCarico["Materialità presa in carico ed accettata dal recapitista"] -->|RECRN001A| ConsegnatoPreEsito["Consegnato<br>(pre-esito)"]
