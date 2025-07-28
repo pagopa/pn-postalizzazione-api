@@ -118,3 +118,4 @@ flowchart TD
   style CompiutaGiacenzaPressoGiacenzaFascicoloChiuso fill:#43A047
   style MancataConsegnaFascicoloChiuso fill:#43A047
 ```
+

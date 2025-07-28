@@ -1,0 +1,89 @@
+@startuml
+skinparam defaultTextAlignment center
+skinparam rectangle {
+  BackgroundColor White
+  BorderColor Black
+  FontColor Black
+}
+skinparam arrow {
+  FontColor Black
+}
+
+' Nodi principali
+rectangle "Materialità presa in carico ed accettata dal recapitista" as PresaInCarico
+rectangle "Consegnato\n(pre-esito)" as ConsegnatoPreEsito
+rectangle "Mancata consegna\n(pre-esito)" as MancataConsegnaPreEsito
+rectangle "Irreperibilita assoluta\n(pre-esito)" as IrreperibilitaAssolutaPreEsito
+rectangle "Furto\nSmarrimento\nDeterioramento" as FurtoSmarrimentoDeterioramento #43A047
+rectangle "Inesito" as Inesito
+
+' Consegnato
+rectangle "Consegnato (demat)" as ConsegnatoDemat
+rectangle "Consegnato (fascicolo chiuso)" as ConsegnatoFascicoloChiuso #43A047
+
+' Mancata consegna
+rectangle "Mancata consegna (demat)" as MancataConsegnaDemat
+rectangle "Mancata consegna (fascicolo chiuso)" as MancataConsegnaFascicoloChiuso #43A047
+
+' Irreperibilità assoluta
+rectangle "Irreperibilita assoluta (demat)" as IrreperibilitaAssolutaDemat
+rectangle "Irreperibilita assoluta (fascicolo chiuso)" as IrreperibilitaAssolutaFascicoloChiuso #43A047
+
+' Giacenza
+rectangle "In giacenza" as InGiacenza
+
+' Consegnato presso giacenza
+rectangle "Consegnato presso giacenza\n(pre-esito)" as ConsegnatoPressoGiacenzaPreEsito
+rectangle "Consegnato presso giacenza (demat)" as ConsegnatoPressoGiacenzaDemat
+rectangle "Consegnato presso giacenza (fascicolo chiuso)" as ConsegnatoPressoGiacenzaFascicoloChiuso #43A047
+
+' Mancata consegna presso giacenza
+rectangle "Mancata consegna presso giacenza\n(pre-esito)" as MancataConsegnaPressoGiacenzaPreEsito
+rectangle "Mancata consegna presso giacenza (demat)" as MancataConsegnaPressoGiacenzaDemat
+rectangle "Mancata consegna presso giacenza (fascicolo chiuso)" as MancataConsegnaPressoGiacenzaFascicoloChiuso #43A047
+
+' Compiuta giacenza presso giacenza
+rectangle "Compiuta giacenza presso giacenza\n(pre-esito)" as CompiutaGiacenzaPressoGiacenzaPreEsito
+rectangle "Compiuta giacenza presso giacenza (demat)" as CompiutaGiacenzaPressoGiacenzaDemat
+rectangle "Compiuta giacenza presso giacenza (fascicolo chiuso)" as CompiutaGiacenzaPressoGiacenzaFascicoloChiuso #43A047
+
+' Collegamenti principali
+PresaInCarico --> ConsegnatoPreEsito : RECRN001A
+PresaInCarico --> MancataConsegnaPreEsito : RECRN002A
+PresaInCarico --> IrreperibilitaAssolutaPreEsito : RECRN002D
+PresaInCarico --> FurtoSmarrimentoDeterioramento : RECRN006
+PresaInCarico --> Inesito : RECRN010
+
+' Consegnato
+ConsegnatoPreEsito --> ConsegnatoDemat : RECRN001B\n(Demat AR)
+ConsegnatoDemat --> ConsegnatoFascicoloChiuso : RECRN001C
+
+' Mancata consegna
+MancataConsegnaPreEsito --> MancataConsegnaDemat : RECRN002B\n(Demat Plico)
+MancataConsegnaDemat --> MancataConsegnaFascicoloChiuso : RECRN002C
+
+' Irreperibilità assoluta
+IrreperibilitaAssolutaPreEsito --> IrreperibilitaAssolutaDemat : RECRN002E\n(Demat Plico, Demat Indagine)
+IrreperibilitaAssolutaDemat --> IrreperibilitaAssolutaDemat : RECRN002E\n(Demat Plico, Demat Indagine)
+IrreperibilitaAssolutaDemat --> IrreperibilitaAssolutaFascicoloChiuso : RECRN002F
+
+' Giacenza
+Inesito --> FurtoSmarrimentoDeterioramento : RECRN006
+Inesito --> InGiacenza : RECRN011
+
+' Consegnato presso giacenza
+InGiacenza --> ConsegnatoPressoGiacenzaPreEsito : RECRN003A
+ConsegnatoPressoGiacenzaPreEsito --> ConsegnatoPressoGiacenzaDemat : RECRN003B\n(Demat AR)
+ConsegnatoPressoGiacenzaDemat --> ConsegnatoPressoGiacenzaFascicoloChiuso
+
+' Mancata consegna presso giacenza
+InGiacenza --> MancataConsegnaPressoGiacenzaPreEsito : RECRN004A
+MancataConsegnaPressoGiacenzaPreEsito --> MancataConsegnaPressoGiacenzaDemat : RECRN004B\n(Demat Plico)
+MancataConsegnaPressoGiacenzaDemat --> MancataConsegnaPressoGiacenzaFascicoloChiuso
+
+' Compiuta giacenza presso giacenza
+InGiacenza --> CompiutaGiacenzaPressoGiacenzaPreEsito : RECRN005A
+CompiutaGiacenzaPressoGiacenzaPreEsito --> CompiutaGiacenzaPressoGiacenzaDemat : RECRN005B\n(Demat Plico)
+CompiutaGiacenzaPressoGiacenzaDemat --> CompiutaGiacenzaPressoGiacenzaFascicoloChiuso
+
+@enduml
