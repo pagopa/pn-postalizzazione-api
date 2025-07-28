@@ -119,3 +119,8 @@ flowchart TD
   style MancataConsegnaFascicoloChiuso fill:#43A047
 ```
 
+## Esempio PlantUML
+Il digramma viene generato dinamicamente chiamando il servizio [http://www.plantuml.com/plantuml]()
+
+![AR](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/pagopa/pn-postalizzazione-api/refs/heads/feature/test-diagrams-20250728/docs/diagrams/plantuml.iuml)
+
