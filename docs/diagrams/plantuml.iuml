@@ -55,16 +55,16 @@ PresaInCarico --> FurtoSmarrimentoDeterioramento : RECRN006
 PresaInCarico --> Inesito : RECRN010
 
 ' Consegnato
-ConsegnatoPreEsito --> ConsegnatoDemat : RECRN001B\n(Demat AR)
+ConsegnatoPreEsito --> ConsegnatoDemat : RECRN001B\n[Demat AR]
 ConsegnatoDemat --> ConsegnatoFascicoloChiuso : RECRN001C
 
 ' Mancata consegna
-MancataConsegnaPreEsito --> MancataConsegnaDemat : RECRN002B\n(Demat Plico)
+MancataConsegnaPreEsito --> MancataConsegnaDemat : RECRN002B\n[Demat Plico]
 MancataConsegnaDemat --> MancataConsegnaFascicoloChiuso : RECRN002C
 
 ' Irreperibilità assoluta
-IrreperibilitaAssolutaPreEsito --> IrreperibilitaAssolutaDemat : RECRN002E\n(Demat Plico, Demat Indagine)
-IrreperibilitaAssolutaDemat --> IrreperibilitaAssolutaDemat : RECRN002E\n(Demat Plico, Demat Indagine)
+IrreperibilitaAssolutaPreEsito --> IrreperibilitaAssolutaDemat : RECRN002E\n[Demat Plico, Demat Indagine]
+IrreperibilitaAssolutaDemat --> IrreperibilitaAssolutaDemat : RECRN002E\n[Demat Plico, Demat Indagine]
 IrreperibilitaAssolutaDemat --> IrreperibilitaAssolutaFascicoloChiuso : RECRN002F
 
 ' Giacenza
@@ -73,17 +73,17 @@ Inesito --> InGiacenza : RECRN011
 
 ' Consegnato presso giacenza
 InGiacenza --> ConsegnatoPressoGiacenzaPreEsito : RECRN003A
-ConsegnatoPressoGiacenzaPreEsito --> ConsegnatoPressoGiacenzaDemat : RECRN003B\n(Demat AR)
+ConsegnatoPressoGiacenzaPreEsito --> ConsegnatoPressoGiacenzaDemat : RECRN003B\n[Demat AR]
 ConsegnatoPressoGiacenzaDemat --> ConsegnatoPressoGiacenzaFascicoloChiuso
 
 ' Mancata consegna presso giacenza
 InGiacenza --> MancataConsegnaPressoGiacenzaPreEsito : RECRN004A
-MancataConsegnaPressoGiacenzaPreEsito --> MancataConsegnaPressoGiacenzaDemat : RECRN004B\n(Demat Plico)
+MancataConsegnaPressoGiacenzaPreEsito --> MancataConsegnaPressoGiacenzaDemat : RECRN004B\n[Demat Plico]
 MancataConsegnaPressoGiacenzaDemat --> MancataConsegnaPressoGiacenzaFascicoloChiuso
 
 ' Compiuta giacenza presso giacenza
 InGiacenza --> CompiutaGiacenzaPressoGiacenzaPreEsito : RECRN005A
-CompiutaGiacenzaPressoGiacenzaPreEsito --> CompiutaGiacenzaPressoGiacenzaDemat : RECRN005B\n(Demat Plico)
+CompiutaGiacenzaPressoGiacenzaPreEsito --> CompiutaGiacenzaPressoGiacenzaDemat : RECRN005B\n[Demat Plico]
 CompiutaGiacenzaPressoGiacenzaDemat --> CompiutaGiacenzaPressoGiacenzaFascicoloChiuso
 
 @enduml
