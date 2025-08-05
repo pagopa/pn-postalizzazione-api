@@ -1,126 +1,245 @@
-## Esempio Mermaid stateDiagram
-```mermaid
-stateDiagram-v2
-  [*] --> PresaInCarico
-  PresaInCarico --> ConsegnatoPreEsito:RECRN001A
-  PresaInCarico --> MancataConsegnaPreEsito:RECRN002A
-  PresaInCarico --> IrreperibilitaAssolutaPreEsito:RECRN002D
-  PresaInCarico --> FurtoSmarrimentoDeterioramento:RECRN006
-  FurtoSmarrimentoDeterioramento --> [*]
-  PresaInCarico --> Inesito:RECRN010
-  %% Consegnato
-  ConsegnatoPreEsito --> ConsegnatoDemat:RECRN001B<br>[Demat AR]
-  ConsegnatoDemat --> ConsegnatoFascicoloChiuso:RECRN001C
-  ConsegnatoFascicoloChiuso --> [*]
-  %% Mancata consegna
-  MancataConsegnaPreEsito --> MancataConsegnaDemat:RECRN002B<br>[Demat Plico]
-  MancataConsegnaDemat --> MancataConsegnaFascicoloChiuso:RECRN002C
-  MancataConsegnaFascicoloChiuso --> [*]
-  %% Irreperibilita assoluta
-  IrreperibilitaAssolutaPreEsito --> IrreperibilitaAssolutaDemat:RECRN002E<br>[Demat Plico, Demat Indagine]
-  IrreperibilitaAssolutaDemat --> IrreperibilitaAssolutaDemat:RECRN002E<br>[Demat Plico, Demat Indagine]
-  IrreperibilitaAssolutaDemat --> IrreperibilitaAssolutaFascicoloChiuso:RECRN002F
-  IrreperibilitaAssolutaFascicoloChiuso --> [*]
-  %% Giacenza
-  Inesito --> FurtoSmarrimentoDeterioramento:RECRN006
-  Inesito --> InGiacenza:RECRN011
-  %% Consegnato presso giacenza
-  InGiacenza --> ConsegnatoPressoGiacenzaPreEsito:RECRN003A
-  ConsegnatoPressoGiacenzaPreEsito --> ConsegnatoPressoGiacenzaDemat:RECRN003B<br>[Demat AR]
-  ConsegnatoPressoGiacenzaDemat --> ConsegnatoPressoGiacenzaFascicoloChiuso
-  ConsegnatoPressoGiacenzaFascicoloChiuso --> [*]
-  %% Mancata consegna presso giacenza
-  InGiacenza --> MancataConsegnaPressoGiacenzaPreEsito:RECRN004A
-  MancataConsegnaPressoGiacenzaPreEsito --> MancataConsegnaPressoGiacenzaDemat:RECRN004B<br>[Demat Plico]
-  MancataConsegnaPressoGiacenzaDemat --> MancataConsegnaPressoGiacenzaFascicoloChiuso
-  MancataConsegnaPressoGiacenzaFascicoloChiuso --> [*]
-  %% Compiuta giacenza presso giacenza
-  InGiacenza --> CompiutaGiacenzaPressoGiacenzaPreEsito:RECRN005A
-  CompiutaGiacenzaPressoGiacenzaPreEsito --> CompiutaGiacenzaPressoGiacenzaDemat:RECRN005B<br>[Demat Plico]
-  CompiutaGiacenzaPressoGiacenzaDemat --> CompiutaGiacenzaPressoGiacenzaFascicoloChiuso
-  CompiutaGiacenzaPressoGiacenzaFascicoloChiuso --> [*]
-  %%Alias
-  PresaInCarico: Materialità presa in carico ed accettata dal recapitista
-  FurtoSmarrimentoDeterioramento: Furto<br>Smarrimento<br>Deterioramento
-  ConsegnatoPreEsito: Consegnato<br>(pre-esito)
-  ConsegnatoDemat: Consegnato<br>(demat)
-  ConsegnatoFascicoloChiuso: Consegnato<br>(fascicolo chiuso)
-  MancataConsegnaPreEsito: Mancata consegna<br>(pre-esito)
-  MancataConsegnaDemat: Mancata consegna<br>(demat)
-  MancataConsegnaFascicoloChiuso: Mancata consegna<br>(fascicolo chiuso)
-  IrreperibilitaAssolutaPreEsito: Irreperibilita assoluta<br>(pre-esito)
-  IrreperibilitaAssolutaDemat: Irreperibilita assoluta<br>(demat)
-  IrreperibilitaAssolutaFascicoloChiuso: Irreperibilita assoluta<br>(fascicolo chiuso)
-  ConsegnatoPressoGiacenzaPreEsito: Consegnato presso giacenza<br>(pre-esito)
-  ConsegnatoPressoGiacenzaDemat: Consegnato presso giacenza<br>(demat)
-  ConsegnatoPressoGiacenzaFascicoloChiuso: Consegnato presso giacenza<br>(fascicolo chiuso)
-  MancataConsegnaPressoGiacenzaPreEsito: Mancata consegna presso giacenza<br>(pre-esito)
-  MancataConsegnaPressoGiacenzaDemat: Mancata consegna presso giacenza<br>(demat)
-  MancataConsegnaPressoGiacenzaFascicoloChiuso: Mancata consegna presso giacenza<br>(fascicolo chiuso)
-  CompiutaGiacenzaPressoGiacenzaPreEsito: Compiuta giacenza presso giacenza<br>(pre-esito)
-  CompiutaGiacenzaPressoGiacenzaDemat: Compiuta giacenza presso giacenza<br>(demat)
-  CompiutaGiacenzaPressoGiacenzaFascicoloChiuso: Compiuta giacenza presso giacenza<br>(fascicolo chiuso)
-  style FurtoSmarrimentoDeterioramento,ConsegnatoFascicoloChiuso,IrreperibilitaAssolutaFascicoloChiuso,ConsegnatoPressoGiacenzaFascicoloChiuso,MancataConsegnaPressoGiacenzaFascicoloChiuso,CompiutaGiacenzaPressoGiacenzaFascicoloChiuso,MancataConsegnaFascicoloChiuso fill:#43A047
-```
-## Esempio Mermaid flowchart
+## Macchina a stati v1
 ```mermaid
 ---
 config:
-  flowchart:
-    defaultRenderer: "elk"
+  layout: elk
 ---
-flowchart TD
-  %% Nodi principali
-  PresaInCarico["Materialità presa in carico ed accettata dal recapitista"] -->|RECRN001A| ConsegnatoPreEsito["Consegnato<br>(pre-esito)"]
-  PresaInCarico -->|RECRN002A| MancataConsegnaPreEsito["Mancata consegna<br>(pre-esito)"]
-  PresaInCarico -->|RECRN002D| IrreperibilitaAssolutaPreEsito["Irreperibilita assoluta<br>(pre-esito)"]
-  PresaInCarico -->|RECRN006| FurtoSmarrimentoDeterioramento["Furto<br>Smarrimento<br>Deterioramento"]
-  PresaInCarico -->|RECRN010| Inesito["Inesito"]
-
-  %% Consegnato
-  ConsegnatoPreEsito -->| RECRN001B<br>Demat AR| ConsegnatoDemat["Consegnato (demat)"]
-  ConsegnatoDemat -->|RECRN001C| ConsegnatoFascicoloChiuso["Consegnato (fascicolo chiuso)"]
-
-  %% Mancata consegna
-  MancataConsegnaPreEsito -->|RECRN002B<br>Demat Plico| MancataConsegnaDemat["Mancata consegna (demat)"]
-  MancataConsegnaDemat -->|RECRN002C| MancataConsegnaFascicoloChiuso["Mancata consegna (fascicolo chiuso)"]
-
-  %% Irreperibilita assoluta
-  IrreperibilitaAssolutaPreEsito -->|RECRN002E<br>Demat Plico<br>Demat Indagine| IrreperibilitaAssolutaDemat["Irreperibilita assoluta (demat)"]
-  IrreperibilitaAssolutaDemat -->|RECRN002E<br>Demat Plico<br>Demat Indagine| IrreperibilitaAssolutaDemat
-  IrreperibilitaAssolutaDemat -->|RECRN002F| IrreperibilitaAssolutaFascicoloChiuso["Irreperibilita assoluta (fascicolo chiuso)"]
-
+stateDiagram-v2
+  direction TB
+  state Consegnato {
+    direction TB
+    [*] --> Preesito1
+    Preesito1 --> Demat1:RECRN001B [AR]
+    Demat1 --> [*]
+  }
+  state MancataConsegna {
+    direction TB
+    [*] --> Preesito2
+    Preesito2 --> Demat2:RECRN002B [Plico]
+    Demat2 --> [*]
+  }
+  state IrreperibilitaAssoluta {
+    direction TB
+    [*] --> Preesito2i
+    Preesito2i --> Demat2i:RECRN002E [Plico, Indagine]
+    Demat2i --> Demat2i:RECRN002E [Plico, Indagine]
+    Demat2i --> [*]
+  }
+  state ConsegnatoGiacenza {
+    direction TB
+    [*] --> Preesito3
+    Preesito3 --> Demat3:RECRN003B [AR]
+    Demat3 --> [*]
+  }
+  state MancataConsegnaGiacenza {
+    direction TB
+    [*] --> Preesito4
+    Preesito4 --> Demat4:RECRN004B [Plico]
+    Demat4 --> [*]
+  }
+  state CompiutaGiacenza {
+    direction TB
+    [*] --> Preesito5
+    Preesito5 --> Demat5:RECRN005B [Plico]
+    Demat5 --> [*]
+  }
+  %% Presa in carico
+  [*] --> PresaInCarico
+  PresaInCarico --> Consegnato:RECRN001A
+  PresaInCarico --> MancataConsegna:RECRN002A
+  PresaInCarico --> IrreperibilitaAssoluta:RECRN002D
+  PresaInCarico --> Inesito:RECRN010
+  PresaInCarico --> Furto:RECRN006
+  %% Chiusura fascicolo
+  Consegnato --> [*]:RECRN001C
+  MancataConsegna --> [*]:RECRN002C
+  IrreperibilitaAssoluta --> [*]:RECRN002F
+  ConsegnatoGiacenza --> [*]:RECRN003C
+  MancataConsegnaGiacenza --> [*]:RECRN004C
+  CompiutaGiacenza --> [*]:RECRN005C
   %% Giacenza
-  Inesito -->|RECRN006| FurtoSmarrimentoDeterioramento
-  Inesito -->|RECRN011| InGiacenza["In giacenza"]
+  Inesito --> InGiacenza:RECRN011
+  InGiacenza --> Furto:RECRN006
+  InGiacenza --> ConsegnatoGiacenza:RECRN003A
+  InGiacenza --> MancataConsegnaGiacenza:RECRN004A
+  InGiacenza --> CompiutaGiacenza:RECRN005A
+  %% Furto
+  PresaInCarico --> Furto:RECRN006
+  Inesito --> Furto:RECRN006
+  Furto --> [*]
 
-  %% Consegnato presso giacenza
-  InGiacenza -->|RECRN003A| ConsegnatoPressoGiacenzaPreEsito["Consegnato presso giacenza (pre-esito)"]
-  ConsegnatoPressoGiacenzaPreEsito -->|RECRN003B<br>Demat AR| ConsegnatoPressoGiacenzaDemat["Consegnato presso giacenza (demat)"]
-  ConsegnatoPressoGiacenzaDemat --> ConsegnatoPressoGiacenzaFascicoloChiuso["Consegnato presso giacenza (fascicolo chiuso)"]
-
-  %% Mancata consegna presso giacenza
-  InGiacenza -->|RECRN004A| MancataConsegnaPressoGiacenzaPreEsito["Mancata consegna presso giacenza (pre-esito)"]
-  MancataConsegnaPressoGiacenzaPreEsito -->|RECRN004B<br>Demat Plico| MancataConsegnaPressoGiacenzaDemat["Mancata consegna presso giacenza (demat)"]
-  MancataConsegnaPressoGiacenzaDemat --> MancataConsegnaPressoGiacenzaFascicoloChiuso["Mancata consegna presso giacenza (fascicolo chiuso)"]
-
-  %% Compiuta giacenza presso giacenza
-  InGiacenza -->|RECRN005A| CompiutaGiacenzaPressoGiacenzaPreEsito["Compiuta giacenza presso giacenza (pre-esito)"]
-  CompiutaGiacenzaPressoGiacenzaPreEsito -->|RECRN005B<br>Demat Plico| CompiutaGiacenzaPressoGiacenzaDemat["Compiuta giacenza presso giacenza (demat)"]
-  CompiutaGiacenzaPressoGiacenzaDemat --> CompiutaGiacenzaPressoGiacenzaFascicoloChiuso["Compiuta giacenza presso giacenza (fascicolo chiuso)"]
-
-  %% Stili
-  style FurtoSmarrimentoDeterioramento fill:#43A047
-  style ConsegnatoFascicoloChiuso fill:#43A047
-  style IrreperibilitaAssolutaFascicoloChiuso fill:#43A047
-  style ConsegnatoPressoGiacenzaFascicoloChiuso fill:#43A047
-  style MancataConsegnaPressoGiacenzaFascicoloChiuso fill:#43A047
-  style CompiutaGiacenzaPressoGiacenzaFascicoloChiuso fill:#43A047
-  style MancataConsegnaFascicoloChiuso fill:#43A047
+  %% Etichette
+  Preesito1:Preesito
+  Demat1:Demat
+  Preesito2:Preesito
+  Demat2:Demat
+  IrreperibilitaAssoluta:Irreperibilità assoluta
+  Preesito2i:Preesito
+  Demat2i:Demat
+  ConsegnatoGiacenza:Consegnato presso giacenza
+  Preesito3:Preesito
+  Demat3:Demat
+  MancataConsegnaGiacenza:Mancata consegna presso giacenza
+  Preesito4:Preesito
+  Demat4:Demat
+  CompiutaGiacenza:Compiuta giacenza
+  Preesito5:Preesito
+  Demat5:Demat
+  PresaInCarico:Presa in carico
+  InGiacenza:In giacenza
+  Furto:Furto, smarrimento o deterioramento
 ```
 
-## Esempio PlantUML
-Il digramma viene generato dinamicamente chiamando il servizio [http://www.plantuml.com/plantuml]()
+## Macchina a stati v2
+```mermaid
+---
+config:
+  layout: elk
+---
 
-![AR](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/pagopa/pn-postalizzazione-api/refs/heads/feature/test-diagrams-20250728/docs/diagrams/plantuml.iuml)
+stateDiagram-v2
+  direction TB
 
+  state Consegnato {
+    direction TB
+
+    [*] --> Preesito1
+    Preesito1 --> Demat1:RECRN001B [AR]
+    Demat1 --> Finale1:RECRN001C
+    Finale1 --> [*]
+  }
+  state MancataConsegna {
+    direction TB
+
+    [*] --> Preesito2
+    Preesito2 --> Demat2:RECRN002B [Plico]
+    Demat2 --> Finale2:RECRN002C
+    Finale2 --> [*]
+  }
+  state IrreperibilitaAssoluta {
+    direction TB
+
+    [*] --> Preesito2i
+    Preesito2i --> Demat2i:RECRN002E [Plico, Indagine]
+    Demat2i --> Demat2i:RECRN002E [Plico, Indagine]
+    Demat2i --> Finale2i:RECRN002F
+    Finale2i --> [*]
+  }
+  state ConsegnatoGiacenza {
+    direction TB
+
+    [*] --> Preesito3
+    Preesito3 --> Demat3:RECRN003B [AR]
+    Demat3 --> Finale3:RECRN003C
+    Finale3 --> [*]
+  }
+  state MancataConsegnaGiacenza {
+    direction TB
+
+    [*] --> Preesito4
+    Preesito4 --> Demat4:RECRN004B [Plico]
+    Demat4 --> Finale4:RECRN004C
+    Finale4 --> [*]
+  }
+  state CompiutaGiacenza {
+    direction TB
+
+    [*] --> Preesito5
+    Preesito5 --> Demat5:RECRN005B [Plico]
+    Demat5 --> Finale5:RECRN004C
+    Finale5 --> [*]
+  }
+
+  %% Presa in carico
+  [*] --> PresaInCarico
+  PresaInCarico --> Consegnato: RECRN001A
+  PresaInCarico --> MancataConsegna: RECRN002A
+  PresaInCarico --> IrreperibilitaAssoluta: RECRN002D
+  PresaInCarico --> Inesito: RECRN010
+  PresaInCarico --> Furto: RECRN006
+  %% Chiusura fascicolo
+  Consegnato --> [*]
+  MancataConsegna --> [*]
+  IrreperibilitaAssoluta --> [*]
+  ConsegnatoGiacenza --> [*]
+  MancataConsegnaGiacenza --> [*]
+  CompiutaGiacenza --> [*]
+  %% Giacenza
+  Inesito --> InGiacenza: RECRN011
+  InGiacenza --> Furto: RECRN006
+  InGiacenza --> ConsegnatoGiacenza: RECRN003A
+  InGiacenza --> MancataConsegnaGiacenza: RECRN004A
+  InGiacenza --> CompiutaGiacenza: RECRN005A
+  %% Furto
+  PresaInCarico --> Furto: RECRN006
+  Inesito --> Furto: RECRN006
+  Furto --> [*]
+
+  %% Etichette
+  Preesito1: Pre-esito
+  Demat1: Demat
+  Consegnato: Consegnato
+  Finale1: Fascicolo chiuso
+  Preesito2: Pre-esito
+  Demat2: Demat
+  Finale2: Fascicolo chiuso
+  IrreperibilitaAssoluta: Irreperibilità assoluta
+  Preesito2i: Pre-esito
+  Demat2i: Demat
+  Finale2i: Fascicolo chiuso
+  ConsegnatoGiacenza: Consegnato presso giacenza
+  Preesito3: Pre-esito
+  Demat3: Demat
+  Finale3: Fascicolo chiuso
+  MancataConsegnaGiacenza: Mancata consegna presso giacenza
+  Preesito4: Pre-esito
+  Demat4: Demat
+  Finale4: Fascicolo chiuso
+  CompiutaGiacenza: Compiuta giacenza
+  Preesito5: Pre-esito
+  Demat5: Demat
+  Finale5: Fascicolo chiuso
+  PresaInCarico: Presa in carico
+  Inesito: Inesito
+  InGiacenza:In giacenza
+  Furto: Furto, smarrimento o deterioramento
+
+```
+
+## Macchina a stati v3
+```mermaid
+---
+config:
+  layout: elk
+---
+stateDiagram
+  direction TB
+  [*] --> PresaInCarico
+  PresaInCarico --> CausaForzaMaggiore:RECRN015
+  PresaInCarico --> PreEsito:RECRN0xx
+  CausaForzaMaggiore --> PreEsito:RECRN0xx
+  PresaInCarico --> Inesito:RECRN010
+  CausaForzaMaggiore --> Inesito:RECRN0xx
+  CausaForzaMaggiore --> [*]
+  Inesito --> InGiacenza:RECRN011
+  Inesito --> NonRendicontabile:RECRN013
+  InGiacenza --> NonRendicontabile:RECRN013
+  InGiacenza --> PreEsito:RECRN0xx
+  PreEsito --> NonRendicontabile:RECRN013
+  NonRendicontabile --> [*]
+  PresaInCarico --> NonRendicontabile:RECRN013
+  PreEsito --> Demat:RECRN0xx
+  PreEsito --> PreEsito:RECRN0xx
+  Demat --> ChiusuraFascicolo:RECRN0xx
+  ChiusuraFascicolo --> [*]
+
+  %% Etichette
+  PresaInCarico
+  CausaForzaMaggiore
+  Inesito
+  InGiacenza
+  NonRendicontabile
+  PreEsito
+  Demat
+  ChiusuraFascicolo
+```
