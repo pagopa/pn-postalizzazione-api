@@ -1,0 +1,273 @@
+openapi: 3.0.3
+info:
+  title: Consolidatore ingress API.
+  description: >-
+    NOTIFICHE DI AVANZAMENTO DEL PROCESSO DI POSTALIZZAZIONE. L'API espone dei servizi sul path "/consolidatore-ingress/v1/".
+  version: v1.0
+servers:
+  - url: >-
+      https://api.externalchannel.pagopa.local
+    description: Server url
+tags:
+  - name: Consolidatore
+    description: API del consolidatore.
+
+paths:
+ 
+  /consolidatore-ingress/v1/push-progress-events:
+    put:
+      operationId: sendPaperProgressStatusRequest
+      summary: Webhook con cui PN riceve progressi postalizzazioni
+      description: |-
+        inserire
+      tags:
+        - Consolidatore
+      parameters:
+        - $ref: '#/components/parameters/xPagopaExtchServiceId'
+        - $ref: '#/components/parameters/xPagopaExtchApiKey'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              minItems: 1
+              #maxItems: 1
+              items:
+                $ref: '#/components/schemas/PaperProgressStatusEvent'
+        required: true
+      responses:
+        '202':
+          description: >-
+            OK, l'evento è stato registrato
+          content:
+            application/json:
+              example: { resultCode: '202.00', resultDescription: 'Accepted', clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
+              schema:
+                $ref: '#/components/schemas/OperationResultCodeResponse'
+        '400':
+          description: >- 
+            Il ricevente ha eseguito la validazione sintattica o semantica dei campi e 
+            tale validazione è fallita: possiblie mismatch di versione
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResultCodeResponse'
+              examples: 
+                syntaxError: 
+                  summary: 'Errore sintattico'
+                  value: { resultCode: '400.01', resultDescription: 'Syntax Error', errorList: [ 'field requestId is required'], clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
+                semanticError: 
+                  summary: 'Errore semantico'
+                  value: { resultCode: '400.02', resultDescription: 'Semantic Error', errorList: [ 'unrecognized product Type'], clientResponseTimeStamp: '2019-08-24T14:15:22Z'}  
+        '401':
+          description: >- 
+            Il sistema chiamante non è stato identificato, verificare le configurazioni
+          content:
+            application/json:
+              example: { resultCode: '401.00', resultDescription: 'Authentication Failed', clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
+              schema:
+                $ref: '#/components/schemas/OperationResultCodeResponse'
+  
+  /consolidatore-ingress/v1/replicas-push-progress-events/:
+    put:
+      operationId: sendPaperReplicasProgressStatusRequest
+      summary: Webhook con cui PN riceve progressi di richiesta duplicato
+      parameters:
+        - $ref: '#/components/parameters/xPagopaExtchServiceId'
+        - $ref: '#/components/parameters/xPagopaExtchApiKey'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              minItems: 1
+              items:
+                $ref: '#/components/schemas/PaperReplicasStatusEvent'
+        required: true
+      responses:
+        '202':
+          description: >-
+            OK, l'evento è stato registrato
+          content:
+            application/json:
+              example: { resultCode: '202.00', resultDescription: 'Accepted', clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
+              schema:
+                $ref: '#/components/schemas/OperationResultCodeResponse'
+        '400':
+          description: >- 
+            Il ricevente ha eseguito la validazione sintattica o semantica dei campi e 
+            tale validazione è fallita: possiblie mismatch di versione
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResultCodeResponse'
+              examples: 
+                syntaxError: 
+                  summary: 'Errore sintattico'
+                  value: { resultCode: '400.01', resultDescription: 'Syntax Error', errorList: [ 'field requestId is required'], clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
+                semanticError: 
+                  summary: 'Errore semantico'
+                  value: { resultCode: '400.02', resultDescription: 'Semantic Error', errorList: [ 'unrecognized product Type'], clientResponseTimeStamp: '2019-08-24T14:15:22Z'}  
+        '401':
+          description: >- 
+            Il sistema chiamante non è stato identificato, verificare le configurazioni
+          content:
+            application/json:
+              example: { resultCode: '401.00', resultDescription: 'Authentication Failed', clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
+              schema:
+                $ref: '#/components/schemas/OperationResultCodeResponse'
+
+  /consolidatore-ingress/v1/attachment-preload:
+    put:
+      summary: Richiesta di pre-caricamento dei documenti da comunicare a PN
+      description: |-
+        Operazione che richiede a Piattaforma Notifica le informazioni e le autorizzazioni necessarie 
+        a precaricare uno o più file.
+      tags:
+        - Consolidatore
+      parameters:
+        - $ref: '#/components/parameters/xPagopaExtchServiceId'
+        - $ref: '#/components/parameters/xPagopaExtchApiKey'
+      operationId: presignedUploadRequest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: PreLoadRequestData
+              type: object
+              required:
+                - preloads
+              properties:
+                preloads:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/PreLoadRequest"
+                  minItems: 1
+                  maxItems: 15
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: PreLoadResponseData
+                type: object
+                required:
+                  - preloads
+                properties:
+                  preloads:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/PreLoadResponse"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResultCodeResponse'
+              examples: 
+                syntaxError: 
+                  summary: 'Errore sintattico'
+                  value: { resultCode: '400.01', resultDescription: 'Syntax Error', errorList: [ 'field requestId is required'], clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
+                semanticError: 
+                  summary: 'Errore semantico'
+                  value: { resultCode: '400.02', resultDescription: 'Semantic Error', errorList: [ 'unrecognized product Type'], clientResponseTimeStamp: '2019-08-24T14:15:22Z'}  
+
+  /consolidatore-ingress/v1/get-attachment/{fileKey}:
+    get:
+      summary: ottieni metadati e contenuto di un file.
+      description: |-
+        Con questa API è possibile ottenere le informazioni necessarie al download del contenuto del file;
+        tali informazioni sono contenute nel campo _download_. <br/>
+          - _url_: se il contenuto del file è immediatamente disponibile questo campo viene 
+            valorizzato con un URL da invocare in GET per ottenere il contenuto del file. <br/>
+          - _retryAfter_: valorizzato se il contenuto del file è stato archiviato in glacier. 
+            Indica una stima del tempo necessario per recuperare il file. <br/>
+        
+        Se il file non è pronto al momento dell'invocazione il campo _download.url_ della risposta
+        verrà valorizzato ```null```; in un secondo momento, quando il contenuto del file sarà 
+        pronto verrà comunicato un evento al client che ha invocato la chiamata. Molteplici 
+        invocazioni di questa API generano un solo evento per client. <br/>
+        Il file rimane hot per ```stayHotTime````.
+      parameters:
+        - $ref: '#/components/parameters/fileKey'
+        - $ref: '#/components/parameters/xPagopaExtchServiceId'
+        - $ref: '#/components/parameters/xPagopaExtchApiKey'
+      tags:
+        - Consolidatore
+      operationId: getFile
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileDownloadResponse'
+              examples:
+                hotFile:
+                  summary: File pronto per il download
+                  value:
+                    key: 'random/path/of/the/file'
+                    versionId: '3Z9SdhZ50PBeIj617KEMrztNKDMJj8FZ'
+                    contentType: 'application/pdf'
+                    contentLength: 30438
+                    checksum: '91375e9e5a9510087606894437a6a382fa5bc74950f932e2b85a788303cf5ba0'
+                    retentionUntil: '2032-04-12T12:32:04.000Z'
+                    documentType: PN_LEGALFACT
+                    documentStatus: SAVED
+                    download:
+                      url: 'https://presignedurldemo.s3.eu-west-2.amazonaws.com/...'
+                coldFile:
+                  summary: File su glacier.
+                  description: Il file è stato archiviato. Verrà recuperato in 24 ore.
+                  value:
+                    key: 'random/path/of/the/file'
+                    versionId: '3Z9SdhZ50PBeIj617KEMrztNKDMJj8FZ'
+                    contentType: 'application/pdf'
+                    contentLength: 30438
+                    checksum: '91375e9e5a9510087606894437a6a382fa5bc74950f932e2b85a788303cf5ba0'
+                    retentionUntil: '2032-04-12T12:32:04.000Z'
+                    documentType: PN_LEGALFACT
+                    documentStatus: SAVED
+                    download:
+                      retryAfter: 86400
+        '404':
+          description: >-
+            Non trovato. Restituito se: <br/>
+            - il parametro clientId è diverso dal client autenticato; <br/>
+            - se il file identificato da fileKey non è ancora stato salvato; <br/>
+
+
+components:
+
+  parameters:
+    fileKey: 
+      $ref: 'schemas-paper-v2.yaml#/components/parameters/fileKey'
+      
+    xPagopaExtchServiceId:
+      $ref: 'schemas-paper-v2.yaml#/components/parameters/xPagopaExtchServiceId'
+    
+    xPagopaExtchApiKey:
+      $ref: 'schemas-paper-v2.yaml#/components/parameters/xPagopaExtchApiKey'
+  
+  schemas:
+      
+    OperationResultCodeResponse:
+      $ref: 'schemas-paper-v2.yaml#/components/schemas/OperationResultCodeResponse'
+
+    PaperProgressStatusEvent:
+      $ref: 'schemas-paper-v2.yaml#/components/schemas/PaperProgressStatusEvent'
+
+    PaperReplicasStatusEvent:
+      $ref: 'schemas-paper-v2.yaml#/components/schemas/PaperReplicasStatusEvent' 
+
+    PreLoadRequest:
+      $ref: 'schemas-paper-v2.yaml#/components/schemas/PreLoadRequest'
+     
+    PreLoadResponse:
+      $ref: 'schemas-paper-v2.yaml#/components/schemas/PreLoadResponse'
+    
+    FileDownloadResponse:
+      $ref: 'schemas-paper-v2.yaml#/components/schemas/FileDownloadResponse'
+    
