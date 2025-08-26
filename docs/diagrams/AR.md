@@ -3,6 +3,9 @@
 ---
 config:
   layout: elk
+  elk:
+    mergeEdges: false
+    nodePlacementStrategy: NETWORK_SIMPLEX
 ---
 stateDiagram-v2
   direction TB
