@@ -1,7 +1,7 @@
 components:
 
   parameters:
-    fileKey: 
+    fileKey:
       name: fileKey
       description: La chiave definita per il file di cui si sta richiedendo il download
       in: path
@@ -49,13 +49,11 @@ components:
         - senderName
         - senderAddress
         - senderCity
-        - senderPr        
+        - senderPr
       type: object
       properties:
-        iun: 
+        iun:
           type: string
-          minLength: 10 
-          maxLength: 50
           example: 'ABCD-HILM-YKWX-202202-1'
           description: >-
             Identificativo Unico della Notifica. Può essere usato per migliorare il servizio 
@@ -78,7 +76,6 @@ components:
             recupero, da parte delle pubbliche amministrazioni, degli originali cartacei
         clientRequestTimeStamp:
           type: string
-          format: date-time
           description: >-
             Timestamp della richiesta in UTC
         productType:
@@ -90,40 +87,38 @@ components:
             - __RIS__: Raccomandata Internazionale Semplice,  <br/>
             - __RIR__: Raccomandata Internazionale con AR.  <br/>
           type: string
-          minLength: 2
-          maxLength: 3
           example: 'AR'
         attachments:
           type: array
           items:
             type: object
-            required: 
+            required:
               - uri
               - order
               - documentType
               - sha256
             properties:
-              uri: 
+              uri:
                 type: string
-                description: URI indicante 
+                description: URI indicante
                 example: safestorage://PN_EXTERNAL_LEGALFACT_....
                 minLength: 5
                 maxLength: 2000
-              order: 
+              order:
                 type: number
                 description: Ordine di stampa, intero positivo, continuo, inizia da 0
                 example: 0
-              documentType: 
+              documentType:
                 type: string
                 minLength: 3
-                maxLength: 4 
+                maxLength: 4
                 description: >-
                   Tipo di documento: <br/>
                   - __AAR__: Avviso di avvenuta ricezione, tipicamente associato a campo _order_ valorizzato a 0
                   - __ATTO__: Documento inviato dalla pubblica amministrazione.
                 example: AAR
               sha256:
-                type: string 
+                type: string
                 description: >-
                   sha256, codificato in base 64, del contenuto del file riferenziato dal campo uri
                 minLength: 40
@@ -142,87 +137,106 @@ components:
           maxLength: 30
           example: 'BN_FRONTE_RETRO'
         receiverName:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             Cognome e nome o ragione sociale del destinatario
           example: 'Mario Rossi'
         receiverNameRow2:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             Seconda riga sulla busta.
           example: 'c/o famiglia Bianchi'
         receiverAddress:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             Indirizzo del destinatario.
           example: 'via senza nome 610106'
         receiverAddressRow2:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             Specifica dell’indirizzo di residenza del destinatario (seconda riga indirizzo sulla busta).
           example: 'scala Z interno 400'
         receiverCap:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             Cap del destinatario; in caso di invio estero diventa facoltativo.
           example: '40050'
         receiverCity:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             Comune del destinatario.
           example: Argelato
         receiverCity2:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             Frazione del destinatario. Potrebbe essere utile se il chiamante non fornisce il cap.
           example: 'fraz. malacappa'
         receiverPr:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             Provincia del destinatario; in caso di invio estero diventa facoltativo.
           example: 'BO'
         receiverCountry:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             In caso di destinatario estero, diventa obbligatoria l’indicazione della nazione di destinazione, 
             in standard UPU o altro standard condiviso.
         receiverFiscalCode:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             Potrebbe servire ai recapitisti in caso di offerte migliorative per i destinatari (servizi a valore aggiunto basati su cf).
         senderName:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             Ragione sociale del mittente (PagoPA).
         senderAddress:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             Indirizzo del mittente.
         senderCity:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             Città del mittente
         senderPr:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             Provincia del mittente.
         senderDigitalAddress:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             Indirizzo PEC del mittente.
         arName:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             Nominativo di riferimento per l’Avviso di Ritorno.
         arAddress:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             Indirizzo per AR.
         arCap:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             CAP AR.
         arCity:
+          x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
           type: string
           description: >-
             Città per AR.
@@ -239,8 +253,8 @@ components:
     OperationResultCodeResponse:
       required:
         - resultCode
-        - resultDescription  
-        - clientResponseTimeStamp 
+        - resultDescription
+        - clientResponseTimeStamp
       type: object
       properties:
         resultCode:
@@ -267,7 +281,7 @@ components:
             Descrizione dell’Esito dell’operazione, sempre valorizzato, anche in caso di esito positivo. <br />
             In caso di errore dovrà contenere info utili al chiamante per indirizzare le azioni correttive necessarie. <br />
             In nessun caso conterrà dettagli tecnici e/o stack trace. <br />
-        errorList: 
+        errorList:
           type: array
           minItems: 0
           maxItems: 50
@@ -278,13 +292,13 @@ components:
             example: 'unsupported printType value'
           description: >-
             Elenco degli errori di validazione, se presenti.
-        clientResponseTimeStamp: 
+        clientResponseTimeStamp:
           type: string
           format: date-time
           description: >-
             Timestamp della response in UTC  
     
-    
+
     ##########################################################################
     ###      NOTIFICHE DI AVANZAMENTO DEL PROCESSO DI POSTALIZZAZIONE      ###
     ##########################################################################
@@ -297,7 +311,7 @@ components:
         - requestId
         - statusCode
         - statusDescription
-        - statusDateTime        
+        - statusDateTime
         - productType
         - clientRequestTimeStamp
       type: object
@@ -308,7 +322,7 @@ components:
           maxLength: 250
           description: >-
             Identificativo della richiesta.
-          example: 'ABCD-HILM-YKWX-202202-1_rec0_try1'  
+          example: 'ABCD-HILM-YKWX-202202-1_rec0_try1'
         registeredLetterCode:
           type: string
           description: >-
@@ -330,19 +344,17 @@ components:
             - __RS__: Raccomandata Semplice nazionale (per Avviso di mancato Recapito). <br/>
             - __RIS__: Raccomandata Internazionale Semplice,  <br/>
             - __RIR__: Raccomandata Internazionale con AR.  <br/>
-          minLength: 2
-          maxLength: 3
           type: string
-        iun: 
+        iun:
           type: string
-          minLength: 10 
+          minLength: 0
           maxLength: 50
           description: >-
             Identificativo Unico della Notifica. Proviene dalla richiesta originaria di PN.
           example: 'ABCD-HILM-YKWX-202202-1'
         statusCode:
           type: string
-          minLength: 3 
+          minLength: 3
           maxLength: 20
           description: >-
             _Codifica sintetica dello stato dell'esito._  <br/>
@@ -452,7 +464,7 @@ components:
             - __RECRSI004C__	- [RIS] - Non Consegnato - fascicolo Chiuso <br/> 
             - __RECRSI005__		- [RIS] - Furto/Smarrimanto/deterioramento <br/> 
             - __REC090__		  - [ALL] - Archiviazione fisica materialità di ritorno
-        statusDescription: 
+        statusDescription:
           type: string
           minLength: 5
           maxLength: 250
@@ -464,7 +476,7 @@ components:
           format: date-time
           description: >-
             Data stato con timezone
-        deliveryFailureCause: 
+        deliveryFailureCause:
           description: >-
             _Motivazione di irreperibilità_ obbligtorie nei relativi eventi <br/>
             - __M01__ destinatario irreperibile <br/>
@@ -501,18 +513,18 @@ components:
           maxItems: 10
           items:
             type: object
-            required: 
+            required:
               - id
               - documentType
               - uri
               - sha256
               - date
             properties:
-              id: 
+              id:
                 type: string
                 description: >-
                   Identificativo di riga.
-                minLength: 1 
+                minLength: 1
                 maxLength: 10
               documentId:
                 type: string
@@ -521,7 +533,7 @@ components:
               documentType:
                 type: string
                 minLength: 2
-                maxLength: 10
+                maxLength: 50
                 description: >-
                   _La descrizione della tipologia di oggetto._
                   - __23L__ <br/>
@@ -536,9 +548,9 @@ components:
                 minLength: 5
                 maxLength: 2000
                 description: >-
-                  Le coordinate del documento correlato allo stato. 
+                  Le coordinate del documento correlato allo stato.
               sha256:
-                type: string 
+                type: string
                 minLength: 40
                 maxLength: 50
                 description: >-
@@ -555,40 +567,49 @@ components:
             - name
             - address
             - city
-          properties:  
+          properties:
             name:
+              x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
               type: string
               description: >-
                 Cognome e nome o ragione sociale del destinatario
             nameRow2:
+              x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
               type: string
               description: >-
                 Seconda riga sulla busta.
             address:
+              x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
               type: string
               description: >-
                 Indirizzo del destinatario.
             addressRow2:
+              x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
               type: string
               description: >-
                 Specifica dell’indirizzo di residenza del destinatario (seconda riga indirizzo sulla busta).
             cap:
+              x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
               type: string
               description: >-
                 Cap del destinatario; in caso di invio estero diventa facoltativo.
             city:
+              x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
               type: string
               description: >-
                 Comune del destinatario.
             city2:
+              x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
               type: string
               description: >-
                 Frazione del destinatario. Potrebbe essere utile se il chiamante non fornisce il cap.
             pr:
+              x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
               type: string
               description: >-
                 Provincia del destinatario; in caso di invio estero diventa facoltativo.
             country:
+              x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
               type: string
               description: >-
                 In caso di destinatario estero, diventa obbligatoria l’indicazione della nazione di destinazione, 
@@ -599,9 +620,9 @@ components:
           description: >-
             Timestamp della richiesta in UTC
 
-    ### - LISTA DI EVENTI RELATIVI A UNA STESSA RICHIESTA
-    ######################################################
-      
+      ### - LISTA DI EVENTI RELATIVI A UNA STESSA RICHIESTA
+      ######################################################
+
     PaperDeliveryProgressesResponse:
       type: object
       required:
@@ -657,7 +678,7 @@ components:
             richesta di postalizzazione identificata dal "paperEngageRequestId" richiedendoli al recapitista 
             ove necessario
             TODO: da codividere i possibili valori
-          
+
     ##########################################################################
     ###      NOTIFICHE DI AVANZAMENTO DEL PROCESSO DI POSTALIZZAZIONE      ###
     ##########################################################################
@@ -671,7 +692,7 @@ components:
         - paperEngageRequestId
         - statusCode
         - statusDescription
-        - statusDateTime        
+        - statusDateTime
         - productType
         - clientRequestTimeStamp
       properties:
@@ -681,25 +702,25 @@ components:
           type: string
           description: >-
             Identificativo della richiesta duplicato.
-          example: 'ABCD-HILM-YKWX-202202-1_rec0_try1_replicarequest1' 
+          example: 'ABCD-HILM-YKWX-202202-1_rec0_try1_replicarequest1'
         paperEngageRequestId:
           minLength: 30
           maxLength: 250
           type: string
           description: >-
             Identificativo della richiesta di postalizzazione.
-          example: 'ABCD-HILM-YKWX-202202-1_rec0_try1' 
+          example: 'ABCD-HILM-YKWX-202202-1_rec0_try1'
         statusCode:
           type: string
-          minLength: 3 
+          minLength: 3
           maxLength: 20
           description: >-
             _Codifica sintetica dello stato dell'esito._  <br/>
             TODO: Elencare possibili esiti delle richieste di duplicato
             N.B: i duplicati non sono producibili se il recapito è ancora in corso.
-        statusDescription: 
+        statusDescription:
           type: string
-          minLength: 3 
+          minLength: 3
           maxLength: 250
           description: >-
             Descrizione dello stato della richiesta di duplicato
@@ -712,9 +733,9 @@ components:
           type: array
           minItems: 1
           maxItems: 10
-          items: 
+          items:
             type: object
-            required: 
+            required:
               - documentType
               - uri
               - sha256
@@ -737,7 +758,7 @@ components:
                 minLength: 5
                 maxLength: 2000
               sha256:
-                type: string 
+                type: string
                 minLength: 40
                 maxLength: 50
                 description: >-
@@ -775,7 +796,7 @@ components:
           maxLength: 250
           description: >-
             Identificativo della richiesta.
-          example: 'ABCD-HILM-YKWX-202202-1_rec0_try1' 
+          example: 'ABCD-HILM-YKWX-202202-1_rec0_try1'
         events:
           type: array
           minItems: 0
@@ -867,14 +888,14 @@ components:
         - $ref: '#/components/schemas/FileCreatedDto'
         - type: object
           properties:
-            download: 
+            download:
               $ref: '#/components/schemas/FileDownloadInfo'
-  
+
     FileCreatedDto:
       description: >-
         Evento generato quando il contenuto di un file è stato caricato, elaborato da 
         _SafeStorage_, ed è pronto all'uso.
-      type: object 
+      type: object
       required:
         - key
         - versionId
@@ -884,7 +905,7 @@ components:
         - documentType
         - documentStatus
         - retentionUntil
-      properties:  
+      properties:
         key:
           type: string
           description: la chiave da utilizzare per il recupero del file
@@ -910,7 +931,7 @@ components:
           description: dmensione, in byte, del contenuto.
         checksum:
           type: string
-          description: >- 
+          description: >-
             SHA256 o MD5 del contenuto del file. Il tipo di checksum cambia a seconda del 
             documentType.
         retentionUntil:
@@ -919,10 +940,10 @@ components:
           description: >-
             data e ora fino a cui il documento sarà garantito all'interno di _SafeStorage_. <br/>
             Può essere ritardata nel tempo, mai anticipata. Formattata con timezone secondo l'rfc 3339
-                            
+
     FileDownloadInfo:
       type: object
-      properties: 
+      properties:
         url:
           type: string
           description: >-
