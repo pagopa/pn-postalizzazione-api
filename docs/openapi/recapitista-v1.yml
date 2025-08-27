@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: API che il fornitore dei servizi di recapito dovrà mettere a disposizione
-  description: >- 
+  description: >-
     Il Recapitista espone un path.
 
     - '/piattaforma-notifiche-ingress/v1/paper-deliveries-progresses/{requestId}' a cui 
@@ -14,12 +14,12 @@ info:
 servers:
   - url: 'https://api.recapitista.vincitore-gara-recapito.it'
     description: Server url
-paths:   
+paths:
   /piattaforma-notifiche-ingress/v1/paper-deliveries-progresses/{requestId}:
     get:
       operationId: getPaperEngageProgresses
       summary: il Consolidatore richiede l'elenco dei progressi di una postalizzazione
-      description: >- 
+      description: >-
         Questa richiesta permette di ottenere l'elenco degli eventi salienti 
         riguardanti un processo di postalizzazione. <br/>
         Oltre all'elenco degli eventi si ottengono informazioni sulle cause di tali eventi 
@@ -29,12 +29,12 @@ paths:
         - $ref: '#/components/parameters/xPagopaExtchServiceId'
         - $ref: '#/components/parameters/xPagopaExtchApiKey'
         - name: requestId
-          description: Identificativo della richiesta di postalizzazione 
+          description: Identificativo della richiesta di postalizzazione
           example: 'ABCD-HILM-YKWX-202202-1_rec0_try1'
           in: path
           required: true
           schema:
-            type: string  
+            type: string
       responses:
         '200':
           description: OK
@@ -60,17 +60,17 @@ paths:
               example: { resultCode: '404.01', resultDescription: 'requestId never sent', clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
               schema:
                 $ref: '#/components/schemas/OperationResultCodeResponse'
-        
 
 
-webhooks: 
+
+webhooks:
 
   ##########################################################################
   ###      NOTIFICHE DI AVANZAMENTO DEL PROCESSO DI POSTALIZZAZIONE      ###
   ##########################################################################
 
   push-progress-events-to-notification-platform:
-    post:
+    put:
       operationId: sendPaperProgressStatusRequest
       summary: Webhook con cui PN riceve progressi postalizzazioni
       parameters:
@@ -95,22 +95,22 @@ webhooks:
               schema:
                 $ref: '#/components/schemas/OperationResultCodeResponse'
         '400':
-          description: >- 
+          description: >-
             Il ricevente ha eseguito la validazione sintattica o semantica dei campi e 
             tale validazione è fallita: possiblie mismatch di versione
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/OperationResultCodeResponse'
-              examples: 
-                syntaxError: 
+              examples:
+                syntaxError:
                   summary: 'Errore sintattico'
                   value: { resultCode: '400.01', resultDescription: 'Syntax Error', errorList: [ 'field requestId is required'], clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
-                semanticError: 
+                semanticError:
                   summary: 'Errore semantico'
-                  value: { resultCode: '400.02', resultDescription: 'Semantic Error', errorList: [ 'unrecognized product Type'], clientResponseTimeStamp: '2019-08-24T14:15:22Z'}  
+                  value: { resultCode: '400.02', resultDescription: 'Semantic Error', errorList: [ 'unrecognized product Type'], clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
         '401':
-          description: >- 
+          description: >-
             Il sistema chiamante non è stato identificato, verificare le configurazioni
           content:
             application/json:
@@ -136,7 +136,7 @@ components:
       required: true
       schema:
         type: string
-  
+
   schemas:
 
     ### - RISPOSTA
@@ -145,12 +145,14 @@ components:
     OperationResultCodeResponse:
       required:
         - resultCode
-        - resultDescription  
-        - clientResponseTimeStamp 
+        - resultDescription
+        - clientResponseTimeStamp
       type: object
       properties:
         resultCode:
           type: string
+          minLength: 3
+          maxLength: 10
           example: '400.00'
           description: >-
             Codice a 5 cifre separate da punto che indica l’esito della richiesta.  LE prime tre sono ripetizione del codice HTTP<br/>
@@ -164,25 +166,31 @@ components:
             - .... Altri errori previsti dalla specifica implementazione <br />
         resultDescription:
           type: string
+          minLength: 5
+          maxLength: 250
           example: 'Request validation errors'
           description: >-
             Descrizione dell’Esito dell’operazione, sempre valorizzato, anche in caso di esito positivo. <br />
             In caso di errore dovrà contenere info utili al chiamante per indirizzare le azioni correttive necessarie. <br />
             In nessun caso conterrà dettagli tecnici e/o stack trace. <br />
-        errorList: 
+        errorList:
           type: array
+          minItems: 0
+          maxItems: 50
           items:
             type: string
+            minLength: 3
+            maxLength: 250
             example: 'unsupported printType value'
           description: >-
             Elenco degli errori di validazione, se presenti.
-        clientResponseTimeStamp: 
+        clientResponseTimeStamp:
           type: string
           format: date-time
           description: >-
             Timestamp della response in UTC  
     
-    
+
     ##########################################################################
     ###      NOTIFICHE DI AVANZAMENTO DEL PROCESSO DI POSTALIZZAZIONE      ###
     ##########################################################################
@@ -195,16 +203,18 @@ components:
         - requestId
         - statusCode
         - statusDescription
-        - statusDateTime        
+        - statusDateTime
         - productType
         - clientRequestTimeStamp
       type: object
       properties:
         requestId:
           type: string
+          minLength: 30
+          maxLength: 250
           description: >-
             Identificativo della richiesta.
-          example: 'ABCD-HILM-YKWX-202202-1_rec0_try1'  
+          example: 'ABCD-HILM-YKWX-202202-1_rec0_try1'
         registeredLetterCode:
           type: string
           description: >-
@@ -219,17 +229,35 @@ components:
             - __RIS__: Raccomandata Internazionale Semplice,  <br/>
             - __RIR__: Raccomandata Internazionale con AR.  <br/>
           type: string
-        iun: 
+        iun:
           type: string
+          minLength: 0
+          maxLength: 50
           description: >-
             Identificativo Unico della Notifica. Proviene dalla richiesta originaria di PN.
           example: 'ABCD-HILM-YKWX-202202-1'
         statusCode:
           type: string
+          minLength: 3
+          maxLength: 20
           description: >-
             _Codifica sintetica dello stato dell'esito._  <br/>
             Eventi relativi alla fase di __Stampa/Postalizzazione__ <br/>
             - ... TODO: stati aggiuntivi concordati con il Recapitista <br/>
+            - __CON998__    - [ALL] - Scartato NODOC <br/>
+            - __CON997__    - [ALL] - Scartato CAP/INTERNAZIONALE <br/>
+            - __CON996__    - [ALL] - Scartato PDF <br/>
+            - __CON995__    - [ALL] - Errore Stampa <br/>
+            - __CON080__    - [ALL] - Stampato ed Imbustato <br/>
+            - __CON993__    - [ALL] - Errore Stampa - parziale <br/>
+            - __CON010__    - [ALL] - Distinta Elettronica inviata a Recapitista <br/>
+            - __CON011__    - [ALL] - Distinta Elettronica Sigillata <br/>
+            - __CON012__    - [ALL] - OK Distinta Elettronica da Recapitista <br/>
+            - __CON992__    - [ALL] - KO Distinta Elettronica da Recapitista <br/>
+            - __CON09A__    - [ALL] - Materialità Pronta <br/>
+            - __CON016__    - [ALL] - PICKUP Sigillata <br/>
+            - __CON018__    - [ALL] - Accettazione Recapitista <br/>
+            - __CON991__    - [ALL] - Mancata Accetazione Recapitsita <br/>
             Eventi relativi alla fase di __Recapito__ <br/>
             - __RECRS010__		- [RS] - Inesito <br/> 
             - __RECRS011__		- [RS] - In giacenza <br/> 
@@ -315,8 +343,10 @@ components:
             - __RECRSI004C__	- [RIS] - Non Consegnato - fascicolo Chiuso <br/> 
             - __RECRSI005__		- [RIS] - Furto/Smarrimanto/deterioramento <br/> 
             - __REC090__		  - [ALL] - Archiviazione fisica materialità di ritorno
-        statusDescription: 
+        statusDescription:
           type: string
+          minLength: 5
+          maxLength: 250
           example: 'Stampato'
           description: >-
             Descrizione dello stato del delivery cartaceo che viene notificato.
@@ -325,7 +355,7 @@ components:
           format: date-time
           description: >-
             Data stato con timezone
-        deliveryFailureCause: 
+        deliveryFailureCause:
           description: >-
             _Motivazione di mancata consegna_ obbligtorie negli stati di mancata consegna  <br/>
             - __M01__ destinatario irreperibile <br/>
@@ -340,22 +370,28 @@ components:
             - __F02__ - in caso di smarrimento  <br/>
             - __F03__  - in caso di deterioramento  <br/>
           type: string
+          minLength: 2
+          maxLength: 10
         attachments:
           description: >-
             elenco dei documenti prodotti che attestano quanto accaduto durante il processo 
             di postalizzazione
           type: array
+          minItems: 0
+          maxItems: 10
           items:
             type: object
-            required: 
+            required:
               - id
               - documentType
               - uri
               - sha256
               - date
             properties:
-              id: 
+              id:
                 type: string
+                minLength: 1
+                maxLength: 10
                 description: >-
                   Identificativo di riga.
               documentId:
@@ -364,6 +400,8 @@ components:
                   Codice postale dell'oggetto di ritorno
               documentType:
                 type: string
+                minLength: 2
+                maxLength: 50
                 description: >-
                   _La descrizione della tipologia di oggetto._
                   - __23L__ <br/>
@@ -375,10 +413,14 @@ components:
                   - __AR__ <br/>
               uri:
                 type: string
+                minLength: 5
+                maxLength: 2000
                 description: >-
-                  Le coordinate del documento correlato allo stato. 
+                  Le coordinate del documento correlato allo stato.
               sha256:
-                type: string 
+                type: string
+                minLength: 40
+                maxLength: 50
                 description: >-
                   sha256, codificato in base 64, del contenuto del file riferenziato dal campo uri
               date:
@@ -393,40 +435,49 @@ components:
             - name
             - address
             - city
-          properties:  
+          properties:
             name:
+              x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
               type: string
               description: >-
                 Cognome e nome o ragione sociale del destinatario
             nameRow2:
+              x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
               type: string
               description: >-
                 Seconda riga sulla busta.
             address:
+              x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
               type: string
               description: >-
                 Indirizzo del destinatario.
             addressRow2:
+              x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
               type: string
               description: >-
                 Specifica dell’indirizzo di residenza del destinatario (seconda riga indirizzo sulla busta).
             cap:
+              x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
               type: string
               description: >-
                 Cap del destinatario; in caso di invio estero diventa facoltativo.
             city:
+              x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
               type: string
               description: >-
                 Comune del destinatario.
             city2:
+              x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
               type: string
               description: >-
                 Frazione del destinatario. Potrebbe essere utile se il chiamante non fornisce il cap.
             pr:
+              x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
               type: string
               description: >-
                 Provincia del destinatario; in caso di invio estero diventa facoltativo.
             country:
+              x-field-extra-annotation: "@lombok.ToString.Exclude" #NO EXTERNAL
               type: string
               description: >-
                 In caso di destinatario estero, diventa obbligatoria l’indicazione della nazione di destinazione, 
@@ -437,9 +488,9 @@ components:
           description: >-
             Timestamp della richiesta in UTC
 
-    ### - LISTA DI EVENTI RELATIVI A UNA STESSA RICHIESTA
-    ######################################################
-      
+      ### - LISTA DI EVENTI RELATIVI A UNA STESSA RICHIESTA
+      ######################################################
+
     PaperDeliveryProgressesResponse:
       type: object
       required:
@@ -448,11 +499,15 @@ components:
       properties:
         requestId:
           type: string
+          minLength: 30
+          maxLength: 250
           description: >-
             Identificativo della richiesta di postalizzazione.
           example: 'ABCD-HILM-YKWX-202202-1_rec0_try1'
         events:
           type: array
+          minItems: 0
+          maxItems: 500
           items:
             $ref: '#/components/schemas/PaperProgressStatusEvent'
 
