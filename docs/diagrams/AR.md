@@ -1,11 +1,24 @@
-## Macchina a stati prodotto AR
-```mermaid
+# Macchina a stati prodotto AR
+
+![AR](AR.svg)
+
+(*) Trattasi di impossibilità di chiusura della rendicontazione, la quale può verificarsi sia come primo esito di rendicontazione sia a seguito di un pre-esito di rendicontazione. Tale evento genera una nuova richiesta di presa in carico da parte del consolidatore generando una nuova spedizione. Nell'eventualità in cui il recapitista dovesse rinvenire informazioni utili al completamento dell'attività di postalizzazione per suddetta raccomandta, questi dovrà procedere alla rendicontazione in conformità alla macchina a stati.
+
+(**) Trattasi di una sospensione della postalizzazione dovuta ad una causa di forza maggiore, la postalizzazione verrà gestita dal recapitista al verificarsi di condizioni favorevoli alla consegna.
+
+(***) Potrebbe essere rimosso nella nuova gara in quanto l'Indagine è già presente sul Plico. Se viene inclusa questa specifica all'interno della nuova gara togliere commento e asterisco.
+
+<details>
+  <summary>Codice Mermaid</summary>
+
+```
 ---
 config:
   layout: elk
   elk:
     mergeEdges: false
     nodePlacementStrategy: NETWORK_SIMPLEX
+  theme: redux
 ---
 stateDiagram-v2
   direction TB
@@ -24,8 +37,8 @@ stateDiagram-v2
   state IrreperibilitaAssoluta {
     direction TB
     [*] --> Preesito2i
-    Preesito2i --> Demat2i:RECRN002E [Plico, Indagine]
-    Demat2i --> Demat2i:RECRN002E [Plico, Indagine]
+    Preesito2i --> Demat2i:RECRN002E<br>[Plico, Indagine (***)]
+    Demat2i --> Demat2i:RECRN002E<br>[Plico, Indagine (***)]
     Demat2i --> [*]
   }
   state ConsegnatoGiacenza {
@@ -54,10 +67,15 @@ stateDiagram-v2
   PresaInCarico --> IrreperibilitaAssoluta:RECRN002D
   PresaInCarico --> Inesito:RECRN010
   PresaInCarico --> Furto:RECRN006
-  PresaInCarico --> NonRendicontabile:RECRN013
-  PresaInCarico --> CausaForzaMaggione:RECRN015
-  CausaForzaMaggione --> PresaInCarico
+
+  %% Non rendicontabile
+  NonRendicontabile --> PresaInCarico
+  PresaInCarico --> NonRendicontabile:RECRN013 (**)
   NonRendicontabile --> [*]
+  
+  %% Causa forza maggiore
+  CausaForzaMaggione --> PresaInCarico
+  PresaInCarico --> CausaForzaMaggione:RECRN015 (*)
 
   %% Chiusura fascicolo
   Consegnato --> [*]:RECRN001C
@@ -66,14 +84,15 @@ stateDiagram-v2
   ConsegnatoGiacenza --> [*]:RECRN003C
   MancataConsegnaGiacenza --> [*]:RECRN004C
   CompiutaGiacenza --> [*]:RECRN005C
+
   %% Giacenza
   Inesito --> InGiacenza:RECRN011
   InGiacenza --> Furto:RECRN006
   InGiacenza --> ConsegnatoGiacenza:RECRN003A
   InGiacenza --> MancataConsegnaGiacenza:RECRN004A
   InGiacenza --> CompiutaGiacenza:RECRN005A
+
   %% Furto
-  PresaInCarico --> Furto:RECRN006
   Inesito --> Furto:RECRN006
   Furto --> [*]
 
@@ -100,3 +119,4 @@ stateDiagram-v2
   CausaForzaMaggione:Causa di forza maggiore
   NonRendicontabile:Non rendicontabile
 ```
+</details>
