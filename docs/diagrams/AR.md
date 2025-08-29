@@ -1,12 +1,10 @@
 # Macchina a stati prodotto AR
 
-![AR](AR.svg)
+![AR](AR.png)
 
 (*) Trattasi di impossibilità di chiusura della rendicontazione, la quale può verificarsi sia come primo esito di rendicontazione sia a seguito di un pre-esito di rendicontazione. Tale evento genera una nuova richiesta di presa in carico da parte del consolidatore generando una nuova spedizione. Nell'eventualità in cui il recapitista dovesse rinvenire informazioni utili al completamento dell'attività di postalizzazione per suddetta raccomandta, questi dovrà procedere alla rendicontazione in conformità alla macchina a stati.
 
 (**) Trattasi di una sospensione della postalizzazione dovuta ad una causa di forza maggiore, la postalizzazione verrà gestita dal recapitista al verificarsi di condizioni favorevoli alla consegna.
-
-(***) Potrebbe essere rimosso nella nuova gara in quanto l'Indagine è già presente sul Plico. Se viene inclusa questa specifica all'interno della nuova gara togliere commento e asterisco.
 
 <details>
   <summary>Codice Mermaid</summary>
@@ -37,8 +35,8 @@ stateDiagram-v2
   state IrreperibilitaAssoluta {
     direction TB
     [*] --> Preesito2i
-    Preesito2i --> Demat2i:RECRN002E<br>[Plico, Indagine (***)]
-    Demat2i --> Demat2i:RECRN002E<br>[Plico, Indagine (***)]
+    Preesito2i --> Demat2i:RECRN002E [Plico]
+    Demat2i --> Demat2i:RECRN002E<br>[Plico]
     Demat2i --> [*]
   }
   state ConsegnatoGiacenza {
@@ -70,12 +68,12 @@ stateDiagram-v2
 
   %% Non rendicontabile
   NonRendicontabile --> PresaInCarico
-  PresaInCarico --> NonRendicontabile:RECRN013 (**)
+  PresaInCarico --> NonRendicontabile:RECRN013 (*)
   NonRendicontabile --> [*]
   
   %% Causa forza maggiore
   CausaForzaMaggione --> PresaInCarico
-  PresaInCarico --> CausaForzaMaggione:RECRN015 (*)
+  PresaInCarico --> CausaForzaMaggione:RECRN015 (**)
 
   %% Chiusura fascicolo
   Consegnato --> [*]:RECRN001C
@@ -101,6 +99,7 @@ stateDiagram-v2
   Demat1:Demat
   Preesito2:Preesito
   Demat2:Demat
+  MancataConsegna:Mancata consegna
   IrreperibilitaAssoluta:Irreperibilità assoluta
   Preesito2i:Preesito
   Demat2i:Demat
