@@ -2,7 +2,8 @@
 
 ![AR](AR.png)
 
-(*) Trattasi di impossibilità di chiusura della rendicontazione, la quale può verificarsi sia come primo esito di rendicontazione sia a seguito di un pre-esito di rendicontazione. Tale evento genera una nuova richiesta di presa in carico da parte del consolidatore generando una nuova spedizione. Nell'eventualità in cui il recapitista dovesse rinvenire informazioni utili al completamento dell'attività di postalizzazione per suddetta raccomandta, questi dovrà procedere alla rendicontazione in conformità alla macchina a stati.
+(*) Trattasi di impossibilità di chiusura della rendicontazione, la quale può verificarsi sia come primo esito di rendicontazione sia a seguito di un pre-esito di rendicontazione.
+Nell'eventualità in cui il recapitista dovesse rinvenire informazioni utili al completamento dell'attività di postalizzazione per suddetta raccomandta, questi dovrà procedere alla rendicontazione in conformità alla macchina a stati.
 
 (**) Trattasi di una sospensione della postalizzazione dovuta ad una causa di forza maggiore, la postalizzazione verrà gestita dal recapitista al verificarsi di condizioni favorevoli alla consegna.
 
