@@ -40,12 +40,12 @@ sequenceDiagram
     PN->>CONS: POST /paper-deliveries-engagement (richiesta postalizzazione)
     CONS-->>PN: 200/400/401/409 (esito registrazione)
 
-opt download di allegati 
+note over CONS : Scaricamento Allegati
     CONS->>PN: GET Scarica allegati (API download allegati)
     PN-->>CONS: 200 (riferimenti allegato )
     CONS ->> PN: GET fileUrl
     PN -->> CONS : 200 ( allegato ) 
-end 
+
 
     loop Avanzamento
     
@@ -59,12 +59,5 @@ end
         CONS-->>PN: Webhook avanzamento postalizzazione
     end
 
-    PN->>CONS: GET /paper-deliveries-progresses/{requestId}
-    CONS-->>PN: 200/401/404 (stato avanzamento)
-
-    PN->>CONS: POST /paper-replicas-engagement (richiesta duplicato)
-    CONS-->>PN: 200/400/401/409 (esito registrazione duplicato)
-
-    PN->>CONS: GET /paper-replicas-progresses/{requestId}
-    CONS-->>PN: 200/401/404
+    
 ```
