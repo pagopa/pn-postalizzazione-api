@@ -459,23 +459,23 @@ components:
             Data stato con timezone
         deliveryFailureCause:
           description: >-
-            _Motivazione di irreperibilità_ obbligtorie nei relativi eventi <br/>
+            _Motivazione di irreperibilità_ obbligatorie nei relativi eventi <br/>
             - __M01__ destinatario irreperibile <br/>
             - __M03__ destinatario sconosciuto <br/>
             - __M04__ destinatario trasferito <br/>
-            _Motivazione di mancata consegna_ obbligtorie nei relativi eventi <br/>
+            _Motivazione di mancata consegna_ obbligatorie nei relativi eventi <br/>
             - __M02__ destinatario deceduto <br/>
             - __M05__ invio rifiutato <br/>
             - __M06__ indirizzo inesatto <br/>
             - __M07__ indirizzo inesistente <br/>
             - __M08__ indirizzo insufficiente <br/>
             - __M09__ altre Motivazioni <br/>
-            _Motivazione di furto o smarrimento_ obbligtorie nei relativi eventi <br/>
+            _Motivazione di furto o smarrimento_ obbligatorie nei relativi eventi <br/>
             - __F01__ in caso di furto  <br/>
             - __F02__ in caso di smarrimento  <br/>
             - __F03__ in caso di deterioramento  <br/>
             - __F04__ in caso di rapina  <br/>
-            _Motivazione di causa di forza maggiore_ obbligtorie nei relativi eventi <br/>
+            _Motivazione di causa di forza maggiore_ obbligatorie nei relativi eventi <br/>
             - __C01__ incendio <br/>
             - __C02__ strada chiusa per lavori in corso o frana <br/>
             - __C03__ strada chiusa dalle autorità per eventi eccezionali <br/>
