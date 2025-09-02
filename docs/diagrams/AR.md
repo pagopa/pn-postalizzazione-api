@@ -37,7 +37,6 @@ stateDiagram-v2
     direction TB
     [*] --> Preesito2i
     Preesito2i --> Demat2i:RECRN002E [Plico]
-    Demat2i --> Demat2i:RECRN002E<br>[Plico]
     Demat2i --> [*]
   }
   state ConsegnatoGiacenza {
