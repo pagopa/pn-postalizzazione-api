@@ -25,7 +25,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PaperProgressFailure'
+              type: array
+              minItems: 1
+              maxItems: 250
+              items:
+                $ref: '#/components/schemas/PaperProgressFailure'
         required: true
       responses:
         '200':
