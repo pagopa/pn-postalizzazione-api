@@ -933,3 +933,59 @@ components:
           description: >-
             Stima del numero di secondi da aspettare prima che il contenuto del 
             documento sia scaricabile.
+
+    ##########################################################################
+    ###            INFORMATIVA FALLIMENTO RENDINCONTAZIONE                 ###
+    ##########################################################################
+
+    PaperProgressFailure:
+      required:
+        - requestId
+        - discardCode
+        - discardDescription
+        - discardTimeStamp
+      type: object
+      properties:
+        requestId:
+          type: string
+          minLength: 30
+          maxLength: 250
+          example: 'ABCD-HILM-YKWX-202202-1_rec0_try1'
+          description: >-
+            Identificativo della richiesta.
+        failureTriggeredBy:
+          description: >-
+            Evento che ha fatto scattare l'errore (opzionale)
+          $ref: 'schemas-paper-v2.yaml#/components/schemas/PaperProgressStatusEvent'
+        discardCode:
+          type: string
+          minLength: 3
+          maxLength: 10
+          example: 'PN400'
+          description: >-
+            Codice a 5 cifre che identifica la causa dello scarto
+            - 'PN400' Errore di validazione della macchina a stati <br />
+            - .... Altri errori previsti dalla specifica implementazione <br />
+        discardDescription:
+          type: string
+          minLength: 5
+          maxLength: 250
+          example: 'State Machine validation Error'
+          description: >-
+            Descrizione dello scarto
+        errorList: 
+          type: array
+          minItems: 0
+          maxItems: 50
+          items:
+            type: string
+            minLength: 3
+            maxLength: 250
+            example: 'missing RECXXX code'
+          description: >-
+            Elenco degli errori di validazione, se presenti.
+        discardTimeStamp: 
+          type: string
+          format: date-time
+          description: >-
+            Timestamp della response in UTC  
