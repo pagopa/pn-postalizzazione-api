@@ -954,8 +954,6 @@ components:
           description: >-
             Identificativo della richiesta.
         failureTriggeredBy:
-          description: >-
-            Evento che ha fatto scattare l'errore (opzionale)
           $ref: 'schemas-paper-v2.yaml#/components/schemas/PaperProgressStatusEvent'
         discardCode:
           type: string
