@@ -940,19 +940,11 @@ components:
 
     PaperProgressFailure:
       required:
-        - requestId
         - discardCode
         - discardDescription
         - discardTimeStamp
       type: object
       properties:
-        requestId:
-          type: string
-          minLength: 30
-          maxLength: 250
-          example: 'ABCD-HILM-YKWX-202202-1_rec0_try1'
-          description: >-
-            Identificativo della richiesta.
         failureTriggeredBy:
           $ref: 'schemas-paper-v2.yaml#/components/schemas/PaperProgressStatusEvent'
         discardCode:
