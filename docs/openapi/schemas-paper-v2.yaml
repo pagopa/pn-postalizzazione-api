@@ -739,6 +739,10 @@ components:
                   - __SCANNED__ <br/>
                   - __DIGITAL__ <br/>
                   In caso di assenza del campo, la piattaforma considererà DIGITAL gli allegati con MIME/Type application/zip.
+              duplicate:
+                type: boolean
+                description: >-
+                  Indica se è un duplicato.
               documentId:
                 type: string
                 description: >-
