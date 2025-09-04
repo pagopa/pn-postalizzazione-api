@@ -538,15 +538,6 @@ components:
                   - __Plico__ <br/>
                   - __Indagine__ <br/>
                   - __AR__ <br/>
-              dematType:
-                type: string
-                enum: [digital, scanned]
-                description: >-
-                  Tipologia di dematerializzazione, full digital o scansionato.
-              isDuplicate:
-                type: boolean
-                description: >-
-                  Indica se è un duplicato.
               uri:
                 type: string
                 minLength: 5
