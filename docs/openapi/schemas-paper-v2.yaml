@@ -317,18 +317,11 @@ components:
         courier:
           type: string
           description: >-
-            Identificativo del recapitista.
-          example: '123456789abc'
-        printer:
-          type: string
-          description: >-
-            Identificativo dello stampatore.
-          example: '123456789abc'
-        du:
-          type: string
-          description: >-
-            Distinta Unica, raggruppamento di spedizioni in un unico lotto.
-          example: '123456789abc'
+            identificativo del recapitista
+            es.:
+            - Poste
+            - PostAndService
+            - Fulmine
         productType:
           description: >-
             Tipo prodotto di cui viene chiesto il recapito:  <br/>
