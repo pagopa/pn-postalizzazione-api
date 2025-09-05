@@ -1,50 +1,7 @@
-openapi: 3.0.3
-info:
-  title:  API fornite dal normalizzatore - servizio di deduplica
-  version: 1.0.0
-tags:
-  - Deduplica
-paths:
+components: 
 
-  /send-normalizzatore-ingress/v1/deduplica:
-    post:
-      operationId: deduplica
-      tags:
-        - Deduplica
-      summary: PN richiede la deduplica online
-      parameters:
-        - $ref: '#/components/parameters/xPagopaAddrManCxId'
-        - $ref: '#/components/parameters/xPagopaAddrManApiKey'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DeduplicaRequest'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DeduplicaResponse'
-        '400':
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                $ref: 'schemas-normalizzatore.yaml#/components/schemas/Problem'
-        '500':
-          description: Internal error
-          content:
-            application/problem+json:
-              schema:
-                $ref: 'schemas-normalizzatore.yaml#/components/schemas/Problem'
-
-components:
-
-
-  parameters: 
+  parameters:
+  
     xPagopaAddrManCxId:
         name: "pn-address-manager-cx-id"
         in: header
@@ -58,11 +15,57 @@ components:
         required: true
         schema:
           type: string
-          x-field-extra-annotation: "@lombok.ToString.Exclude" # NO EXTERNAL
-
 
   schemas:
-   
+
+    NormalizzazioneRequest:
+      type: object
+      required:
+        - requestId
+        - sha256
+        - uri
+      properties:
+        requestId:
+          type: string
+          minLength: 1
+          maxLength: 250
+          description: id lavorazione
+        uri:
+          type: string
+          minLength: 5
+          maxLength: 2000
+          description: Le coordinate del documento correlato allo stato.
+        sha256:
+          type: string
+          minLength: 40
+          maxLength: 50
+          description: sha256, codificato in base 64, del contenuto del file riferenziato dal campo uri
+        idConf:
+          type: string
+          description: Eventuale configurazione speciale per la normalizzazione
+
+    NormalizzazioneResponse:
+      type: object
+      required:
+        - requestId
+      description: >-
+        error valorizzato solo in caso di mancata accettazione
+      properties:
+        requestId:
+          type: string
+          minLength: 1
+          maxLength: 250
+          description: id lavorazione
+        error:
+          type: string
+          description: >-
+            identificativo dell'errore            
+              - NOR400: BAD REQUEST. Mi passa un input errato sia dal punto di vista del contenuto o formale;
+              - NOR401: UNAUTHORIZATED. Mi passa delle credenziali vuote o errate;
+              - NOR404: NOT FOUND. Il servizio nel server Postel non è disponibile;
+              - NOR500: INTERNAL_SERVER_ERROR. Il servizio nei server Postel non è raggiungibile;
+              - NOR998: SERVIZIO DI NORMALIZZAZIONE NON DISPONIBILE; 
+    
     DeduplicaRequest:
       type: object
       required:
@@ -189,4 +192,33 @@ components:
         sViaCompletaSpedizione:
           type: string
 
-    
+    NormalizerCallbackRequest:
+      type: object
+      description: >-
+        uri e sha256 obbligatori in caso di callback di successo
+        error obbligatorio in caso di callback di errore
+      required:
+        - requestId
+      properties:
+        requestId:
+          type: string
+          minLength: 1
+          maxLength: 250
+          description: id lavorazione
+        uri:
+          type: string
+          minLength: 5
+          maxLength: 2000
+          description: Le coordinate del documento correlato allo stato. 
+        sha256:
+          type: string 
+          minLength: 40
+          maxLength: 50
+          description: >-
+            sha256, codificato in base 64, del contenuto del file riferenziato dal campo uri
+        error:
+          type: string
+          description: >-
+            identificativo dell'errore
+            - _E01_ //FIXME elencare i casi
+            - _E02_
