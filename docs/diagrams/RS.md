@@ -20,17 +20,13 @@ config:
   theme: redux
 ---
 stateDiagram-v2
+  direction TB
 
   %% Non rendicontabile
   NonRendicontabile --> PresaInCarico
   PresaInCarico --> NonRendicontabile:RECRS013 (*)
   NonRendicontabile --> [*]
   
-  %% Causa forza maggiore
-  CausaForzaMaggione --> PresaInCarico
-  PresaInCarico --> CausaForzaMaggione:RECRS015 (**)
-
-  direction TB
   state MancataConsegna {
     direction TB
     [*] --> Preesito2
@@ -82,6 +78,11 @@ stateDiagram-v2
   %% Furto
   Inesito --> Furto:RECRS006
   Furto --> [*]
+  
+  %% Causa forza maggiore
+  PresaInCarico --> CausaForzaMaggione:RECRS015 (**)
+  CausaForzaMaggione --> PresaInCarico
+
 
   %% Etichette
   Preesito2:Preesito
