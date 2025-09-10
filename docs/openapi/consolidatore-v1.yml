@@ -29,6 +29,13 @@ servers:
       Esempi:
       - Produzione: `https://prod.consolidatore.vincitore-gara-monte-valle.it`
       - Test:       `https://test.consolidatore.vincitore-gara-monte-valle.it`
+    variables:
+      env:
+        description: Ambiente di destinazione
+        default: prod
+        enum:
+          - prod
+          - test
 paths:  
   /piattaforma-notifiche-ingress/v1/paper-deliveries-engagement:
     post:
@@ -56,7 +63,7 @@ paths:
           description: OK
           content:
             application/json:
-              example: { resultCode: '200.00', resultDescription: 'OK', clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
+              example: { resultCode: '200.00', resultDescription: 'OK.   ', clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
               schema:
                 $ref: '#/components/schemas/OperationResultCodeResponse'
         '400':
@@ -115,7 +122,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaperDeliveryProgressesResponse'
               example:
-                responseId: 'ABCD-HILM-YKWX-202202-1_rec0_try1'
+                requestId: 'ABCD-HILM-YKWX-202202-1_rec0_try1'
                 events: []
 
         '401':
@@ -159,7 +166,7 @@ paths:
           description: OK
           content:
             application/json:
-              example: { resultCode: '200.00', resultDescription: 'OK', clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
+              example: { resultCode: '200.00', resultDescription: 'OK    ', clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
               schema:
                 $ref: '#/components/schemas/OperationResultCodeResponse'
         '400':
@@ -215,7 +222,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaperReplicasProgressesResponse'
               example:
-                responseId: 'ABCD-HILM-YKWX-202202-1_rec0_try1'
+                paperEngageRequestId: 'ABCD-HILM-YKWX-202202-1_rec0_try1'
+                requestId: 'ABCD-HILM-YKWX-202202-1_rec0_try1'
                 events: []
 
         '401':
