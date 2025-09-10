@@ -16,6 +16,11 @@ info:
 servers:
   - url: 'https://api.consolidatore.vincitore-gara-monte-valle.it'
     description: Server url
+tags:
+  - name: Evoluzioni 
+    description: api non presenti nella gara attuale
+  - name: RifiutoRendicontazionePostalizzazione
+    description: api che informa il recapitista circa il rigetto della sequenza di rendicontazione per la specifica postalizzazione
 paths:  
   /piattaforma-notifiche-ingress/v1/paper-deliveries-engagement:
     post:
@@ -232,6 +237,7 @@ paths:
         utilizzando l'apposita API.
       tags:
         - Evoluzioni
+        - RifiutoRendicontazionePostalizzazione
       parameters:
         - $ref: '#/components/parameters/xPagopaExtchServiceId'
         - $ref: '#/components/parameters/xPagopaExtchApiKey'

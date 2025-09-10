@@ -942,7 +942,6 @@ components:
       required:
         - discardCode
         - discardDescription
-        - discardTimeStamp
       type: object
       properties:
         failureTriggeredBy:
@@ -974,8 +973,3 @@ components:
             example: 'missing RECXXX code'
           description: >-
             Elenco degli errori di validazione, se presenti.
-        discardTimeStamp: 
-          type: string
-          format: date-time
-          description: >-
-            Timestamp della response in UTC  
