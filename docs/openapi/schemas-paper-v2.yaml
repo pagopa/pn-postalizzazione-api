@@ -251,7 +251,7 @@ components:
           description: >-
             Codice a 5 cifre separate da punto che indica l’esito della richiesta.  LE prime tre sono ripetizione del codice HTTP<br/>
             Per convenzione, la sequenza 2000 indicherà OK. <br />
-            - '200.00' OK <br />
+            - '200.00' Accepted <br />
             - '400.01' Errore di validazione sintattica del messaggio <br />
             - '400.02' Errore di validazione regole semantiche <br />
             - '404.00' requestId mai ricevuto <br />
