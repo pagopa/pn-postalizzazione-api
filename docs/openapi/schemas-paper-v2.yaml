@@ -554,18 +554,21 @@ components:
                 format: date-time
                 description: >-
                   Data di produzione del documento.
-              originType:
+              sourceType:
                 type: string
                 description: >-
                   [NUOVASPECIFICA] Indica se il documento è stato prodotto tramite scansione cartacea (`SCANNED`) oppure generato digitalmente (`DIGITAL`). 
                   - __SCANNED__ <br/>
                   - __DIGITAL__ <br/>
                   In caso di assenza del campo, la piattaforma considererà DIGITAL gli allegati con MIME/Type application/zip.
-              duplicate:
-                type: boolean
+              originType:
+                type: string
                 description: >-
-                  [NUOVASPECIFICA] Indica se l'allegato è un duplicato.
-                  In caso di assenza del campo si presuppone che l'allegato sia l'originale (default: false)
+                  [NUOVASPECIFICA] Specifica l'origine del documento
+                  - __ORIGINAL__ <br/>
+                  - __DUPLICATED__ <br/>
+                  - altri valori da specificare in fase di approfondimento tecnico
+                  In caso di assenza del campo la piattaforma considererà come originale (`ORIGINAL`) il documento
         discoveredAddress:
           description: >-
             Indirizzo del destinatario desunto dalle indagini del personale postale.
@@ -744,7 +747,7 @@ components:
                   La descrizione della tipologia di oggetto.
                 minItems: 2
                 maxItems: 10
-              originType:
+              sourceType:
                 type: string
                 description: >-
                   [NUOVASPECIFICA] Indica se il documento è stato prodotto tramite scansione cartacea (`SCANNED`) oppure generato digitalmente (`DIGITAL`). 
