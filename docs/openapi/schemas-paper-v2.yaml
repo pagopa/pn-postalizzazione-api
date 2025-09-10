@@ -726,6 +726,13 @@ components:
                   La descrizione della tipologia di oggetto.
                 minItems: 2
                 maxItems: 10
+              originType:
+                type: string
+                description: >-
+                  Indica se il documento è stato prodotto tramite scansione cartacea (`SCANNED`) oppure generato digitalmente (`DIGITAL`). 
+                  - __SCANNED__ <br/>
+                  - __DIGITAL__ <br/>
+                  In caso di assenza del campo, la piattaforma considererà DIGITAL gli allegati con MIME/Type application/zip.
               documentId:
                 type: string
                 description: >-

@@ -12,10 +12,23 @@ info:
     E invoca un __webhook__ messo a disposizione da Piattaforma Notifiche 
       e invocato dal consolidatore allo scopo di notificare gli eventi di progressione dei processi 
       di postalizzazione.
+
+    > **Nota:** Tutte le chiamate verso il consolidatore devono avvenire tramite connessione VPN dedicata, 
+    > secondo le modalità concordate tra le parti. L'endpoint non è accessibile da Internet pubblica.
   version: v1.0
 servers:
-  - url: 'https://api.consolidatore.vincitore-gara-monte-valle.it'
-    description: Server url
+  - url: 'https://{env}.consolidatore.vincitore-gara-monte-valle.it'
+    description: >
+      Endpoint raggiungibile esclusivamente tramite VPN dedicata tra Piattaforma Notifiche e Consolidatore.
+      L'accesso pubblico non è consentito.
+
+      Sostituire `{env}` con:
+      - `prod` per l'ambiente di produzione
+      - `test` per l'ambiente di test/collaudo
+
+      Esempi:
+      - Produzione: `https://prod.consolidatore.vincitore-gara-monte-valle.it`
+      - Test:       `https://test.consolidatore.vincitore-gara-monte-valle.it`
 paths:  
   /piattaforma-notifiche-ingress/v1/paper-deliveries-engagement:
     post:

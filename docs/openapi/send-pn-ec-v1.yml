@@ -2,18 +2,34 @@ openapi: 3.0.3
 info:
   title: Consolidatore ingress API.
   description: >-
-    NOTIFICHE DI AVANZAMENTO DEL PROCESSO DI POSTALIZZAZIONE. L'API espone dei servizi sul path "/consolidatore-ingress/v1/".
+    Questa API espone i servizi utilizzati dal consolidatore per:
+    - notificare a Piattaforma Notifiche gli avanzamenti del processo di postalizzazione e delle richieste di duplicato tramite webhook dedicati;
+    - gestire gli allegati relativi alle notifiche, consentendo il pre-caricamento e il download dei documenti necessari al processo.
+
+    Tutte le API sono protette tramite i parametri di header `x-pagopa-extch-service-id` e `x-api-key`.
+    I servizi sono disponibili sul path "/consolidatore-ingress/v1/".
   version: v1.0
+
 servers:
-  - url: >-
-      https://api.externalchannel.pagopa.local
-    description: Server url
+  - url: 'https://{vpnDomain}/PagoPaService'
+    variables:
+      vpnDomain:
+        default: "pn.pagopa.it/consolidatore"
+        description: >
+          Dominio VPN fornito per ciascun ambiente (es. test, produzione) e comunicato separatamente.
+          Il valore effettivo sarà definito in fase di onboarding.
+    description: >
+      Endpoint raggiungibile esclusivamente tramite VPN dedicata tra Piattaforma Notifiche e Consolidatore.
+      L'accesso pubblico non è consentito.
+
+
 tags:
-  - name: Consolidatore
-    description: API del consolidatore.
+  - name: ProgressEvents
+    description: Servizi per la ricezione dei progressi del processo di postalizzazione e duplicato tramite webhook.
+  - name: Attachments
+    description: Servizi per la gestione degli allegati (pre-caricamento e download).
 
 paths:
- 
   /consolidatore-ingress/v1/push-progress-events:
     put:
       operationId: sendPaperProgressStatusRequest
@@ -26,7 +42,7 @@ paths:
         - Ogni singolo aggiornamento di recapito deve essere inviato con una chiamata API separata. 
         Non è possibile raggruppare più consegne in un'unica richiesta.
       tags:
-        - Consolidatore
+        - ProgressEvents
       parameters:
         - $ref: '#/components/parameters/xPagopaExtchServiceId'
         - $ref: '#/components/parameters/xPagopaExtchApiKey'
@@ -41,8 +57,7 @@ paths:
         required: true
       responses:
         '202':
-          description: >-
-            OK, l'evento è stato registrato
+          description: OK
           content:
             application/json:
               example: { resultCode: '202.00', resultDescription: 'Accepted', clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
@@ -72,10 +87,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/OperationResultCodeResponse'
   
-  /consolidatore-ingress/v1/replicas-push-progress-events/:
+  /consolidatore-ingress/v1/replicas-push-progress-events:
     put:
       operationId: sendPaperReplicasProgressStatusRequest
       summary: Webhook con cui PN riceve progressi di richiesta duplicato
+      description: Ricezione avanzamenti del processo di duplicato.
+      tags:
+        - ProgressEvents
       parameters:
         - $ref: '#/components/parameters/xPagopaExtchServiceId'
         - $ref: '#/components/parameters/xPagopaExtchApiKey'
@@ -124,11 +142,11 @@ paths:
   /consolidatore-ingress/v1/attachment-preload:
     put:
       summary: Richiesta di pre-caricamento dei documenti da comunicare a PN
-      description: |-
+      description: >-
         Operazione che richiede a Piattaforma Notifica le informazioni e le autorizzazioni necessarie 
         a precaricare uno o più file.
       tags:
-        - Consolidatore
+        - Attachments
       parameters:
         - $ref: '#/components/parameters/xPagopaExtchServiceId'
         - $ref: '#/components/parameters/xPagopaExtchApiKey'
@@ -181,9 +199,9 @@ paths:
   /consolidatore-ingress/v1/get-attachment/{fileKey}:
     get:
       summary: ottieni metadati e contenuto di un file.
-      description: |-
+      description: >-
         Con questa API è possibile ottenere le informazioni necessarie al download del contenuto del file;
-        tali informazioni sono contenute nel campo _download_. <br/>
+        tali informazioni sono contenute nel campo _download_.  <br/>
           - _url_: se il contenuto del file è immediatamente disponibile questo campo viene 
             valorizzato con un URL da invocare in GET per ottenere il contenuto del file. <br/>
           - _retryAfter_: valorizzato se il contenuto del file è stato archiviato in glacier. 
@@ -194,12 +212,12 @@ paths:
         pronto verrà comunicato un evento al client che ha invocato la chiamata. Molteplici 
         invocazioni di questa API generano un solo evento per client. <br/>
         Il file rimane hot per ```stayHotTime````.
+      tags:
+        - Attachments
       parameters:
         - $ref: '#/components/parameters/fileKey'
         - $ref: '#/components/parameters/xPagopaExtchServiceId'
         - $ref: '#/components/parameters/xPagopaExtchApiKey'
-      tags:
-        - Consolidatore
       operationId: getFile
       responses:
         '200':
@@ -243,8 +261,9 @@ paths:
             - se il file identificato da fileKey non è ancora stato salvato; <br/>
 
 
-components:
 
+components:
+      
   parameters:
     fileKey: 
       $ref: 'schemas-paper-v2.yaml#/components/parameters/fileKey'
@@ -274,4 +293,3 @@ components:
     
     FileDownloadResponse:
       $ref: 'schemas-paper-v2.yaml#/components/schemas/FileDownloadResponse'
-    
