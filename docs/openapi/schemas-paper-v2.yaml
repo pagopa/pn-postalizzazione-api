@@ -251,7 +251,7 @@ components:
           description: >-
             Codice a 5 cifre separate da punto che indica l’esito della richiesta.  LE prime tre sono ripetizione del codice HTTP<br/>
             Per convenzione, la sequenza 2000 indicherà OK. <br />
-            - '200.00' OK <br />
+            - '200.00' Accepted <br />
             - '400.01' Errore di validazione sintattica del messaggio <br />
             - '400.02' Errore di validazione regole semantiche <br />
             - '404.00' requestId mai ricevuto <br />
@@ -318,10 +318,16 @@ components:
           type: string
           description: >-
             identificativo del recapitista
-            es.:
-            - Poste
-            - PostAndService
-            - Fulmine
+        printer:
+          type: string
+          description: >-
+            [NUOVASPECIFICA] Identificativo dello stampatore.
+          example: '123456789abc'
+        du:
+          type: string
+          description: >-
+            [NUOVASPECIFICA] Distinta Unica, raggruppamento di spedizioni in un unico lotto.
+          example: '123456789abc'
         productType:
           description: >-
             Tipo prodotto di cui viene chiesto il recapito:  <br/>
@@ -548,6 +554,21 @@ components:
                 format: date-time
                 description: >-
                   Data di produzione del documento.
+              sourceType:
+                type: string
+                description: >-
+                  [NUOVASPECIFICA] Indica se il documento è stato prodotto tramite scansione cartacea (`SCANNED`) oppure generato digitalmente (`DIGITAL`). 
+                  - __SCANNED__ <br/>
+                  - __DIGITAL__ <br/>
+                  In caso di assenza del campo, la piattaforma considererà DIGITAL gli allegati con MIME/Type application/zip.
+              originType:
+                type: string
+                description: >-
+                  [NUOVASPECIFICA] Specifica l'origine del documento
+                  - __ORIGINAL__ <br/>
+                  - __DUPLICATED__ <br/>
+                  - altri valori da specificare in fase di approfondimento tecnico
+                  In caso di assenza del campo la piattaforma considererà come originale (`ORIGINAL`) il documento
         discoveredAddress:
           description: >-
             Indirizzo del destinatario desunto dalle indagini del personale postale.
@@ -726,10 +747,10 @@ components:
                   La descrizione della tipologia di oggetto.
                 minItems: 2
                 maxItems: 10
-              originType:
+              sourceType:
                 type: string
                 description: >-
-                  Indica se il documento è stato prodotto tramite scansione cartacea (`SCANNED`) oppure generato digitalmente (`DIGITAL`). 
+                  [NUOVASPECIFICA] Indica se il documento è stato prodotto tramite scansione cartacea (`SCANNED`) oppure generato digitalmente (`DIGITAL`). 
                   - __SCANNED__ <br/>
                   - __DIGITAL__ <br/>
                   In caso di assenza del campo, la piattaforma considererà DIGITAL gli allegati con MIME/Type application/zip.

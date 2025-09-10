@@ -166,7 +166,7 @@ paths:
           description: OK
           content:
             application/json:
-              example: { resultCode: '200.00', resultDescription: 'OK    ', clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
+              example: { resultCode: '200.00', resultDescription: 'Accepted', clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
               schema:
                 $ref: '#/components/schemas/OperationResultCodeResponse'
         '400':
