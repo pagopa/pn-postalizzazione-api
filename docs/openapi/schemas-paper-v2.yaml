@@ -317,16 +317,16 @@ components:
         courier:
           type: string
           description: >-
-            identificativo del recapitistaì
+            identificativo del recapitista
         printer:
           type: string
           description: >-
-            Identificativo dello stampatore.
+            [NUOVASPECIFICA] Identificativo dello stampatore.
           example: '123456789abc'
         du:
           type: string
           description: >-
-            Distinta Unica, raggruppamento di spedizioni in un unico lotto.
+            [NUOVASPECIFICA] Distinta Unica, raggruppamento di spedizioni in un unico lotto.
           example: '123456789abc'
         productType:
           description: >-
@@ -735,7 +735,7 @@ components:
               originType:
                 type: string
                 description: >-
-                  Indica se il documento è stato prodotto tramite scansione cartacea (`SCANNED`) oppure generato digitalmente (`DIGITAL`). 
+                  [NUOVASPECIFICA] Indica se il documento è stato prodotto tramite scansione cartacea (`SCANNED`) oppure generato digitalmente (`DIGITAL`). 
                   - __SCANNED__ <br/>
                   - __DIGITAL__ <br/>
                   In caso di assenza del campo, la piattaforma considererà DIGITAL gli allegati con MIME/Type application/zip.
