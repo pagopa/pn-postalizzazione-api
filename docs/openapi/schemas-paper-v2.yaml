@@ -742,7 +742,8 @@ components:
               duplicate:
                 type: boolean
                 description: >-
-                  Indica se è un duplicato.
+                  [NUOVASPECIFICA] Indica se l'allegato è un duplicato.
+                  In caso di assenza del campo si presuppone che l'allegato sia l'originale (default: false)
               documentId:
                 type: string
                 description: >-
