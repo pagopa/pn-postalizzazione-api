@@ -2,8 +2,15 @@ openapi: 3.0.3
 info:
   title:  API fornite dal normalizzatore - servizio di deduplica
   version: 1.0.0
-tags:
-  - Deduplica
+  description: |
+    Definizione delle API fornite dal normalizzatore SINI per il servizio di deduplica online. </br>
+    Il servizio consente di confrontare due indirizzi e stabilire se sono riferiti alla stessa destinazione postale. </br>
+    La deduplica viene eseguita dopo che entrambi gli indirizzi sono stati normalizzati. </br>
+    Il servizio è sincrono e risponde con l'esito della deduplica. </br>
+tags:   
+  - name: Deduplica
+    description: Servizio di normalizzazione
+
 paths:
 
   /send-normalizzatore-ingress/v1/deduplica:
@@ -71,10 +78,8 @@ components:
         configIn:
           $ref: '#/components/schemas/ConfigIn'
         masterIn:
-          description: Indirizzo base con cui deduplicare lo slave
           $ref: '#/components/schemas/AddressIn'
         slaveIn:
-          description: Indirizzo oggetto della deduplica
           $ref: '#/components/schemas/AddressIn'
 
     ConfigIn:
@@ -115,10 +120,8 @@ components:
         errore: valorizzato in caso di risposta con errore
       properties:
         masterOut:
-          description: risultato delle deduplica 
           $ref: '#/components/schemas/AddressOut'
         slaveOut:
-          description: risultato delle deduplica
           $ref: '#/components/schemas/AddressOut'
         risultatoDedu:
           type: boolean

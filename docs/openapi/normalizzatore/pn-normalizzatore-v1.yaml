@@ -2,8 +2,9 @@ openapi: 3.0.3
 info:
   title:  API fornite dal normalizzatore SINI
   version: 1.0.0
-tags:
-  - Normalizzatore
+tags: 
+  - name: Normalizzatore
+    description: Servizio di normalizzazione batch 
 paths:
   /send-normalizzatore-ingress/v1/normalizzazione:
     post:
