@@ -1,0 +1,80 @@
+openapi: 3.0.3
+info:
+  title: API che il fornitore dei servizi di recapito dovrà mettere a disposizione
+  description: >- 
+    Il Recapitista espone un path.
+
+    - '/piattaforma-notifiche-ingress/v1/paper-deliveries-progresses/{requestId}' a cui 
+      il Consolidatore richiede in modalità pull gli esiti delle postalizzazioni.
+    
+    E invoca un __webhook__ messo a disposizione dal Consolidatore
+      e invocato dal Recapitista allo scopo di notificare gli eventi di progressione dei processi 
+      di postalizzazione.
+  version: v1.0
+servers:
+  - url: 'https://api.recapitista.vincitore-gara-recapito.it'
+    description: Server url
+paths:   
+  /piattaforma-notifiche-ingress/v1/paper-deliveries-progresses/{requestId}:
+    get:
+      operationId: getPaperEngageProgresses
+      summary: il Consolidatore richiede l'elenco dei progressi di una postalizzazione
+      description: >- 
+        Questa richiesta permette di ottenere l'elenco degli eventi salienti 
+        riguardanti un processo di postalizzazione. <br/>
+        Oltre all'elenco degli eventi si ottengono informazioni sulle cause di tali eventi 
+        e URL per effettuare il download delle copie digitali conformi dei documenti prodotti 
+        durante il processo di postalizzazione. <br>
+      parameters:
+        - $ref: '#/components/parameters/xPagopaExtchServiceId'
+        - $ref: '#/components/parameters/xPagopaExtchApiKey'
+        - name: requestId
+          description: Identificativo della richiesta di postalizzazione 
+          example: 'ABCD-HILM-YKWX-202202-1_rec0_try1'
+          in: path
+          required: true
+          schema:
+            type: string  
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaperDeliveryProgressesResponse'
+              example:
+                responseId: 'ABCD-HILM-YKWX-202202-1_rec0_try1'
+                events: []
+
+        '401':
+          description: Mancano le credenziali di identificazione o sono sbagliate
+          content:
+            application/json:
+              example: { resultCode: '401.00', resultDescription: 'Authentication Failed', clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
+              schema:
+                $ref: '#/components/schemas/OperationResultCodeResponse'
+        '404':
+          description: requestId non corrispondente a un requestId precedentemente richiesto.
+          content:
+            application/json:
+              example: { resultCode: '404.01', resultDescription: 'requestId never sent', clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
+              schema:
+                $ref: '#/components/schemas/OperationResultCodeResponse'
+        
+components:
+      
+  parameters:
+      
+    xPagopaExtchServiceId:
+      $ref: 'schemas-paper-v2.yaml#/components/parameters/xPagopaExtchServiceId'
+    
+    xPagopaExtchApiKey:
+      $ref: 'schemas-paper-v2.yaml#/components/parameters/xPagopaExtchApiKey'
+  
+  schemas:
+      
+    OperationResultCodeResponse:
+      $ref: 'schemas-paper-v2.yaml#/components/schemas/OperationResultCodeResponse'
+
+    PaperDeliveryProgressesResponse:
+      $ref: 'schemas-paper-v2.yaml#/components/schemas/PaperDeliveryProgressesResponse'

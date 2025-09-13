@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Consolidatore ingress API.
+  title: SEND - Consolidatore ingress API.
   description: >-
     Questa API espone i servizi utilizzati dal consolidatore per:
     - notificare a Piattaforma Notifiche gli avanzamenti del processo di postalizzazione e delle richieste di duplicato tramite webhook dedicati;
