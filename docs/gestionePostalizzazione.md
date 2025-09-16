@@ -30,34 +30,36 @@ In particolare un consolidatore / recapitista sarà in grado di. :
 5. **SEND** può interrogare lo stato tramite `GET /paper-deliveries-progresses/{requestId}`.
 paper-replicas-progresses/{requestId}`.
 
-## Sequence Diagram
+### Sequence Diagram
 
 ```mermaid
 sequenceDiagram
+
     participant SEND as SEND
     participant CONS as Consolidatore
     participant REC as Recapitista
 
-    SEND->>CONS: POST /paper-deliveries-engagement (richiesta postalizzazione)
-    CONS-->>SEND: 200/400/401/409 (esito presa in carico)
+    SEND->>CONS: POST sendPaperProgressStatusRequest
+    CONS-->>SEND: 200
 
-rect LIGHTGREY
+
+rect rgba(204, 210, 211, 0.22)
 note over CONS : Scaricamento Allegati
-    CONS->>SEND: GET Scarica allegati (API download allegati)
-    SEND-->>CONS: 200 (riferimenti allegato )
-    CONS ->> SEND: GET fileUrl
+    CONS->>SEND: GET getFile (API download allegati)
+    SEND-->>CONS: 200 (presignedFileUrl )
+    CONS ->> SEND: GET presignedFileUrl
     SEND -->> CONS : 200 ( allegato ) 
 end
 
-rect LIGHTGREY
+rect rgba(204, 210, 211, 0.22)
 note over CONS : Stampa ed imbustamento
 
     loop Avanzamento per eventi CONS
     
     opt upload allegato
-    CONS ->> SEND : PUT attachment-preload
-    SEND -->> CONS : 200 - UploadUrl 
-    CONS ->> SEND : Upload Document (UploadUrl,attachment)
+    CONS ->> SEND : PUT presignedUploadRequest
+    SEND -->> CONS : 200 - presignedUploadUrl 
+    CONS ->> SEND : POST presignedUploadUrl (attachment)
     SEND -->> CONS : 200 -OK
 
     end
@@ -68,15 +70,15 @@ end
 
 note over CONS,REC : Invio materialità a recapito   
 
-rect LIGHTGREY
+rect rgba(204, 210, 211, 0.22)
 note over CONS,REC : Ricezione e presa in carico eventi di postalizzazione (*)
 loop Avanzamento per eventi REC
     
     opt upload allegato
     REC ->> CONS : PUT attachment-preload (**)
-    CONS ->> SEND : PUT attachment-preload
-    SEND -->> CONS : 200 - UploadUrl 
-    CONS -->> REC : 200 - forward UploadUrl
+    CONS ->> SEND : PUT presignedUploadRequest
+    SEND -->> CONS : 200 - presignedUploadUrl 
+    CONS -->> REC : 200 - forward presignedUploadUrl
     REC ->> CONS : Upload Document (UploadUrl,attachment) (**)
     CONS ->> SEND : Upload Document (UploadUrl,attachment)
     SEND -->> CONS : 200 -OK
