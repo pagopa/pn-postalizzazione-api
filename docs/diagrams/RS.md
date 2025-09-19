@@ -80,8 +80,8 @@ stateDiagram-v2
   Furto --> [*]
   
   %% Causa forza maggiore
-  PresaInCarico --> CausaForzaMaggione:RECRS015 (**)
-  CausaForzaMaggione --> PresaInCarico
+  PresaInCarico --> CausaForzaMaggiore:RECRS015 (**)
+  CausaForzaMaggiore --> PresaInCarico
 
 
   %% Etichette
@@ -101,7 +101,7 @@ stateDiagram-v2
   PresaInCarico:Presa in carico
   InGiacenza:In giacenza
   Furto:Furto, smarrimento o deterioramento
-  CausaForzaMaggione:Causa di forza maggiore
+  CausaForzaMaggiore:Causa di forza maggiore
   NonRendicontabile:Non rendicontabile
 ```
 </details>

@@ -72,8 +72,8 @@ stateDiagram-v2
   NonRendicontabile --> [*]
   
   %% Causa forza maggiore
-  CausaForzaMaggione --> PresaInCarico
-  PresaInCarico --> CausaForzaMaggione:RECRN015 (**)
+  CausaForzaMaggiore --> PresaInCarico
+  PresaInCarico --> CausaForzaMaggiore:RECRN015 (**)
 
   %% Chiusura fascicolo
   Consegnato --> [*]:RECRN001C
@@ -115,7 +115,7 @@ stateDiagram-v2
   PresaInCarico:Presa in carico
   InGiacenza:In giacenza
   Furto:Furto, smarrimento o deterioramento
-  CausaForzaMaggione:Causa di forza maggiore
+  CausaForzaMaggiore:Causa di forza maggiore
   NonRendicontabile:Non rendicontabile
 ```
 </details>
