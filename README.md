@@ -7,7 +7,7 @@ Questo documento descrive le specifiche e il flusso di integrazione richiesto pe
 
 ### Servizi di stampa e recapito
 Per tutti i servizi legati al mondo della stampa e del recapito si faccia riferimento ai seguenti documenti:
-* [gestionePostalizzazione.md](docs/gestione_postalizzazione.md) - descrive l'integrazione con il processo di postalizzazione (stampa ed imbustamento, invio a recapito e successiva rendicontazione)
+* [gestionePostalizzazione.md](docs/gestionePostalizzazione.md) - descrive l'integrazione con il processo di postalizzazione (stampa ed imbustamento, invio a recapito e successiva rendicontazione)
 * [gestioneErroreRendicontazione.md](docs/gestioneErroreRendicontazione.md) - descrive la modalità di gestione degli errori generati da SEND in fase di validazione delle rendicontazioni ed il processo di recupero
 * [gestioneRendicontazioniSostitutive.md](docs/gestioneRendicontazioniSostitutive.md) - descrive il processo di recupero di rendicontazioni sostitutive alle originali
 
