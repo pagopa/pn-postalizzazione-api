@@ -190,6 +190,10 @@ components:
           type: string
         sViaCompletaSpedizione:
           type: string
+        codiceComuneIstat:
+          # [NUOVASPECIFICA] CODICECOMUNEISTAT : Codice Istat del comune;
+          type: string
+
 
     Problem:
       required:
