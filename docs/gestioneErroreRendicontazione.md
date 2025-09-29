@@ -1,5 +1,7 @@
 ## Gestione errori di rendicontazione
-E' possibile che gli eventi dei recapitisti veicolati tramite il consolidatore siano contrastanti in base alle informazioni su SEND. I tali casi SEND può , tramite il consolidatore, segnalare un errore di rendicontazione attraverso le seguente API 
+E' possibile che gli eventi dei recapitisti veicolati tramite il consolidatore siano contrastanti in base alle informazioni su SEND. 
+In tali casi SEND può, tramite il consolidatore, segnalare un errore di rendicontazione attraverso una specifica API secondo il flusso qui descritto.
+La specifica API verrà definita a valle dell'aggiudicazione della gara.
 
 ```mermaid
 sequenceDiagram
@@ -10,7 +12,7 @@ sequenceDiagram
 
 SEND ->> CONS : Scarto
         CONS-->>SEND: 200/400/401/409 (esito presa in carico)
-        CONS <<->> REC : Inoltro scarto K
+        CONS ->> REC : Inoltro scarto K
         
     REC ->> REC : Verifica segnalazione
  
@@ -18,21 +20,19 @@ SEND ->> CONS : Scarto
 
 note over CONS,REC : Re-inoltro eventi
 loop Avanzamento per eventi REC
-    
+
     opt upload allegato
-    REC ->> CONS : PUT attachment-preload (*)
-    CONS ->> SEND : PUT attachment-preload
-    SEND -->> CONS : 200 - UploadUrl 
-    CONS -->> REC : 200 - UploadUrl (*)
-    REC ->> CONS : Upload Document (UploadUrl,attachment) (*)
+    note over CONS,REC : Rendicontazione evidenze recapito (*)
+    CONS ->> SEND : PUT presignedUploadRequest
+    SEND -->> CONS : 200 - presignedUploadUrl 
     CONS ->> SEND : Upload Document (UploadUrl,attachment)
     SEND -->> CONS : 200 -OK
-    CONS -->> REC : 200 -OK (*)
 
     end
-        REC ->> CONS : Webhook avanzamento postalizzazione
-        CONS-->>SEND: Webhook avanzamento postalizzazione
+    note over CONS,REC: Rendicontazione eventi recapito (*)
+    CONS-->>SEND: Webhook avanzamento postalizzazione
     end
-
 
 ```
+
+(*) Fare riferimento alla specifica di integrazione tra Consolidatore e Recapitisiti

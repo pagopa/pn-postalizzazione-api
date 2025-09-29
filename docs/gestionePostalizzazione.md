@@ -24,9 +24,9 @@ In particolare un consolidatore / recapitista sarà in grado di. :
 1. **SEND** invia una richiesta di postalizzazione tramite `POST /paper-deliveries-engagement`.
 1. Il consolidatore valida e registra la richiesta.
 1. Il consolidatore scarica gli allegati tramite le API della piattaforma.
-1. Il consolidatore invia notifiche di avanzamento tramite [webhook](./openapi/send2consolidatore-v1.yml).
+1. Il consolidatore invia notifiche di avanzamento tramite [webhook](./openapi/send-ec-v1.yml).
 1. Il consolidatore si integra con lo specifico recapitista per trasmettere la richiesta di postalizzazione
-1. Il consolidatore riceve avanzamenti sulla specifica postalizzazione tramite [API](./openapi/recapitista2consolidatore-v1.yml) che inoltra a sua volta a SEND mediante [webhook](./openapi/send2consolidatore-v1.yml).
+1. Il consolidatore riceve avanzamenti sulla specifica postalizzazione tramite l'integrazione descritta nel -documento tbd- che inoltra a sua volta a SEND mediante [webhook](./openapi/send-ec-v1.yml).
 5. **SEND** può interrogare lo stato tramite `GET /paper-deliveries-progresses/{requestId}`.
 paper-replicas-progresses/{requestId}`.
 
@@ -71,33 +71,29 @@ end
 note over CONS,REC : Invio materialità a recapito   
 
 rect rgba(204, 210, 211, 0.22)
-note over CONS,REC : Ricezione e presa in carico eventi di postalizzazione (*)
+note over CONS,REC : Processo di rendicontazione (*)
 loop Avanzamento per eventi REC
-    
+
     opt upload allegato
-    REC ->> CONS : PUT attachment-preload (**)
+    note over CONS,REC : Rendicontazione evidenze recapito (**)
     CONS ->> SEND : PUT presignedUploadRequest
     SEND -->> CONS : 200 - presignedUploadUrl 
-    CONS -->> REC : 200 - forward presignedUploadUrl
-    REC ->> CONS : Upload Document (UploadUrl,attachment) (**)
     CONS ->> SEND : Upload Document (UploadUrl,attachment)
     SEND -->> CONS : 200 -OK
-    CONS -->> REC : 200 -OK 
 
     end
-        REC ->> CONS : Webhook avanzamento postalizzazione (**)
-        CONS-->>SEND: Webhook avanzamento postalizzazione
+    note over CONS,REC: Rendicontazione eventi recapito (**)
+    CONS-->>SEND: Webhook avanzamento postalizzazione
     end
 
 end
-
 ```
 
-(*) Ogni prodotto postale segue una specifica rendicontazione con i propri eventi e la propria sequenza di eventi. Fare riferimento alla documentazione specifica
+(*) Ogni prodotto postale segue una specifica rendicontazione con eventi dedicati, sequenze dedicate ed evidenze di recapito. Fare riferimento alla documentazione specifica
 * [Atto giudiziario 890](diagrams/890.md)
 * [Raccomandata AR nazionale](diagrams/AR.md)
 * [Raccomanata Semplice nazionale](diagrams/RS.md)
 * [Raccomanata AR Internazionale](diagrams/RIR.md)
 * [Raccomandata Semplice Internazionale](diagrams/RIS.md)
 
-(**) Specifica per l'integrazione coi Recapitisiti
+(**) Fare riferimento alla specifica di integrazione tra Consolidatore e Recapitisiti
