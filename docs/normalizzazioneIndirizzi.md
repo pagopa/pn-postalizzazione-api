@@ -37,7 +37,7 @@ In particolare sono rese disponibili le seguenti operazioni : il normalizzatore 
 1. **SEND** invia una richiesta di normalizzazione tramite `POST /normalizzazione`.
 1. Il normalizzatore valida e registra la richiesta.
 1. Il normalizzatore scarica l'allegato tramite le API della piattaforma.
-1. Il normalizzatore comunica il risultato tramite il webhook [normalizer-callback](./openapi/normalizzatore/pn-normalizzatore-webhook-v1-v1.yml).
+1. Il normalizzatore comunica il risultato tramite il webhook [normalizer-callback](./openapi/normalizzatore/pn-normalizzatore-webhook-v1.yml).
 
 
 
@@ -47,7 +47,7 @@ sequenceDiagram
     participant NORM as Normalizzatore
     box PN
     participant SEND as SEND
-    participant ss as SafeStorage
+    participant ss as BucketSafeStorage
     end 
     
     SEND->>NORM: POST normalizzazione
@@ -56,16 +56,16 @@ sequenceDiagram
 
 
 note over NORM : Scaricamento File Inidirizzi da normalizzare
-    NORM->>ss: getFile
-    ss-->>NORM: 200 (presignedFileUrl )
+    NORM->>SEND: getFile
+    SEND-->>NORM: 200 (presignedFileUrl )
     NORM ->> ss: GET presignedFileUrl
     ss -->> NORM : 200 ( allegato ) 
 
     NORM -->> NORM : Normalizzazione indirizzi
 
 note over NORM : Upload File Indirizzi normalizzati
-    NORM->>ss: presignedUploadRequest
-    ss-->>NORM: 200 (presignedFileUrl )
+    NORM->>SEND: presignedUploadRequest
+    SEND-->>NORM: 200 (presignedFileUrl )
     NORM ->> ss: upload file
 
 note over NORM : Callback di completamento normalizzazione
