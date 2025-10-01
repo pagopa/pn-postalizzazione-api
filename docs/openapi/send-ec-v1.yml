@@ -28,6 +28,8 @@ tags:
     description: Servizi per la ricezione dei progressi del processo di postalizzazione e duplicato tramite webhook.
   - name: Attachments
     description: Servizi per la gestione degli allegati (pre-caricamento e download).
+  - name: FASE2
+    description: Servizi da integrare nella FASE2.
 
 paths:
   /consolidatore-ingress/v1/push-progress-events:
@@ -94,6 +96,7 @@ paths:
       description: Ricezione avanzamenti del processo di duplicato.
       tags:
         - ProgressEvents
+        - FASE2
       parameters:
         - $ref: '#/components/parameters/xPagopaExtchServiceId'
         - $ref: '#/components/parameters/xPagopaExtchApiKey'

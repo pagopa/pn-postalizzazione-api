@@ -39,7 +39,7 @@ paths:
           - SVIACOMPLETAUFF : via completa normalizzata (DUG+COMPL+TOPONIMO+CIVICO POSTALE) ;
           - SVIACOMPLETAABB: via completa normalizzata abbreviata (DUG+COMPL+TOPONIMO+CIVICO POSTALE ABBREVIATA) ;
           - SVIACOMPLETASPEDIZIONE : Indirizzo di Stampa;
-          - [NUOVASPECIFICA] CODICECOMUNEISTAT : Codice Istat del comune;
+          - [FASE1] CODICECOMUNEISTAT : Codice Istat del comune;
 
       tags:
         - Normalizzatore

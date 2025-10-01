@@ -1,6 +1,6 @@
 # Servizio Normalizzatore - Specifica API
 
-Questo documento descrive le specifiche API REST  e il flusso di integrazione richiesto per realizzare il servizio di normalizzatore descritto al capitolo 8.1 dell'allegato 03 " Capitolato tecnico Consolidatore". 
+Questo documento descrive le specifiche API REST  e il flusso di integrazione richiesto per realizzare il servizio di normalizzatore.
 
 Il servizio consente così di garantire la qualità e la coerenza degli indirizzi utilizzati nei processi di postalizzazione, riducendo errori e duplicazioni; offre due funzionalità :
 

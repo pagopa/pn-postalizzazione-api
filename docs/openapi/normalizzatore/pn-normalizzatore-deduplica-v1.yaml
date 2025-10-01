@@ -191,7 +191,7 @@ components:
         sViaCompletaSpedizione:
           type: string
         codiceComuneIstat:
-          # [NUOVASPECIFICA] CODICECOMUNEISTAT : Codice Istat del comune;
+          # [FASE1] CODICECOMUNEISTAT : Codice Istat del comune;
           type: string
 
 

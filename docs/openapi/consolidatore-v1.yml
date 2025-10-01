@@ -36,11 +36,22 @@ servers:
         enum:
           - prod
           - test
+tags:
+  - name: GestioneRecapito
+    description: Api per la gestione della postalizzazione
+  - name: GestioneDuplicati
+    description: Api per la gestione dei duplicati di postalizzazione
+  - name: FASE1
+    description: Api da implementare nella FASE1
+  - name: FASE2
+    description: Api da implementare nella FASE2
 paths:  
   /piattaforma-notifiche-ingress/v1/paper-deliveries-engagement:
     post:
       operationId: sendPaperEngageRequest
       summary: PN richiede l'invio di corrispondenza cartacea
+      tags:
+        - GestioneRecapito
       description: >- 
         Questa operazione sottomette al consolidatore una richiesta di invio di 
         corrispondenza cartacea. <br/>
@@ -98,7 +109,11 @@ paths:
     get:
       operationId: getPaperEngageProgresses
       summary: PN richiede l'elenco dei progressi di una postalizzazione
+      tags:
+        - GestioneRecapito
+        - FASE1
       description: >- 
+        [FASE1]
         Questa richiesta permette di ottenere l'elenco degli eventi salienti 
         riguardanti un processo di postalizzazione. <br/>
         Oltre all'elenco degli eventi si ottengono informazioni sulle cause di tali eventi 
@@ -144,7 +159,11 @@ paths:
     post:
       operationId: sendPaperReplicasEngagementRequest
       summary: PN richiede la generazione di un duplicato
+      tags:
+        - GestioneDuplicati
+        - FASE2
       description: >- 
+        [FASE2]
         Questa operazione sottomette al consolidatore una richiesta di invio di 
         documento duplicato. <br/>
         Il consolidatore deve validare la sintatticamente la richiesta e, se tale 
@@ -201,7 +220,11 @@ paths:
     get:
       operationId: getPaperReplicasProgressesRequest
       summary: PN richiede l'elenco dei progressi di una richiesta duplicato
+      tags:
+        - GestioneDuplicati
+        - FASE2
       description: >- 
+        [FASE2]
         Questa richiesta permette di ottenere l'elenco degli eventi salienti 
         riguardanti un processo di richieta duplicato. <br/>
       parameters:
