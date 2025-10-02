@@ -39,7 +39,7 @@ sequenceDiagram
     participant CONS as Consolidatore
     participant REC as Recapitista
 
-    SEND->>CONS: POST sendPaperProgressStatusRequest
+    SEND->>CONS: POST sendPaperEngageRequest
     CONS-->>SEND: 200
 
 
@@ -63,7 +63,7 @@ note over CONS : Stampa ed imbustamento
     SEND -->> CONS : 200 -OK
 
     end
-        CONS-->>SEND: Webhook avanzamento postalizzazione
+        CONS-->>SEND: PUT sendPaperProgressStatusRequest
         SEND -->> CONS : 200 -OK (Validazione sinte)
     end
 end
@@ -83,7 +83,7 @@ loop Avanzamento per eventi REC
 
     end
     note over CONS,REC: Rendicontazione eventi recapito (**)
-    CONS-->>SEND: Webhook avanzamento postalizzazione
+    CONS-->>SEND: PUT sendPaperProgressStatusRequest
     end
 
 end

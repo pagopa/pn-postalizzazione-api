@@ -18,6 +18,9 @@ Questa sezione descrive i servizi accessori previsti dal capitolato
 #### Servizi di normalizzazione e deduplica indirizzi
 Per questi servizi fare riferimento al seguente documento [normalizzazioneIndirizzi.md](docs/normalizzazioneIndirizzi.md) dove viene descritta l'integrazione con il sistema di normalizzazione
 
+#### Servizio per la trasmissione dell'originale digitale dell’AAR stampato
+Per le modalità di trasmissione dell'originale dell'AAR stampato fare riferimento al seguente documento [con020.md](docs/con020.md)
+
 #### Servizio di verifica di stampabilità di documenti
 Le specifiche API verranno definite a valle dell'aggiudicazione della gara
 
