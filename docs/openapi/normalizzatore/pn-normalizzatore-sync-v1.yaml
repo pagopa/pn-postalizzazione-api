@@ -15,6 +15,11 @@ paths:
   /send-normalizzatore-ingress/v1/deduplica:
     post:
       operationId: deduplica
+      description: |
+        Definizione delle API fornite dal normalizzatore per il servizio di deduplica online. </br>
+        Il servizio consente di confrontare due indirizzi e stabilire se sono riferiti alla stessa destinazione postale. </br>
+        La deduplica viene eseguita dopo che entrambi gli indirizzi sono stati normalizzati. </br>
+        Il servizio è sincrono e risponde con l'esito della deduplica. 
       tags:
         - Deduplica
       summary: PN richiede la deduplica online
