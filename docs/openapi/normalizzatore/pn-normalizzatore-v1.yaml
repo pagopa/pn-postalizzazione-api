@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title:  API fornite dal normalizzatore SINI
+  title:  API fornite dal normalizzatore in modalità batch
   version: 1.0.0
 tags: 
   - name: Normalizzatore
@@ -196,8 +196,8 @@ components:
             identificativo dell'errore            
               - NOR400: BAD REQUEST. Mi passa un input errato sia dal punto di vista del contenuto o formale;
               - NOR401: UNAUTHORIZATED. Mi passa delle credenziali vuote o errate;
-              - NOR404: NOT FOUND. Il servizio nel server Postel non è disponibile;
-              - NOR500: INTERNAL_SERVER_ERROR. Il servizio nei server Postel non è raggiungibile;
+              - NOR404: NOT FOUND. Il servizio non è disponibile;
+              - NOR500: INTERNAL_SERVER_ERROR. Il servizio non è raggiungibile;
               - NOR998: SERVIZIO DI NORMALIZZAZIONE NON DISPONIBILE; 
     Problem:
       required:
