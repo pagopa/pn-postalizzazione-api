@@ -38,4 +38,4 @@ Il recapitista si dovrà integrare con il consolidatore secondo le modalità des
 ## Appendice
 ### Fasi
 Nella documentazione vegnono usate le keyword \[FASE2\] e \[FASE3\] per indicare che l'implementazione di API complessive o la specifica di elementi aggiuntivi nelle interazioni seguiranno una pianficazione dedicata.
-Si distiguono da tutti gli elementi non marcati che dovranno essere garantiti con la prima integrazione.
+Si distiguono da tutti gli elementi non marcati o taggati con \[FASE1\] che dovranno essere garantiti con la prima integrazione.
