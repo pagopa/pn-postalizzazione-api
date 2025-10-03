@@ -321,12 +321,12 @@ components:
         printer:
           type: string
           description: >-
-            [FASE1] Identificativo dello stampatore.
+            [FASE2] Identificativo dello stampatore.
           example: '123456789abc'
         du:
           type: string
           description: >-
-            [FASE1] Distinta Unica, raggruppamento di spedizioni in un unico lotto.
+            [FASE2] Distinta Unica, raggruppamento di spedizioni in un unico lotto.
           example: '123456789abc'
         productType:
           description: >-
@@ -557,14 +557,14 @@ components:
               sourceType:
                 type: string
                 description: >-
-                  [FASE1] Indica se il documento è stato prodotto tramite scansione cartacea (`SCANNED`) oppure generato digitalmente (`DIGITAL`). 
+                  [FASE2] Indica se il documento è stato prodotto tramite scansione cartacea (`SCANNED`) oppure generato digitalmente (`DIGITAL`). 
                   - __SCANNED__ <br/>
                   - __DIGITAL__ <br/>
                   In caso di assenza del campo, la piattaforma considererà DIGITAL gli allegati con MIME/Type application/zip.
               originType:
                 type: string
                 description: >-
-                  [FASE1] Specifica l'origine del documento
+                  [FASE2] Specifica l'origine del documento
                   - __ORIGINAL__ <br/>
                   - __DUPLICATED__ <br/>
                   - altri valori da specificare in fase di approfondimento tecnico
@@ -687,7 +687,7 @@ components:
     ### - EVENTO SINGOLO
     #####################
     PaperReplicasStatusEvent:
-      description: \[FASE2\] - Evento singolo di avanzamento dello stato di una richiesta di duplicato
+      description: \[FASE3\] - Evento singolo di avanzamento dello stato di una richiesta di duplicato
       type: object
       required:
         - requestId

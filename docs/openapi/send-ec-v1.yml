@@ -28,8 +28,10 @@ tags:
     description: Servizi per la ricezione dei progressi del processo di postalizzazione e duplicato tramite webhook.
   - name: Attachments
     description: Servizi per la gestione degli allegati (pre-caricamento e download).
-  - name: FASE2
-    description: Servizi da integrare nella FASE2.
+  - name: FASE1
+    description: Servizi da integrare nella FASE1.
+  - name: FASE3
+    description: Servizi da integrare nella FASE3.
 
 paths:
   /consolidatore-ingress/v1/push-progress-events:
@@ -45,6 +47,7 @@ paths:
         Non è possibile raggruppare più consegne in un'unica richiesta.
       tags:
         - ProgressEvents
+        - FASE1
       parameters:
         - $ref: '#/components/parameters/xPagopaExtchServiceId'
         - $ref: '#/components/parameters/xPagopaExtchApiKey'
@@ -96,7 +99,7 @@ paths:
       description: Ricezione avanzamenti del processo di duplicato.
       tags:
         - ProgressEvents
-        - FASE2
+        - FASE3
       parameters:
         - $ref: '#/components/parameters/xPagopaExtchServiceId'
         - $ref: '#/components/parameters/xPagopaExtchApiKey'
@@ -150,6 +153,7 @@ paths:
         a precaricare uno o più file.
       tags:
         - Attachments
+        - FASE1
       parameters:
         - $ref: '#/components/parameters/xPagopaExtchServiceId'
         - $ref: '#/components/parameters/xPagopaExtchApiKey'
@@ -217,6 +221,7 @@ paths:
         Il file rimane hot per ```stayHotTime````.
       tags:
         - Attachments
+        - FASE1
       parameters:
         - $ref: '#/components/parameters/fileKey'
         - $ref: '#/components/parameters/xPagopaExtchServiceId'
