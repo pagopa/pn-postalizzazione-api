@@ -11,6 +11,8 @@ servers:
 tags:
   - name: Normalizzatore
     description: API esposte verso il normalizzatore
+  - name: FASE1
+    description: Servizi da integrare nella FASE1.
 
 paths:
   /normalizzatore-ingress/v1/normalizer-callback:
@@ -24,7 +26,7 @@ paths:
           - FPOSTALIZZABILE (0 : NON Postalizzabile, 1 : Postalizzabile);
           - NERRORENORM : Codice di errore;
           - SSIGLAPROV : Sigla provincia normalizzata;
-          - SSTATOUFF : Stato normalizzato (Valorizzato ITALIA, REPUBBLICA DI SAN MARINO e CITTA’ DEL VATICANO + TUTTI GLI STATI ESTERI);
+          - SSTATOUFF : Stato normalizzato (Valorizzato ITALIA, REPUBBLICA DI SAN MARINO e CITTA' DEL VATICANO + TUTTI GLI STATI ESTERI);
           - SSTATOABB : Stato abbreviato normalizzato;
           - SSTATOSPEDIZIONE : Stato di Spedizione;
           - SCOMUNEUFF : Comune normalizzato;
@@ -33,16 +35,17 @@ paths:
           - SFRAZIONEUFF : Frazione normalizzata;
           - SFRAZIONEABB : Frazione Abbreviata normalizzata;
           - SFRAZIONESPEDIZIONE : Frazione di Spedizione;
-          - SCIVICOALTRO : altri elementi del civico (interno, piano, scala, palazzo …) - VA IN INDIRIZZO 2
+          - SCIVICOALTRO : altri elementi del civico (interno, piano, scala, palazzo …) 
           - SCAP : cap normalizzato;
-          - SPRESSO : informazioni di presso e casella postale (C.P 123, Presso sig. rossi …) -  VA IN NAME 2;
+          - SPRESSO : informazioni di presso e casella postale (C.P 123, Presso sig. rossi …) 
           - SVIACOMPLETAUFF : via completa normalizzata (DUG+COMPL+TOPONIMO+CIVICO POSTALE) ;
           - SVIACOMPLETAABB: via completa normalizzata abbreviata (DUG+COMPL+TOPONIMO+CIVICO POSTALE ABBREVIATA) ;
           - SVIACOMPLETASPEDIZIONE : Indirizzo di Stampa;
-          - [NUOVASPECIFICA] CODICECOMUNEISTAT : Codice Istat del comune;
+          - [FASE2] SCODICECASTALECOMUNE : Codice catastale del comune;
 
       tags:
         - Normalizzatore
+        - FASE1
       parameters:
         - $ref: '#/components/parameters/xPagopaAddrManCxId'
         - $ref: '#/components/parameters/xPagopaAddrManApiKey'
@@ -91,6 +94,7 @@ paths:
         a precaricare uno o più file.
       tags:
         - Normalizzatore
+        - FASE1
       parameters:
         - $ref: '#/components/parameters/xPagopaAddrManCxId'
         - $ref: '#/components/parameters/xPagopaAddrManApiKey'
@@ -163,6 +167,7 @@ paths:
         - $ref: '#/components/parameters/xPagopaAddrManApiKey'
       tags:
         - Normalizzatore
+        - FASE1
       operationId: getFile
       responses:
         '200':

@@ -5,12 +5,15 @@ info:
 tags: 
   - name: Normalizzatore
     description: Servizio di normalizzazione batch 
+  - name: FASE1
+    description: Api da implementare nella prima integrazione FASE1
 paths:
   /send-normalizzatore-ingress/v1/normalizzazione:
     post:
       operationId: normalizzazione
       tags:
         - Normalizzatore
+        - FASE1
       summary: PN richiede la normalizzazione batch
       description: >-
         Il file in ingresso conterrà i seguenti campi gestiti con logica posizionale (nessuna intestazione, separatore ';'):
@@ -43,7 +46,7 @@ paths:
           - SVIACOMPLETAUFF : via completa normalizzata (DUG+COMPL+TOPONIMO+CIVICO POSTALE) ;
           - SVIACOMPLETAABB: via completa normalizzata abbreviata (DUG+COMPL+TOPONIMO+CIVICO POSTALE ABBREVIATA) ;
           - SVIACOMPLETASPEDIZIONE : Indirizzo di Stampa;
-          - [NUOVASPECIFICA] CODICECOMUNEISTAT : Codice Istat del comune;
+          - [FASE2] SCODICECASTALECOMUNE : Codice catastale del comune;
         
         NERRORENORM può contenere i seguenti valori
           - 001 : IL CAP NON E' PRESENTE IN INPUT;
