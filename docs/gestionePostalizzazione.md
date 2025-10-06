@@ -95,5 +95,9 @@ end
 * [Raccomanata Semplice nazionale](diagrams/RS.md)
 * [Raccomanata AR Internazionale](diagrams/RIR.md)
 * [Raccomandata Semplice Internazionale](diagrams/RIS.md)
+Per gli approfondimenti sugli stati fare riferimento alle appendici:
+* [statusCode](appendices/PaperProgressStatusEvent_statusCode.csv)
+* [documentType](appendices/PaperProgressStatusEvent_documentType.csv)
+* [deliveryFailureCause](appendices/PaperProgressStatusEvent_deliveryFailureCause.csv)
 
 (**) Fare riferimento alla specifica di integrazione tra Consolidatore e Recapitisiti

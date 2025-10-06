@@ -1,0 +1,20 @@
+codice,signifcato
+M01,destinatario irreperibile
+M02,destinatario deceduto
+M03,destinatario sconosciuto
+M04,destinatario trasferito
+M05,invio rifiutato
+M06,Indirizzo inesatto
+M07,indirizzo inesistente
+M08,indirizzo insufficiente
+M09,Altre Motivazioni
+F01,furto
+F02,smarrimento
+F03,deterioramento
+F04,rapina
+C01,incendio
+C02,strada chiusa per lavori in corso o frana
+C03,strada chiusa dalle autorità per eventi eccezionali
+C04,"maltempo: alluvione, neve o allagamento"
+C05,terremoto
+C06,eruzione vulcanica
