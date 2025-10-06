@@ -1,23 +1,27 @@
 openapi: 3.0.3
 info:
-  title:  API fornite dal normalizzatore - servizio di deduplica
+  title:  API fornite dal normalizzatore in modalità sincrona.
   version: 1.0.0
-  description: |
-    Definizione delle API fornite dal normalizzatore SINI per il servizio di deduplica online. </br>
-    Il servizio consente di confrontare due indirizzi e stabilire se sono riferiti alla stessa destinazione postale. </br>
-    La deduplica viene eseguita dopo che entrambi gli indirizzi sono stati normalizzati. </br>
-    Il servizio è sincrono e risponde con l'esito della deduplica. </br>
 tags:   
   - name: Deduplica
-    description: Servizio di normalizzazione
+    description: Servizio di decuplica online.
+  - name: Normalizzatore
+    description: Servizio di normalizzazione sincrona.
   - name: FASE1
-    description: Api da implementare nella prima integrazione FASE1
+    description: Api da implementare nella prima integrazione FASE1.
+  - name: FASE2
+    description: Api da implementare nella FASE2.
 
 paths:
 
   /send-normalizzatore-ingress/v1/deduplica:
     post:
       operationId: deduplica
+      description: |
+        Definizione delle API fornite dal normalizzatore per il servizio di deduplica online. </br>
+        Il servizio consente di confrontare due indirizzi e stabilire se sono riferiti alla stessa destinazione postale. </br>
+        La deduplica viene eseguita dopo che entrambi gli indirizzi sono stati normalizzati. </br>
+        Il servizio è sincrono e risponde con l'esito della deduplica. 
       tags:
         - Deduplica
         - FASE1
@@ -50,6 +54,43 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+
+  /send-normalizzatore-ingress/v1/normalizzazionesync:
+    post:
+      operationId: normalizzazioneSync
+      tags:
+        - Normalizzatore
+        - FASE2
+      summary: PN richiede la normalizzazione sincrona.
+      parameters:
+        - $ref: '#/components/parameters/xPagopaAddrManCxId'
+        - $ref: '#/components/parameters/xPagopaAddrManApiKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NormalizzazioneSyncRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NormalizzazioneSyncResponse'
+        '400':
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  
 
 components:
 
@@ -138,8 +179,8 @@ components:
             identificativo dell'errore
             - DED400: BAD REQUEST. Mi passa un input errato sia dal punto di vista del contenuto o formale;
             - DED401: UNAUTHORIZATED. Mi passa delle credenziali vuote o errate;
-            - DED404: NOT FOUND. Il servizio nel server Postel non è disponibile;
-            - DED500: INTERNAL_SERVER_ERROR. Il servizio nei server Postel non è raggiungibile; 
+            - DED404: NOT FOUND. Il servizio non è disponibile;
+            - DED500: INTERNAL_SERVER_ERROR. Il servizio non è raggiungibile; 
             - DED998: SERVIZIO DI NORMALIZZAZIONE NON DISPONIBILE; 
             - DED997: SERVIZIO ORACLE NON DISPONIBILE; 
             - DED992: ERRORE_GENERICO;
@@ -349,3 +390,25 @@ components:
           example: Parameter not valid
           maxLength: 1024
           type: string
+
+    NormalizzazioneSyncRequest:
+      type: object
+      required:
+        - addressIn
+      properties:
+        addressIn:
+          $ref: '#/components/schemas/AddressIn'
+
+
+    NormalizzazioneSyncResponse:
+      type: object
+      description: >-
+          addressOut: obbligatorio in caso di risposta di successo
+          errore: valorizzato in caso di risposta con errore
+      properties:
+        addressOut:
+          $ref: '#/components/schemas/AddressOut'
+        errore:
+          type: string
+          description: >-
+            identificativo dell'errore, da definire in fase di implementazione
