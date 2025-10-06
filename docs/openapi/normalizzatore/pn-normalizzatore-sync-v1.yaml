@@ -9,6 +9,8 @@ tags:
     description: Servizio di normalizzazione sincrona.
   - name: FASE1
     description: Api da implementare nella prima integrazione FASE1.
+  - name: FASE2
+    description: Api da implementare nella FASE2.
 
 paths:
 
@@ -58,7 +60,7 @@ paths:
       operationId: normalizzazioneSync
       tags:
         - Normalizzatore
-        - FASE1
+        - FASE2
       summary: PN richiede la normalizzazione sincrona.
       parameters:
         - $ref: '#/components/parameters/xPagopaAddrManCxId'
