@@ -102,4 +102,4 @@ Per gli approfondimenti sugli stati fare riferimento alle appendici:
 * [documentType](appendices/PaperProgressStatusEvent_documentType.csv)
 * [deliveryFailureCause](appendices/PaperProgressStatusEvent_deliveryFailureCause.csv)
 
-(**) Fare riferimento alla specifica di integrazione tra Consolidatore e Recapitisiti descritta nell'appendice [Consolidatore-Integrazione_sistemi_Postalizzazione_e_Recapito](docs/appendices/Consolidatore/Consolidatore-Integrazione_sistemi_Postalizzazione_e_Recapito.docx)
+(**) Fare riferimento alla specifica di integrazione tra Consolidatore e Recapitisiti descritta nell'appendice [Consolidatore-Integrazione_sistemi_Postalizzazione_e_Recapito](appendices/Consolidatore/Consolidatore-Integrazione_sistemi_Postalizzazione_e_Recapito.docx)
