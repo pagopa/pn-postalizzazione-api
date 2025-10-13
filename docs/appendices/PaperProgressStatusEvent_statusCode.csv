@@ -1,109 +1,109 @@
 Codice,Specifica,Fornitore,Prd,Descrizione,Note,Allegati,DeliveryFailureCause
-CON998,FASE1,Consolidatore,ALL,Scartato NODOC,,,
-CON997,FASE1,Consolidatore,ALL,Scartato CAP/INTERNAZIONALE,,,
-CON996,FASE1,Consolidatore,ALL,Scartato PDF,,,
-CON995,FASE1,Consolidatore,ALL,Errore Stampa,,,
-CON993,FASE1,Consolidatore,ALL,Errore Stampa,,,
-CON080,FASE1,Consolidatore,ALL,Stampato ed Imbustato,,,
-CON020,FASE1,Consolidatore,ALL,Affido Conservato,,Affido conservato,
-CON010,FASE1,Consolidatore,ALL,Distinta Elettronica inviata a Recapitista,,,
-CON011,FASE1,Consolidatore,ALL,Distinta Elettronica Sigillata,,Distinta Elettronica Sigillata,
-CON012,FASE1,Consolidatore,ALL,OK Distinta Elettronica da Recapitista,,OK Distinta Elettronica da Recapitista,
-CON992,FASE1,Consolidatore,ALL,KO Distinta Elettronica da Recapitista,,KO Distinta Elettronica da Recapitista,
-CON09A,FASE1,Consolidatore,ALL,Materialità Pronta,,,
-CON016,FASE1,Consolidatore,ALL,PICKUP Sigillata,,PICKUP Sigillata,
-CON018,FASE1,Consolidatore,ALL,Accettazione Recapitista,,Accettazione Recapitista,
-CON991,FASE1,Consolidatore,ALL,Mancata Accetazione Recapitsita,,,
-REC016,FASE2,Recapitista,ALL,Materialità Ritirata,Lo statusDateTime dovrà coincidere con la presa in carico della materialità da parte del recapitista,,
-REC018,FASE2,Recapitista,ALL,Accettazione Recapitista,Lo statusDateTime dovrà coincidere con la controfirma della distinta di presa in carico della materialità da parte del recapitista,,
-REC991,FASE2,Recapitista,ALL,Mancata Accetazione Recapitsita,,,
-RECRS010,FASE1,Recapitista,RS,Inesito,,,
-RECRS011,FASE1,Recapitista,RS,In giacenza,,,
-RECRS001C,FASE1,Recapitista,RS,Consegnato - Fascicolo Chiuso,,,
-RECRS002A,FASE1,Recapitista,RS,Mancata consegna - pre-esito,,,M02 M05 M06 M07 M08 M09
-RECRS002B,FASE1,Recapitista,RS,Mancata consegna - In Dematerializzazione,,Plico,M02 M05 M06 M07 M08 M09
-RECRS002C,FASE1,Recapitista,RS,Mancata consegna - Fascicolo Chiuso,,,M02 M05 M06 M07 M08 M09
-RECRS002D,FASE1,Recapitista,RS,Irreperibilità Assoluta - pre-esito,,,M01 M03 M04
-RECRS002E,FASE1,Recapitista,RS,Irreperibilità Assoluta - In Dematerializzazione,,Plico,M01 M03 M04
-RECRS002F,FASE1,Recapitista,RS,Irreperibilità Assoluta - Fascicolo Chiuso,,,M01 M03 M04
-RECRS003C,FASE1,Recapitista,RS,Consegnato presso Punti di Giacenza - Fascicolo Chiuso,,,
-RECRS004A,FASE1,Recapitista,RS,Mancata consegna presso Punti di Giacenza - pre-esito,,,
-RECRS004B,FASE1,Recapitista,RS,Mancata consegna presso Punti di Giacenza - In Dematerializzazione,,Plico,
-RECRS004C,FASE1,Recapitista,RS,Mancata consegna presso Punti di Giacenza - Fascicolo Chiuso,,,
-RECRS005A,FASE1,Recapitista,RS,Compiuta giacenza - pre-esito,Lo statusDateTime dovrà rispettare la tempistica di giacenza prevista dal prodotto postale,,
-RECRS005B,FASE1,Recapitista,RS,Compiuta giacenza - In Dematerializzazione,Lo statusDateTime dovrà rispettare la tempistica di giacenza prevista dal prodotto postale,Plico,
-RECRS005C,FASE1,Recapitista,RS,Compiuta giacenza - Fascicolo Chiuso,Lo statusDateTime dovrà rispettare la tempistica di giacenza prevista dal prodotto postale,,
-RECRS006,FASE1,Recapitista,RS,Furto/Smarrimanto/deterioramento,,,F01 F02 F03 F04
-RECRS013,FASE1,Recapitista,RS,Non Rendicontabile,,,
-RECRS015,FASE1,Recapitista,RS,Causa Forza Maggiore,,,C01 C02 C03 C04 C05 C06
-RECRN010,FASE1,Recapitista,AR,Inesito,,,
-RECRN011,FASE1,Recapitista,AR,In giacenza,,,
-RECRN001A,FASE1,Recapitista,AR,Consegnato - pre-esito,,,
-RECRN001B,FASE1,Recapitista,AR,Consegnato - In Dematerializzazione,,AR,
-RECRN001C,FASE1,Recapitista,AR,Consegnato - Fascicolo Chiuso,,,
-RECRN002A,FASE1,Recapitista,AR,Mancata consegna - pre-esito,,,M02 M05 M06 M07 M08 M09
-RECRN002B,FASE1,Recapitista,AR,Mancata consegna - In Dematerializzazione,,Plico,M02 M05 M06 M07 M08 M09
-RECRN002C,FASE1,Recapitista,AR,Mancata consegna - Fascicolo Chiuso,,,M02 M05 M06 M07 M08 M09
-RECRN002D,FASE1,Recapitista,AR,Irreperibilità Assoluta - pre-esito,,,M01 M03 M04
-RECRN002E,FASE1,Recapitista,AR,Irreperibilità Assoluta - In Dematerializzazione,,Plico,M01 M03 M04
-RECRN002F,FASE1,Recapitista,AR,Irreperibilità Assoluta - Fascicolo Chiuso,,,M01 M03 M04
-RECRN003A,FASE1,Recapitista,AR,Consegnato presso Punti di Giacenza - pre-esito,,,
-RECRN003B,FASE1,Recapitista,AR,Consegnato presso Punti di Giacenza - In Dematerializzazione,,AR,
-RECRN003C,FASE1,Recapitista,AR,Consegnato presso Punti di Giacenza - Fascicolo Chiuso,,,
-RECRN004A,FASE1,Recapitista,AR,Mancata consegna presso Punti di Giacenza - pre-esito,,,
-RECRN004B,FASE1,Recapitista,AR,Mancata consegna presso Punti di Giacenza - In Dematerializzazione,,Plico,
-RECRN004C,FASE1,Recapitista,AR,Mancata consegna presso Punti di Giacenza - Fascicolo Chiuso,,,
-RECRN005A,FASE1,Recapitista,AR,Compiuta giacenza - pre-esito,Lo statusDateTime dovrà rispettare la tempistica di giacenza prevista dal prodotto postale,,
-RECRN005B,FASE1,Recapitista,AR,Compiuta giacenza - In Dematerializzazione,Lo statusDateTime dovrà rispettare la tempistica di giacenza prevista dal prodotto postale,Plico,
-RECRN005C,FASE1,Recapitista,AR,Compiuta giacenza - Fascicolo Chiuso,Lo statusDateTime dovrà rispettare la tempistica di giacenza prevista dal prodotto postale,,
-RECRN006,FASE1,Recapitista,AR,Furto/Smarrimanto/deterioramento,,,F01 F02 F03 F04
-RECRN013,FASE1,Recapitista,AR,Non Rendicontabile,,,
-RECRN015,FASE1,Recapitista,AR,Causa Forza Maggiore,,,C01 C02 C03 C04 C05 C06
-RECAG001A,FASE1,Recapitista,890,Consegnato - pre-esito,,,
-RECAG001B,FASE1,Recapitista,890,Consegnato - In Dematerializzazione,,23L,
-RECAG001C,FASE1,Recapitista,890,Consegnato - Fascicolo Chiuso,,,
-RECAG002A,FASE1,Recapitista,890,Consegnato a persona abilitata - pre-esito,,,
-RECAG002B,FASE1,Recapitista,890,Consegnato a persona abilitata - In Dematerializzazione,,23L CAN,
-RECAG002C,FASE1,Recapitista,890,Consegnato a persona abilitata - Fascicolo Chiuso,,,
-RECAG003A,FASE1,Recapitista,890,Mancata consegna - pre-esito,,,M02 M05 M06 M07 M08 M09
-RECAG003B,FASE1,Recapitista,890,Mancata consegna - In Dematerializzazione,,Plico,M02 M05 M06 M07 M08 M09
-RECAG003C,FASE1,Recapitista,890,Mancata consegna - Fascicolo Chiuso,,,M02 M05 M06 M07 M08 M09
-RECAG003D,FASE1,Recapitista,890,Irreperibilità Assoluta - pre-esito,,,M01 M03 M04
-RECAG003E,FASE1,Recapitista,890,Irreperibilità Assoluta - In Dematerializzazione,,Plico,M01 M03 M04
-RECAG003F,FASE1,Recapitista,890,Irreperibilità Assoluta - Fascicolo Chiuso,,,M01 M03 M04
-RECAG004,FASE1,Recapitista,890,Furto/Smarrimanto/deterioramento,,,F01 F02 F03 F04
-RECAG005A,FASE1,Recapitista,890,Consegnato presso Punti di Giacenza - pre-esito,,,
-RECAG005B,FASE1,Recapitista,890,Consegnato presso Punti di Giacenza - In Dematerializzazione,,ARCAD|CAD 23L,
-RECAG005C,FASE1,Recapitista,890,Consegnato presso Punti di Giacenza - Fascicolo Chiuso,,,
-RECAG006A,FASE1,Recapitista,890,Consegna a persona abilitata presso Punti di Giacenza - pre-esito,,,
-RECAG006B,FASE1,Recapitista,890,Consegna a persona abilitata presso Punti di Giacenza - In Dematerializzazione,,ARCAD|CAD 23L,
-RECAG006C,FASE1,Recapitista,890,Consegna a persona abilitata presso Punti di Giacenza - Fascicolo Chiuso,,,
-RECAG007A,FASE1,Recapitista,890,Mancata consegna presso Punti di Giacenza - pre-esito,,,
-RECAG007B,FASE1,Recapitista,890,Mancata consegna presso Punti di Giacenza - In Dematerializzazione,,ARCAD|CAD 23L Plico,
-RECAG007C,FASE1,Recapitista,890,Mancata consegna presso Punti di Giacenza - Fascicolo Chiuso,,,
-RECAG008A,FASE1,Recapitista,890,Compiuta giacenza - pre-esito,Lo statusDateTime dovrà rispettare la tempistica di giacenza prevista dal prodotto postale,,
-RECAG008B,FASE1,Recapitista,890,Compiuta giacenza - In Dematerializzazione,Lo statusDateTime dovrà rispettare la tempistica di giacenza prevista dal prodotto postale,Plico,
-RECAG008C,FASE1,Recapitista,890,Compiuta giacenza - Fascicolo Chiuso,Lo statusDateTime dovrà rispettare la tempistica di giacenza prevista dal prodotto postale,,
-RECAG010,FASE1,Recapitista,890,Inesito,,,
-RECAG011A,FASE1,Recapitista,890,In giacenza,,,
-RECAG011B,FASE1,Recapitista,890,In giacenza - In Dematerializzazione,,ARCAD|CAD 23L,
-RECAG010A,FASE2,Recapitista,890,Invio CAD,il campo registeredLetterCode dovrà essere valorizzato con il codice oggetto della CAD,,
-RECAG012,FASE1,Recapitista,890,Accettazione 23L,"Lo statusDateTime deve coincidere necessariamente con la data di consegna dell'atto in caso di consegna precendete ai 10gg dalla CAD o coincidere con il 10° giorno dal giorno di consegna della CAD. La macchina a stati non risente della produzione di questo evento, il flusso di rendicontazione continua a partire dal precedente evento ricevuto",,
-RECAG013,FASE1,Recapitista,890,Non Rendicontabile,,,
-RECAG015,FASE1,Recapitista,890,Causa Forza Maggiore,,,C01 C02 C03 C04 C05 C06
-RECRI002,FASE1,Recapitista,RIR,Ingresso nel paese estero,,,
-RECRI003A,FASE1,Recapitista,RIR,Consegnato - pre-esito,,,
-RECRI003B,FASE1,Recapitista,RIR,Consegnato - In Dematerializzazione,,AR,
-RECRI003C,FASE1,Recapitista,RIR,Consegnato - Fascicolo Chiuso,,,
-RECRI004A,FASE1,Recapitista,RIR,Non Consegnato - pre-esito,,,
-RECRI004B,FASE1,Recapitista,RIR,Non Consegnato - In Dematerializzazione,,Plico,
-RECRI004C,FASE1,Recapitista,RIR,Non Consegnato - fascicolo Chiuso,,,
-RECRI005,FASE1,Recapitista,RIR,Furto/Smarrimanto/deterioramento,,,F01 F02 F03 F04
-RECRSI001,FASE1,Recapitista,RIS,Avviato all'estero,,,
-RECRSI002,FASE1,Recapitista,RIS,Ingresso nel paese estero,,,
-RECRSI003C,FASE1,Recapitista,RIS,Consegnato - Fascicolo Chiuso,,,
-RECRSI004A,FASE1,Recapitista,RIS,Non Consegnato - pre-esito,,,
-RECRSI004B,FASE1,Recapitista,RIS,Non Consegnato - In Dematerializzazione,,Plico,
-RECRSI004C,FASE1,Recapitista,RIS,Non Consegnato - fascicolo Chiuso,,,
-RECRSI005,FASE1,Recapitista,RIS,Furto/Smarrimanto/deterioramento,,,F01 F02 F03 F04
-REC090,FASE1,Recapitista,ALL,Archiviazione fisica materialità di ritorno,,,
+CON998,[FASE1],Consolidatore,ALL,Scartato NODOC,,,
+CON997,[FASE1],Consolidatore,ALL,Scartato CAP/INTERNAZIONALE,,,
+CON996,[FASE1],Consolidatore,ALL,Scartato PDF,,,
+CON995,[FASE1],Consolidatore,ALL,Errore Stampa,,,
+CON993,[FASE1],Consolidatore,ALL,Errore Stampa,,,
+CON080,[FASE1],Consolidatore,ALL,Stampato ed Imbustato,,,
+CON020,[FASE1],Consolidatore,ALL,Affido Conservato,,Affido conservato,
+CON010,[FASE1],Consolidatore,ALL,Distinta Elettronica inviata a Recapitista,,,
+CON011,[FASE1],Consolidatore,ALL,Distinta Elettronica Sigillata,,Distinta Elettronica Sigillata,
+CON012,[FASE1],Consolidatore,ALL,OK Distinta Elettronica da Recapitista,,OK Distinta Elettronica da Recapitista,
+CON992,[FASE1],Consolidatore,ALL,KO Distinta Elettronica da Recapitista,,KO Distinta Elettronica da Recapitista,
+CON09A,[FASE1],Consolidatore,ALL,Materialità Pronta,,,
+CON016,[FASE1],Consolidatore,ALL,PICKUP Sigillata,,PICKUP Sigillata,
+CON018,[FASE1],Consolidatore,ALL,Accettazione Recapitista,,Accettazione Recapitista,
+CON991,[FASE1],Consolidatore,ALL,Mancata Accetazione Recapitsita,,,
+REC016,[FASE2],Recapitista,ALL,Materialità Ritirata,Lo statusDateTime dovrà coincidere con la presa in carico della materialità da parte del recapitista,,
+REC018,[FASE2],Recapitista,ALL,Accettazione Recapitista,Lo statusDateTime dovrà coincidere con la controfirma della distinta di presa in carico della materialità da parte del recapitista,,
+REC991,[FASE2],Recapitista,ALL,Mancata Accetazione Recapitsita,,,
+RECRS010,[FASE1],Recapitista,RS,Inesito,,,
+RECRS011,[FASE1],Recapitista,RS,In giacenza,,,
+RECRS001C,[FASE1],Recapitista,RS,Consegnato - Fascicolo Chiuso,,,
+RECRS002A,[FASE1],Recapitista,RS,Mancata consegna - pre-esito,,,M02 M05 M06 M07 M08 M09
+RECRS002B,[FASE1],Recapitista,RS,Mancata consegna - In Dematerializzazione,,Plico,M02 M05 M06 M07 M08 M09
+RECRS002C,[FASE1],Recapitista,RS,Mancata consegna - Fascicolo Chiuso,,,M02 M05 M06 M07 M08 M09
+RECRS002D,[FASE1],Recapitista,RS,Irreperibilità Assoluta - pre-esito,,,M01 M03 M04
+RECRS002E,[FASE1],Recapitista,RS,Irreperibilità Assoluta - In Dematerializzazione,,Plico,M01 M03 M04
+RECRS002F,[FASE1],Recapitista,RS,Irreperibilità Assoluta - Fascicolo Chiuso,,,M01 M03 M04
+RECRS003C,[FASE1],Recapitista,RS,Consegnato presso Punti di Giacenza - Fascicolo Chiuso,,,
+RECRS004A,[FASE1],Recapitista,RS,Mancata consegna presso Punti di Giacenza - pre-esito,,,
+RECRS004B,[FASE1],Recapitista,RS,Mancata consegna presso Punti di Giacenza - In Dematerializzazione,,Plico,
+RECRS004C,[FASE1],Recapitista,RS,Mancata consegna presso Punti di Giacenza - Fascicolo Chiuso,,,
+RECRS005A,[FASE1],Recapitista,RS,Compiuta giacenza - pre-esito,Lo statusDateTime dovrà rispettare la tempistica di giacenza prevista dal prodotto postale,,
+RECRS005B,[FASE1],Recapitista,RS,Compiuta giacenza - In Dematerializzazione,Lo statusDateTime dovrà rispettare la tempistica di giacenza prevista dal prodotto postale,Plico,
+RECRS005C,[FASE1],Recapitista,RS,Compiuta giacenza - Fascicolo Chiuso,Lo statusDateTime dovrà rispettare la tempistica di giacenza prevista dal prodotto postale,,
+RECRS006,[FASE1],Recapitista,RS,Furto/Smarrimanto/deterioramento,,,F01 F02 F03 F04
+RECRS013,[FASE1],Recapitista,RS,Non Rendicontabile,,,
+RECRS015,[FASE1],Recapitista,RS,Causa Forza Maggiore,,,C01 C02 C03 C04 C05 C06
+RECRN010,[FASE1],Recapitista,AR,Inesito,,,
+RECRN011,[FASE1],Recapitista,AR,In giacenza,,,
+RECRN001A,[FASE1],Recapitista,AR,Consegnato - pre-esito,,,
+RECRN001B,[FASE1],Recapitista,AR,Consegnato - In Dematerializzazione,,AR,
+RECRN001C,[FASE1],Recapitista,AR,Consegnato - Fascicolo Chiuso,,,
+RECRN002A,[FASE1],Recapitista,AR,Mancata consegna - pre-esito,,,M02 M05 M06 M07 M08 M09
+RECRN002B,[FASE1],Recapitista,AR,Mancata consegna - In Dematerializzazione,,Plico,M02 M05 M06 M07 M08 M09
+RECRN002C,[FASE1],Recapitista,AR,Mancata consegna - Fascicolo Chiuso,,,M02 M05 M06 M07 M08 M09
+RECRN002D,[FASE1],Recapitista,AR,Irreperibilità Assoluta - pre-esito,,,M01 M03 M04
+RECRN002E,[FASE1],Recapitista,AR,Irreperibilità Assoluta - In Dematerializzazione,,Plico,M01 M03 M04
+RECRN002F,[FASE1],Recapitista,AR,Irreperibilità Assoluta - Fascicolo Chiuso,,,M01 M03 M04
+RECRN003A,[FASE1],Recapitista,AR,Consegnato presso Punti di Giacenza - pre-esito,,,
+RECRN003B,[FASE1],Recapitista,AR,Consegnato presso Punti di Giacenza - In Dematerializzazione,,AR,
+RECRN003C,[FASE1],Recapitista,AR,Consegnato presso Punti di Giacenza - Fascicolo Chiuso,,,
+RECRN004A,[FASE1],Recapitista,AR,Mancata consegna presso Punti di Giacenza - pre-esito,,,
+RECRN004B,[FASE1],Recapitista,AR,Mancata consegna presso Punti di Giacenza - In Dematerializzazione,,Plico,
+RECRN004C,[FASE1],Recapitista,AR,Mancata consegna presso Punti di Giacenza - Fascicolo Chiuso,,,
+RECRN005A,[FASE1],Recapitista,AR,Compiuta giacenza - pre-esito,Lo statusDateTime dovrà rispettare la tempistica di giacenza prevista dal prodotto postale,,
+RECRN005B,[FASE1],Recapitista,AR,Compiuta giacenza - In Dematerializzazione,Lo statusDateTime dovrà rispettare la tempistica di giacenza prevista dal prodotto postale,Plico,
+RECRN005C,[FASE1],Recapitista,AR,Compiuta giacenza - Fascicolo Chiuso,Lo statusDateTime dovrà rispettare la tempistica di giacenza prevista dal prodotto postale,,
+RECRN006,[FASE1],Recapitista,AR,Furto/Smarrimanto/deterioramento,,,F01 F02 F03 F04
+RECRN013,[FASE1],Recapitista,AR,Non Rendicontabile,,,
+RECRN015,[FASE1],Recapitista,AR,Causa Forza Maggiore,,,C01 C02 C03 C04 C05 C06
+RECAG001A,[FASE1],Recapitista,890,Consegnato - pre-esito,,,
+RECAG001B,[FASE1],Recapitista,890,Consegnato - In Dematerializzazione,,23L,
+RECAG001C,[FASE1],Recapitista,890,Consegnato - Fascicolo Chiuso,,,
+RECAG002A,[FASE1],Recapitista,890,Consegnato a persona abilitata - pre-esito,,,
+RECAG002B,[FASE1],Recapitista,890,Consegnato a persona abilitata - In Dematerializzazione,,23L CAN,
+RECAG002C,[FASE1],Recapitista,890,Consegnato a persona abilitata - Fascicolo Chiuso,,,
+RECAG003A,[FASE1],Recapitista,890,Mancata consegna - pre-esito,,,M02 M05 M06 M07 M08 M09
+RECAG003B,[FASE1],Recapitista,890,Mancata consegna - In Dematerializzazione,,Plico,M02 M05 M06 M07 M08 M09
+RECAG003C,[FASE1],Recapitista,890,Mancata consegna - Fascicolo Chiuso,,,M02 M05 M06 M07 M08 M09
+RECAG003D,[FASE1],Recapitista,890,Irreperibilità Assoluta - pre-esito,,,M01 M03 M04
+RECAG003E,[FASE1],Recapitista,890,Irreperibilità Assoluta - In Dematerializzazione,,Plico,M01 M03 M04
+RECAG003F,[FASE1],Recapitista,890,Irreperibilità Assoluta - Fascicolo Chiuso,,,M01 M03 M04
+RECAG004,[FASE1],Recapitista,890,Furto/Smarrimanto/deterioramento,,,F01 F02 F03 F04
+RECAG005A,[FASE1],Recapitista,890,Consegnato presso Punti di Giacenza - pre-esito,,,
+RECAG005B,[FASE1],Recapitista,890,Consegnato presso Punti di Giacenza - In Dematerializzazione,,ARCAD|CAD 23L,
+RECAG005C,[FASE1],Recapitista,890,Consegnato presso Punti di Giacenza - Fascicolo Chiuso,,,
+RECAG006A,[FASE1],Recapitista,890,Consegna a persona abilitata presso Punti di Giacenza - pre-esito,,,
+RECAG006B,[FASE1],Recapitista,890,Consegna a persona abilitata presso Punti di Giacenza - In Dematerializzazione,,ARCAD|CAD 23L,
+RECAG006C,[FASE1],Recapitista,890,Consegna a persona abilitata presso Punti di Giacenza - Fascicolo Chiuso,,,
+RECAG007A,[FASE1],Recapitista,890,Mancata consegna presso Punti di Giacenza - pre-esito,,,
+RECAG007B,[FASE1],Recapitista,890,Mancata consegna presso Punti di Giacenza - In Dematerializzazione,,ARCAD|CAD 23L Plico,
+RECAG007C,[FASE1],Recapitista,890,Mancata consegna presso Punti di Giacenza - Fascicolo Chiuso,,,
+RECAG008A,[FASE1],Recapitista,890,Compiuta giacenza - pre-esito,Lo statusDateTime dovrà rispettare la tempistica di giacenza prevista dal prodotto postale,,
+RECAG008B,[FASE1],Recapitista,890,Compiuta giacenza - In Dematerializzazione,Lo statusDateTime dovrà rispettare la tempistica di giacenza prevista dal prodotto postale,Plico,
+RECAG008C,[FASE1],Recapitista,890,Compiuta giacenza - Fascicolo Chiuso,Lo statusDateTime dovrà rispettare la tempistica di giacenza prevista dal prodotto postale,,
+RECAG010,[FASE1],Recapitista,890,Inesito,,,
+RECAG011A,[FASE1],Recapitista,890,In giacenza,,,
+RECAG011B,[FASE1],Recapitista,890,In giacenza - In Dematerializzazione,,ARCAD|CAD 23L,
+RECAG010A,[FASE2],Recapitista,890,Invio CAD,il campo registeredLetterCode dovrà essere valorizzato con il codice oggetto della CAD,,
+RECAG012,[FASE1],Recapitista,890,Accettazione 23L,"Lo statusDateTime deve coincidere necessariamente con la data di consegna dell'atto in caso di consegna precendete ai 10gg dalla CAD o coincidere con il 10° giorno dal giorno di consegna della CAD. La macchina a stati non risente della produzione di questo evento, il flusso di rendicontazione continua a partire dal precedente evento ricevuto",,
+RECAG013,[FASE1],Recapitista,890,Non Rendicontabile,,,
+RECAG015,[FASE1],Recapitista,890,Causa Forza Maggiore,,,C01 C02 C03 C04 C05 C06
+RECRI002,[FASE1],Recapitista,RIR,Ingresso nel paese estero,,,
+RECRI003A,[FASE1],Recapitista,RIR,Consegnato - pre-esito,,,
+RECRI003B,[FASE1],Recapitista,RIR,Consegnato - In Dematerializzazione,,AR,
+RECRI003C,[FASE1],Recapitista,RIR,Consegnato - Fascicolo Chiuso,,,
+RECRI004A,[FASE1],Recapitista,RIR,Non Consegnato - pre-esito,,,
+RECRI004B,[FASE1],Recapitista,RIR,Non Consegnato - In Dematerializzazione,,Plico,
+RECRI004C,[FASE1],Recapitista,RIR,Non Consegnato - fascicolo Chiuso,,,
+RECRI005,[FASE1],Recapitista,RIR,Furto/Smarrimanto/deterioramento,,,F01 F02 F03 F04
+RECRSI001,[FASE1],Recapitista,RIS,Avviato all'estero,,,
+RECRSI002,[FASE1],Recapitista,RIS,Ingresso nel paese estero,,,
+RECRSI003C,[FASE1],Recapitista,RIS,Consegnato - Fascicolo Chiuso,,,
+RECRSI004A,[FASE1],Recapitista,RIS,Non Consegnato - pre-esito,,,
+RECRSI004B,[FASE1],Recapitista,RIS,Non Consegnato - In Dematerializzazione,,Plico,
+RECRSI004C,[FASE1],Recapitista,RIS,Non Consegnato - fascicolo Chiuso,,,
+RECRSI005,[FASE1],Recapitista,RIS,Furto/Smarrimanto/deterioramento,,,F01 F02 F03 F04
+REC090,[FASE1],Recapitista,ALL,Archiviazione fisica materialità di ritorno,,,
