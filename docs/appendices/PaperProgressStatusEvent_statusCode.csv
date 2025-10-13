@@ -1,4 +1,4 @@
-Codice,Specifica,Fornitore,Prd,Descrizione,Note,Allegati,DeliveryFailureCause
+Codice,Specifica,Fornitore,Prodotto,Descrizione,Note,Allegati,DeliveryFailureCause
 CON998,[FASE1],Consolidatore,ALL,Scartato NODOC,,,
 CON997,[FASE1],Consolidatore,ALL,Scartato CAP/INTERNAZIONALE,,,
 CON996,[FASE1],Consolidatore,ALL,Scartato PDF,,,
@@ -11,6 +11,7 @@ CON011,[FASE1],Consolidatore,ALL,Distinta Elettronica Sigillata,,Distinta Elettr
 CON012,[FASE1],Consolidatore,ALL,OK Distinta Elettronica da Recapitista,,OK Distinta Elettronica da Recapitista,
 CON992,[FASE1],Consolidatore,ALL,KO Distinta Elettronica da Recapitista,,KO Distinta Elettronica da Recapitista,
 CON09A,[FASE1],Consolidatore,ALL,Materialità Pronta,,,
+CON09B,[FASE2],Consolidatore,ALL,Prenotazione Pickup,Lo statusDateTime dovrà coincidere con la data di prenotazione del pickup,,
 CON016,[FASE1],Consolidatore,ALL,PICKUP Sigillata,,PICKUP Sigillata,
 CON018,[FASE1],Consolidatore,ALL,Accettazione Recapitista,,Accettazione Recapitista,
 CON991,[FASE1],Consolidatore,ALL,Mancata Accetazione Recapitsita,,,
