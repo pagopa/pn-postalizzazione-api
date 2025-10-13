@@ -17,8 +17,9 @@ Utilizzando un pattern di comunicazione asincrona ,ed utilizzando come archivio 
 
 ### API Utilizzate 
 
-- *normalizzazione* : Richiesta di normalizzazione (spec: normalizatore/pn-normalizzatore-v1.yaml )
-- *normalizerCallback* : Completamento dell'operazione ( spec: normalizzatore/pn-normalizzatore-webhook-v1.yaml)
+- *normalizzazione* : Richiesta di normalizzazione (vedi [pn-normalizzatore-v1.yaml](openapi/normalizzatore/pn-normalizzatore-v1.yaml) )
+- *normalizerCallback* : Completamento dell'operazione (vedi [pn-normalizzatore-webhook-v1.yaml](openapi/normalizzatore/pn-normalizzatore-webhook-v1.yaml) )
+- *normalizzazioneSync*: [FASE2] Richiesta di normalizzazione sincrona (spec: [pn-normalizzatore-sync-v1.yaml](openapi/normalizzatore/pn-normalizzatore-sync-v1.yaml) )
 
 ### Gestione degli Allegati
 
@@ -85,7 +86,7 @@ Il servizio di deduplica è un servizio sincrono esposto tramite api `POST /dedu
 
 ### API Utilizzate 
 
-- *deduplica* : Richiesta di deduplicazione (spec: normalizatore/pn-normalizzatore-deduplica-v1.yaml )
+- *deduplica* : Richiesta di deduplica  (vedi: [pn-normalizzatore-sync-v1.yaml](openapi/normalizzatore/pn-normalizzatore-sync-v1.yaml) )
 
 ### Sequence Diagram
 
