@@ -1,13 +1,13 @@
-Allegato,Evento legato,Tipologia,Note
-Affido conservato,CON020,Archivio,vedi con020.md
-Distinta Elettronica Sigillata,CON011,Archivio,
-OK Distinta Elettronica da Recapitista,CON012,CSV,
-KO Distinta Elettronica da Recapitista,CON992,CSV,
-Accettazione Recapitista,CON018,PDF,
-PICKUP Sigillata,CON016,PDF,
-Plico,REC,PDF|ZIP,
-AR,REC,PDF|ZIP,
-23L,REC,PDF|ZIP,
-CAN,REC,PDF,
-ARCAD,REC,PDF|ZIP,
-CAD,REC,PDF|ZIP,
+Allegato,Fornitore,Evento,Tipologia,Note
+Affido conservato,Consolidatore,CON020,Archivio,vedi documentazione con020.md
+Distinta Elettronica Sigillata,Consolidatore,CON011,Archivio,
+OK Distinta Elettronica da Recapitista,Consolidatore,CON012,CSV,
+KO Distinta Elettronica da Recapitista,Consolidatore,CON992,CSV,
+Accettazione Recapitista,Consolidatore,CON018,PDF,
+PICKUP Sigillata,Consolidatore,CON016,PDF,
+Plico,Recapitisa,Vedi macchine a stati,PDF|ZIP,
+AR,Recapitisa,Vedi macchine a stati,PDF|ZIP,
+23L,Recapitisa,Vedi macchine a stati,PDF|ZIP,
+CAN,Recapitisa,Vedi macchine a stati,PDF,
+ARCAD,Recapitisa,Vedi macchine a stati,PDF|ZIP,
+CAD,Recapitisa,Vedi macchine a stati,PDF|ZIP,
