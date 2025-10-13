@@ -1,20 +1,20 @@
-codice,signifcato
-M01,destinatario irreperibile
-M02,destinatario deceduto
-M03,destinatario sconosciuto
-M04,destinatario trasferito
-M05,invio rifiutato
-M06,Indirizzo inesatto
-M07,indirizzo inesistente
-M08,indirizzo insufficiente
-M09,Altre Motivazioni
-F01,furto
-F02,smarrimento
-F03,deterioramento
-F04,rapina
-C01,incendio
-C02,strada chiusa per lavori in corso o frana
-C03,strada chiusa dalle autorità per eventi eccezionali
-C04,"maltempo: alluvione, neve o allagamento"
-C05,terremoto
-C06,eruzione vulcanica
+Codice,Significato,Fornitore,Evento
+M01,destinatario irreperibile,Recapitista,Vedi macchine a stati
+M02,destinatario deceduto,Recapitista,Vedi macchine a stati
+M03,destinatario sconosciuto,Recapitista,Vedi macchine a stati
+M04,destinatario trasferito,Recapitista,Vedi macchine a stati
+M05,invio rifiutato,Recapitista,Vedi macchine a stati
+M06,Indirizzo inesatto,Recapitista,Vedi macchine a stati
+M07,indirizzo inesistente,Recapitista,Vedi macchine a stati
+M08,indirizzo insufficiente,Recapitista,Vedi macchine a stati
+M09,Altre Motivazioni,Recapitista,Vedi macchine a stati
+F01,furto,Recapitista,Vedi macchine a stati
+F02,smarrimento,Recapitista,Vedi macchine a stati
+F03,deterioramento,Recapitista,Vedi macchine a stati
+F04,rapina,Recapitista,Vedi macchine a stati
+C01,incendio,Recapitista,Vedi macchine a stati
+C02,strada chiusa per lavori in corso o frana,Recapitista,Vedi macchine a stati
+C03,strada chiusa dalle autorità per eventi eccezionali,Recapitista,Vedi macchine a stati
+C04,"maltempo: alluvione, neve o allagamento",Recapitista,Vedi macchine a stati
+C05,terremoto,Recapitista,Vedi macchine a stati
+C06,eruzione vulcanica,Recapitista,Vedi macchine a stati
