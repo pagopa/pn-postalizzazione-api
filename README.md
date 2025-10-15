@@ -1,11 +1,11 @@
 # Integrazione SEND con Consolidatore e Recapitisti
 
-Fare riferimento ai seguenti allegati
+Per le integrazioni di SEND con Consolidatore e Recapitisti fare riferimento alla documentazione di dettaglio.
 
 ## Allegato tecnico Consolidatore 
 
-Fare riferimento al [Consolidatore_README.md](Consolidatore_README.md)
+Documento di riferimento: [Consolidatore_README.md](Consolidatore_README.md)
 
 ## Allegato tecnico Recapitista 
 
-Fare riferimento al [Recapitista_README.md](Recapitista_README.md)
+Documento di riferimento: [Recapitista_README.md](Recapitista_README.md)
