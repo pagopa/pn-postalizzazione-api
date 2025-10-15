@@ -1,0 +1,17 @@
+components: 
+
+  parameters:
+  
+    xPagopaAddrManCxId:
+        name: "pn-address-manager-cx-id"
+        in: header
+        schema:
+          type: string
+        required: true
+    xPagopaAddrManApiKey:
+        name: x-api-key
+        description: Credenziale di accesso
+        in: header
+        required: true
+        schema:
+          type: string

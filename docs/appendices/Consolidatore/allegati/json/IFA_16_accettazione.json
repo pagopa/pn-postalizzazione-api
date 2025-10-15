@@ -1,0 +1,37 @@
+{
+  "requestId": "<Identificativo univoco della richiesta>",
+  "requestDate": "<Data in cui è stato inviato il messaggio nel formato yyyy-MM-dd'T'HH:mm:ss.SSS'Z'>",
+  "fileHash": "<Hash del file ZIP contenente l’esito di caricamento della “Distinta Unica” in base all’algoritmo SHA256>",
+  "fileObjectId": "<Identificativo univoco file storage (GetUpload.fileObjectId)>",
+  "fileName": "<Nome del file ZIP contenente i due CSV che forniscono l’esito di caricamento della DU. Es: NPSO_G_DU_ID30382157_2341915_01.zip>",
+  "flowName": "<Nome univoco delle Flusso di Caricamento DU assegnato dalla piattaforma del Recapitista. Nel caso la piattaforma non classificasse il flusso, può essere utilizzato il valore della “requestId” o con il “fileName” senza estensione>",
+  "flowProcedure": "<Valore fisso a “IFA16”>",
+  "flowType": "<Valore fisso a “INFO”>",
+  "zCode": "<Valore fisso dedicato a PagoPA, in fase di definizione>",
+  "sourceSystem": {
+    "systemId": "RECP",
+    "systemName": "Recapitista"
+  },
+  "infoList": [
+    {
+      "name": "recapitistaId",
+      "type": "string",
+      "value": "<Identificativo del recapitista a cui inoltrare la DU>"
+    },
+    {
+      "name": "prenotazioneId",
+      "type": "string",
+      "value": "<ID Prenotazione spedizione>"
+    },
+    {
+      "name": "event",
+      "type": "string",
+      "value": "<Identificativo dell'evento ricevuto dal recapitista. Es. “ESITO_CARICAMENTO_DU”>"
+    },
+    {
+      "name": "eventDate",
+      "type": "date",
+      "value": "<Data a cui è riferito l’evento nel formato yyyy-MM-dd'T'HH:mm:ss.SSS'Z'>"
+    }
+  ]
+}

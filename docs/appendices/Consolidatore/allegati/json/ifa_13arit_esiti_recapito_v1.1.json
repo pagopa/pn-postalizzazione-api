@@ -1,0 +1,23 @@
+{
+  "requestIdRc": "NPSO_<stringa univoca per Recapitista>",
+  "requestTimestamp": "2023-02-16T09:45:03",
+  "recapitista": "NPSO",
+  "totRec": "2",
+  "returnObject": 
+  [   
+    {
+      "codiceOggettoDiRitorno": "123456789010",
+      "dataEvento": "2023-02-14T09:45:03",
+      "sourceOggettoRitorno": "dematerializzato",
+      "tipologiaOggettoRitorno": "Plico",
+      "nomeFileOggettoRitorno": "123456789010.pdf"
+    },
+    {
+      "codiceOggettoDiRitorno": "123456789020",
+      "dataEvento": "2023-02-14T09:45:03",
+      "sourceOggettoRitorno": "dematerializzato",
+      "tipologiaOggettoRitorno": "Indagine",
+      "nomeFileOggettoRitorno": "123456789020.pdf"
+    }
+  ]
+}

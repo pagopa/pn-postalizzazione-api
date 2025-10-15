@@ -1,0 +1,414 @@
+openapi: 3.0.3
+info:
+  title:  API fornite dal normalizzatore in modalità sincrona.
+  version: 1.0.0
+tags:   
+  - name: Deduplica
+    description: Servizio di decuplica online.
+  - name: Normalizzatore
+    description: Servizio di normalizzazione sincrona.
+  - name: FASE1
+    description: Api da implementare nella prima integrazione FASE1.
+  - name: FASE2
+    description: Api da implementare nella FASE2.
+
+paths:
+
+  /send-normalizzatore-ingress/v1/deduplica:
+    post:
+      operationId: deduplica
+      description: |
+        Definizione delle API fornite dal normalizzatore per il servizio di deduplica online. </br>
+        Il servizio consente di confrontare due indirizzi e stabilire se sono riferiti alla stessa destinazione postale. </br>
+        La deduplica viene eseguita dopo che entrambi gli indirizzi sono stati normalizzati. </br>
+        Il servizio è sincrono e risponde con l'esito della deduplica. 
+      tags:
+        - Deduplica
+        - FASE1
+      summary: PN richiede la deduplica online
+      parameters:
+        - $ref: '#/components/parameters/xPagopaAddrManCxId'
+        - $ref: '#/components/parameters/xPagopaAddrManApiKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeduplicaRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeduplicaResponse'
+        '400':
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+
+  /send-normalizzatore-ingress/v1/normalizzazionesync:
+    post:
+      operationId: normalizzazioneSync
+      tags:
+        - Normalizzatore
+        - FASE2
+      summary: PN richiede la normalizzazione sincrona.
+      parameters:
+        - $ref: '#/components/parameters/xPagopaAddrManCxId'
+        - $ref: '#/components/parameters/xPagopaAddrManApiKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NormalizzazioneSyncRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NormalizzazioneSyncResponse'
+        '400':
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  
+
+components:
+
+
+  parameters: 
+    xPagopaAddrManCxId:
+        name: "pn-address-manager-cx-id"
+        in: header
+        schema:
+          type: string
+        required: true
+    xPagopaAddrManApiKey:
+        name: x-api-key
+        description: Credenziale di accesso
+        in: header
+        required: true
+        schema:
+          type: string
+
+
+  schemas:
+   
+    DeduplicaRequest:
+      type: object
+      required:
+        - masterIn
+        - slaveIn
+      properties:
+        configIn:
+          $ref: '#/components/schemas/ConfigIn'
+        masterIn:
+          $ref: '#/components/schemas/AddressIn'
+        slaveIn:
+          $ref: '#/components/schemas/AddressIn'
+
+    ConfigIn:
+      type: object
+      properties:
+        configurazioneDeduplica:
+          type: string
+        configurazioneNorm:
+          type: string
+
+    AddressIn:
+      type: object
+      required:
+       - localita
+       - indirizzo
+      properties:
+        id:
+          type: string
+        provincia:
+          type: string
+        cap:
+          type: string
+        localita:
+          type: string
+        localitaAggiuntiva:
+          type: string
+        indirizzo:
+          type: string
+        indirizzoAggiuntivo:
+          type: string
+        stato:
+          type: string
+
+    DeduplicaResponse:
+      type: object
+      description: >-
+        slaveOut e risultatoDedu: obbligatori in caso di risposta di successo
+        errore: valorizzato in caso di risposta con errore
+      properties:
+        masterOut:
+          $ref: '#/components/schemas/AddressOut'
+        slaveOut:
+          $ref: '#/components/schemas/AddressOut'
+        risultatoDedu:
+          type: boolean
+          description: >-
+            Codice contenete l'esito del processo di deduplica
+            - false: Indirzzi differenti
+            - true: Indirizzi uguali
+        errore:
+          type: string
+          description: >-
+            identificativo dell'errore
+            - DED400: BAD REQUEST. Mi passa un input errato sia dal punto di vista del contenuto o formale;
+            - DED401: UNAUTHORIZATED. Mi passa delle credenziali vuote o errate;
+            - DED404: NOT FOUND. Il servizio non è disponibile;
+            - DED500: INTERNAL_SERVER_ERROR. Il servizio non è raggiungibile; 
+            - DED998: SERVIZIO DI NORMALIZZAZIONE NON DISPONIBILE; 
+            - DED997: SERVIZIO ORACLE NON DISPONIBILE; 
+            - DED992: ERRORE_GENERICO;
+            - DED001: WARNING - DEDUPLICA NON POSSIBILE PER INDIRIZZO_MASTER_SCARTATO
+            - DED002: WARNING - DEDUPLICA NON POSSIBILE PER INDIRIZZO_SLAVE_SCARTATO;
+            - DED003: WARNING - DEDUPLICA NON POSSIBILE PER ENTRAMBI_SCARTATI;
+
+    AddressOut:
+      type: object
+      required:
+       - nRisultatoNorm
+       - fPostalizzabile
+      properties:
+        id:
+          type: string
+          description: |-
+            Identificativo dell'indirizzo
+        nRisultatoNorm:
+          type: integer
+          description: |- 
+            Risultato di normalizzazione (0 : scartato/ 1,2,3,4,5 : normalizzato);
+        nErroreNorm:
+          type: integer
+          description: |- 
+            Codice di errore: può contenere i seguenti valori
+            - 001 : IL CAP NON E' PRESENTE IN INPUT;
+            - 002 : LA PROVINCIA NON E' PRESENTE IN INPUT;
+            - 003 : IL CAP IN INPUT RISULTA DIVERSO DAL CAP DELLA LOCALITA;
+            - 004 : IL CAP IN INPUT RISULTA DIVERSO DAL CAP DELLA VIA;
+            - 005 : IL CAP IN INPUT RISULTA DIVERSO DAL CAP DELL'ARCO DI CAP DELLA VIA;
+            - 006 : LA SIGLA PROVINCIA IN INPUT RISULTA DIVERSA DA QUELLA DETERMINATA;
+            - 007 : IL CAP NON E' PRESENTE NEL RANGE DI CAP CONSENTITI;
+            - 008 : LA PROVINCIA NON E' PRESENTE SULLA TABELLA PROVINCIE;
+            - 009 : LA PROVINCIA E IL CAP INDIVIDUANO DUE PROVINCIE DIVERSE;
+            - 019 : I DATI DI PROVINCE E/O CAP NON SONO VALIDI;
+            - 101 : LA LOCALITA' NON E' PRESENTE IN INPUT;
+            - 102 : NON E' STATO TROVATO NESSUN CANDIDATO PER LA LOCALITA;
+            - 103 : E' STATO TROVATO ALMENO UN CANDIDATO PER QUESTA LOCALITA', MA NESSUNO AVEVA UN PUNTEGGIO TALE DA ESSERE VALIDATO;
+            - 104 : SONO STATI TROVATI PIU' CANDIDATI VALIDI PER QUESTA LOCALITA;
+            - 105 : LA LOCALITA CANDIDATA NON E' PUBBLICATA;
+            - 106 : LA LOCALITA' NON CONGRUENTE CON LO STATO;
+            - 107 : LOCALITA' NON TROVATA NELLA PROVINCIA;
+            - 108 : LISTA DI LOCALITA' AMBIGUE TRONCATA;
+            - 109 : I DATI DELLE LOCALITA' NON SONO VALIDI;
+            - 201 : LA FRAZIONE NON E' PRESENTE IN INPUT;
+            - 202 : NON E' STATO TROVATO NESSUN CANDIDATO PER LA FRAZIONE;
+            - 203 : E' STATO TROVATO ALMENO UN CANDIDATO PER QUESTA FRAZIONE, MA NESSUNO AVEVA UN PUNTEGGIO TALE DA ESSERE VALIDATO;
+            - 204 : SONO STATI TROVATI PIU' CANDIDATI VALIDI PER QUESTA FRAZIONE;
+            - 301 : LA LOCALITA E LA FRAZIONE INDIVIDUANO DUE COMUNI DIVERSI;
+            - 302 : LOCALITA' E FRAZIONE INDICANO FRAZIONI DIVERSE;
+            - 303 : LA FRAZIONE NON E' CONGRUENTE CON LA VIA;
+            - 401 : LA DUG NON E' PRESENTE IN INPUT;
+            - 402 : NON E' STATO TROVATO NESSUN CANDIDATO PER LA DUG;
+            - 404 : SONO STATI TROVATI PIU' CANDIDATI VALIDI PER QUESTA DUG;
+            - 409 : I DATI DELLE DUG E COMPLEMENTI A DUG NON SONO VALIDI;
+            - 421 : LA VIA NON E' PRESENTE IN INPUT;
+            - 422 : NON E' STATO TROVATO NESSUN CANDIDATO PER LA VIA;
+            - 423 : E' STATO TROVATO ALMENO UN CANDIDATO PER QUESTA VIA, MA NESSUNO AVEVA UN PUNTEGGIO TALE DA ESSERE VALIDATA;
+            - 424 : SONO STATI TROVATI PIU' CANDIDATI VALIDI PER QUESTA VIA;
+            - 425 : SONO STATE TROVATE IN INPUT ALMENO DUE VIRGOLE;
+            - 426 : LA DUG IN INPUT E QUELLA DEL CANDIDATO HANNO DIVERSA MACRODUG;
+            - 427 : LA VIA CANDIDATA NON E' PUBBLICATA;
+            - 429 : I DATI DELLE VIE NON SONO VALIDI;
+            - 430 : LA VIA IN INPUT CORRISPONDE ESATTAMENTE AD UNA FRAZIONE;
+            - 431 : LA VIA NON E' STATA TROVATA ALL'INTERNO DI UNA CITTA' ZONATA E IL CAP DI INPUT NON è UN CAP VALIDO PER QUELLA CITTA';
+            - 441 : SOLO SULLE VIE MULTICAP: NON E' STATO TROVATO IL CIVICO SULL'ARCO DI CAP DELLA VIA;
+            - 442 : IL CAP TROVATO SULLA VIA DI UNA LOCALITA' E' INCONGRUENTE CON IL CAP DELLA LOCALITA' TROVATA;
+            - 443 : LA VIA NON E' UNIVOCA E ALMENO UNA HA CAP E CIVICO INCONGRUENTI;
+            - 449 : I DATI DEGLI ARCHI NON SONO VALIDI;
+            - 451 : CASELLA POSTALE CON CAP GENERICO;
+            - 452 : LA VIA E' UNA CLAUSOLA DI PRESSO;
+            - 459 : INDIRZZO CON CASELLA POSTALE NON VALIDO;
+            - 461 : INDIRIZZO NON POSTABILIZZABILE PER RIGA DI STAMPA TROPPO LUNGA;
+            - 501 : ALCUNI ELEMENTI DELL'INDIRIZZO HANNO UNA LUNGHEZZA SUPERIORE A QUELLA STAMPABILE;
+            - 601 : NON E' STATO TROVATO NESSUN CANDIDATO PER LO STATO;
+            - 609 : I DATI DEGLI STATI ESTERI NON SONO VALIDI;
+            - 701 : È STATA SUPERATA LA LUNGHEZZA MASSIMA PER UN SINGOLO CAMPO DI INPUT;
+            - 702 : È STATA SUPERATA LA LUNGHEZZA MASSIMA DELL'INTERO QUERY DI INPUT
+            - 901 : ERRORE INTERNO NON CLASSIFICABILE;
+            - 997 : ERRORE NEL SERVIZIO DI NORMALIZZAZIONE;
+            - 998 : ERRORE FORMATTAZIONE DATI;
+            - 999 : CARATTERI NON ASCII PRESENTI NELL'INDIRIZZO;
+        sSiglaProv:
+          type: string
+          description: |- 
+            Sigla provincia normalizzata;
+        fPostalizzabile:
+          type: string
+          description: |- 
+            (0 : NON Postalizzabile, 1 : Postalizzabile); 
+        sStatoUff:
+          type: string
+          description: |- 
+            Stato normalizzato (Valorizzato ITALIA, REPUBBLICA DI SAN MARINO e CITTA' DEL VATICANO + TUTTI GLI STATI ESTERI); 
+        sStatoAbb:
+          type: string
+          description: |- 
+            Stato abbreviato normalizzato;
+        sStatoSpedizione:
+          type: string
+          description: |- 
+            Stato di Spedizione;
+        sComuneUff:
+          type: string
+          description: |- 
+            Comune normalizzato;
+        sComuneAbb:
+          type: string
+          description: |- 
+            Comune Abbreviato normalizzato;
+        sComuneSpedizione:
+          type: string
+          description: |- 
+            Comune di spedizione;
+        sFrazioneUff:
+          type: string
+          description: |- 
+            Frazione normalizzata;
+        sFrazioneAbb:
+          type: string
+          description: |- 
+            Frazione Abbreviata normalizzata;
+        sFrazioneSpedizione:
+          type: string
+          description: |- 
+            Frazione di Spedizione;
+        sCivicoAltro:
+          type: string
+          description: |- 
+            altri elementi del civico (interno, piano, scala, palazzo …) 
+        sCap:
+          type: string
+          description: |- 
+            cap normalizzato;
+        sPresso:
+          type: string
+          description: |- 
+            informazioni di presso e casella postale (C.P 123, Presso sig. rossi …);
+        sViaCompletaUff:
+          type: string
+          description: |- 
+            via completa normalizzata (DUG+COMPL+TOPONIMO+CIVICO POSTALE);   
+        sViaCompletaAbb:
+          type: string
+          description: |- 
+            via completa normalizzata abbreviata (DUG+COMPL+TOPONIMO+CIVICO POSTALE ABBREVIATA);
+        sViaCompletaSpedizione:
+          type: string
+          description: |- 
+            Indirizzo di Stampa; 
+        sCodiceCastaleComune:
+          description: \[FASE2\] Codice catastale del comune;
+          type: string
+
+
+    Problem:
+      required:
+        - type
+        - status
+        - title
+        - errors
+      properties:
+        status:
+          description: The HTTP status code generated by the origin server for this occurrence of the problem.
+          type: integer
+          format: int32
+          example: 503
+          maximum: 600
+          minimum: 100
+          exclusiveMaximum: true
+        title:
+          description: A short, summary of the problem type. Written in english and readable
+          example: Service Unavailable
+          maxLength: 64
+          pattern: ^[ -~]{0,64}$
+          type: string
+        detail:
+          description: A human readable explanation of the problem.
+          example: Request took too long to complete.
+          maxLength: 4096
+          pattern: ^.{0,1024}$
+          type: string
+        traceId:
+          description: Internal support identifier associated to error
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        errors:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/ProblemError'
+
+    ProblemError:
+      required:
+        - code
+      properties:
+        code:
+          description: Internal code of the error, in human-readable format
+          example: PN_PARAMETER_TOO_LONG | PN_PARAMETER_TOO_SHORT | PN_DUPLICATE_ENTRY | etc...
+          type: string
+        element:
+          description: Parameter or request body field name for validation error
+          example: 'body.order.item[2].quantity'
+          type: string
+        detail:
+          description: A human readable explanation specific to this occurrence of the problem.
+          example: Parameter not valid
+          maxLength: 1024
+          type: string
+
+    NormalizzazioneSyncRequest:
+      type: object
+      required:
+        - addressIn
+      properties:
+        addressIn:
+          $ref: '#/components/schemas/AddressIn'
+
+
+    NormalizzazioneSyncResponse:
+      type: object
+      description: >-
+          addressOut: obbligatorio in caso di risposta di successo
+          errore: valorizzato in caso di risposta con errore
+      properties:
+        addressOut:
+          $ref: '#/components/schemas/AddressOut'
+        errore:
+          type: string
+          description: >-
+            identificativo dell'errore, da definire in fase di implementazione
