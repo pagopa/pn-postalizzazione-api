@@ -1,0 +1,32 @@
+{
+  "requestId": "<Identificativo univoco della richiesta>",
+  "requestDate": "<Data in cui è stato inviato il messaggio nel formato yyyy-MM-dd'T'HH:mm:ss.SSS'Z'>",
+  "fileHash": "<Hash del flusso “Esito di recapito” in base all’algoritmo SHA256>",
+  "fileObjectId": "<Identificativo univoco file storage (GetUpload.fileObjectId)>",
+  "fileName": "<Nome del flusso contenente gli esiti di recapito. Es: ESITO-RECAP_003_20230113184201.ZIP>",
+  "flowName": "<Nome univoco assegnato dal recapitista. Es. requestId>",
+  "flowProcedure": "IFA10",
+  "flowType": "<Valore fisso a “INFO”>",
+  "zCode": "<Valore fisso dedicato a PagoPA, in fase di definizione>",
+    "sourceSystem": {
+    "systemId": "RECAP",
+    "systemName": "Recapitista"
+  },
+  "infoList": [
+    {
+      "name": "recapitistaId",
+      "type": "string",
+      "value": "<Identificativo univoco associato al recapitista>"
+    },
+    {
+      "name": "event",
+      "type": "string",
+      "value": "<Valore fisso a “RECAPITISTA_ESITO_RECAPITO”>"
+    },
+    {
+      "name": "eventDate",
+      "type": "date",
+      "value": "<Data a cui è riferito l’evento nel formato yyyy-MM-dd'T'HH:mm:ss.SSS'Z'  Es: 2023-01-13T18:42:01.526Z>"
+    }
+  ]
+}

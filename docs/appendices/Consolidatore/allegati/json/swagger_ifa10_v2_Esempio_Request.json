@@ -1,0 +1,17 @@
+{
+  "errorCode": "string",
+  "errorDescription": "string",
+  "fileObjectId": "string",
+  "flowName": "string",
+  "flowType": "string",
+  "originalRequestId": "string",
+  "requestDate": "2023-04-17T17:12:28.987Z",
+  "requestId": "string",
+  "errorsDetails": [
+    {
+      "requestIdPA": "string",
+      "errorCodeDet": "string",
+      "errorDescriptionDet": "string"
+    }
+  ]
+}

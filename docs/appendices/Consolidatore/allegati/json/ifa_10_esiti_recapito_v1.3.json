@@ -1,0 +1,80 @@
+{
+  "requestIdRc": "A11IL2PNWYJU7H",
+  "requestTimestamp": "2023-02-16T09:45:03",
+  "recapitista": "NPSO",
+  "totRec": "2",
+  "analytic": 
+  [   
+    {
+      "requestId": "ABCD-HILM-YKWX-202202-0001_req-001",
+      "iun": "ABCD-HILM-YKWX-202202-0001",
+      "codiceOggettoPostale": "123456789000",
+      "tipoProdotto": "890",
+      "esito": "RECAG01B",
+      "dataEsito": "2023-02-16T09:45:03",
+      "motivoMancatoRecapito": "",
+      "returnObject":
+      [
+        {
+          "codiceOggettoDiRitorno": "123456789010",
+          "dataEvento": "2023-02-14T09:45:03",
+          "sourceOggettoRitorno": "dematerializzato",
+          "tipologiaOggettoRitorno": "23L",
+          "nomeFileOggettoRitorno": "123456789010.pdf"
+        },
+        {
+          "codiceOggettoDiRitorno": "123456789020",
+          "dataEvento": "2023-02-14T09:45:03",
+          "sourceOggettoRitorno": "dematerializzato",
+          "tipologiaOggettoRitorno": "ARCAD",
+          "nomeFileOggettoRitorno": "123456789020.pdf"
+        }
+      ],
+      "relatedobject": 
+      {
+        "codiceOggettoCorrelato": "123456789020",
+        "tipoOggettoCorrelato": "CAD",
+        "esitoOggettoCorrelato": "Postalizzato",
+        "dataEsitoOggettoCorrelato": "2023-02-14T09:45:03"
+      }
+    },
+    {
+      "requestId": "ABCD-HILM-YKWX-202202-0002_req-001",
+      "iun": "ABCD-HILM-YKWX-202202-0002",
+      "codiceOggettoPostale": "123456790000",
+      "tipoProdotto": "890",
+      "esito": "RECAG01B",
+      "dataEsito": "2023-02-17T09:45:03",
+      "motivoMancatoRecapito": "",
+      "returnObject":
+      [
+        {
+          "codiceOggettoDiRitorno": "123456790010",
+          "dataEvento": "2023-02-14T09:45:03",
+          "sourceOggettoRitorno": "dematerializzato",
+          "tipologiaOggettoRitorno": "23L",
+          "nomeFileOggettoRitorno": "123456790010.pdf"
+        },
+        {
+          "codiceOggettoDiRitorno": "identificativo_tecnico_recapitista",
+          "dataEvento": "2023-02-11T11:33:03",
+          "sourceOggettoRitorno": "Full digital",
+          "tipologiaOggettoRitorno": "Indagine",
+          "nomeFileOggettoRitorno": "identificativo_tecnico_recapitista.pdf"
+        }
+      ],
+      "discoveredAddress": 
+      {
+        "name": "Leonardo Da Vinci",
+        "nameRow2": "c/o Racing teams",
+        "address": "Via della Mola Maggiorana, 16",
+        "addressRow2": "Scala B",
+        "cap": "00063",
+        "city": "Roma",
+        "city2": "Campagnano di Roma",
+        "pr": "RM",
+        "country": "ITALIA"
+      }
+    }
+  ]
+}

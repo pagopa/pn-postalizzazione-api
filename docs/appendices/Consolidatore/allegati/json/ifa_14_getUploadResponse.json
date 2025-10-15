@@ -1,0 +1,8 @@
+{
+  "requestId": "string",
+  "responseDate": "date",
+  "presignedUrl": "string",
+  "fileObjectId": "string",
+  "errorCode": "string",
+  "errorDescription": "string"
+}
