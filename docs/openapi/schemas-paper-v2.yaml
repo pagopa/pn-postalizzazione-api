@@ -681,6 +681,86 @@ components:
 
 
     ##########################################################################
+    ###              SEGNALAZIONE ERRORE DI RENDICONTAZIONE                ###
+    ##########################################################################
+
+    PaperDeliveryReconciliationErrorReport:
+      required:
+        - requestId
+        - requestTimestamp
+        - productType
+        - courier
+        - errorCategory
+        - errorMessage
+        - errorCause
+      type: object
+      properties:
+        requestId:
+          type: string
+          minLength: 30
+          maxLength: 250
+          example: 'PREPARE_ANALOG_DOMICILE.IUN_JKVR-QEAU-XZYK-202604-Q-1.RECINDEX_0.ATTEMPT_0.PCRETRY_0'
+          description: >-
+            Identificativo della richiesta di postalizzazione impattata dall'errore di rendicontazione.
+        requestTimestamp:
+          type: string
+          format: date-time
+          example: '2026-04-17T01:40:31Z'
+          description: >-
+            Timestamp della segnalazione in UTC.
+        productType:
+          description: >-
+            Tipo prodotto di cui viene chiesto il recapito:  <br/>
+            - __AR__: Raccomandata Andata e Ritorno nazionale,  <br/>
+            - __890__: Recapito a norma della legge 890/1982,  <br/>
+            - __RS__: Raccomandata Semplice nazionale (per Avviso di mancato Recapito). <br/>
+            - __RIS__: Raccomandata Internazionale Semplice,  <br/>
+            - __RIR__: Raccomandata Internazionale con AR.  <br/>
+          type: string
+          minLength: 2
+          maxLength: 3
+          example: 'AR'
+        courier:
+          type: string
+          description: >-
+            Identificativo unificato del recapitista a cui è stata affidata la spedizione.
+          example: 'Poste'
+        registeredLetterCode:
+          type: string
+          description: >-
+            Il codice oggetto di tracciatura della spedizione presso il recapitista.
+          example: '698547829431'
+        recAcceptanceDate:
+          type: string
+          format: date-time
+          description: >-
+            Data di affido/accettazione della spedizione da parte del recapitista.
+          example: '2026-04-21T14:42:28Z'
+        errorCategory:
+          type: string
+          minLength: 3
+          maxLength: 50
+          example: 'OCR_VALIDATION'
+          description: >-
+            Categoria sintetica dell'errore di rendicontazione riscontrato.
+        errorMessage:
+          type: string
+          minLength: 5
+          maxLength: 250
+          example: 'Validation failed: YOLO could not detect required labels (registration number, delivery date, checkbox, or signature section)'
+          description: >-
+            Messaggio descrittivo dell'errore, utile ad indirizzare le azioni correttive. <br />
+            In nessun caso conterrà dettagli tecnici e/o stack trace. <br />
+        errorCause:
+          type: string
+          minLength: 3
+          maxLength: 50
+          example: 'OCR_KO'
+          description: >-
+            Causa sintetica, codificata, dell'errore di rendicontazione.
+
+
+    ##########################################################################
     ###                 PRECARICAMENTO FILE SU SAFESTORAGE                 ###
     ##########################################################################
 

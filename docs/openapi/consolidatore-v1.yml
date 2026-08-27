@@ -41,6 +41,8 @@ tags:
     description: Api per la gestione della postalizzazione
   - name: GestioneDuplicati
     description: Api per la gestione dei duplicati di postalizzazione
+  - name: GestioneErroreRendicontazione
+    description: Api per la segnalazione e gestione degli errori di rendicontazione
   - name: FASE1
     description: Api da implementare nella prima integrazione FASE1
   - name: FASE2
@@ -267,6 +269,66 @@ paths:
               schema:
                 $ref: '#/components/schemas/OperationResultCodeResponse'
 
+  /piattaforma-notifiche-ingress/v1/paper-deliveries-recon-error-report:
+    post:
+      operationId: sendPaperDeliveryReconciliationErrorReport
+      summary: SEND segnala al Consolidatore un errore di rendicontazione
+      tags:
+        - GestioneErroreRendicontazione
+        - FASE2
+      description: >- 
+        [FASE2]
+        Questa operazione permette a SEND di segnalare al consolidatore il requestId 
+        di una spedizione bloccata a causa di un errore di rendicontazione, 
+        in modo che il consolidatore possa inoltrare la segnalazione al recapitista 
+        ed automatizzare il processo di re-invio degli eventi corretti. <br/>
+        Il consolidatore deve validare sintatticamente la richiesta e, se tale 
+        validazione ha successo, registrare la segnalazione in maniera sincrona.
+      parameters:
+        - $ref: '#/components/parameters/xPagopaExtchServiceId'
+        - $ref: '#/components/parameters/xPagopaExtchApiKey'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaperDeliveryReconciliationErrorReport'
+        required: true
+      responses:
+        '200':
+          description: OK (esito presa in carico)
+          content:
+            application/json:
+              example: { resultCode: '200.00', resultDescription: 'OK.   ', clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
+              schema:
+                $ref: '#/components/schemas/OperationResultCodeResponse'
+        '400':
+          description: errore di validazione della richiesta
+          content:
+            application/json:
+              examples: 
+                syntaxError: 
+                  summary: 'Errore sintattico'
+                  value: { resultCode: '400.01', resultDescription: 'Syntax Error', errorList: [ 'field requestId is required'], clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
+                semanticError: 
+                  summary: 'Errore semantico'
+                  value: { resultCode: '400.02', resultDescription: 'Semantic Error', errorList: [ 'unrecognized productType value'], clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
+              schema:
+                $ref: '#/components/schemas/OperationResultCodeResponse'
+        '401':
+          description: Mancano le credenziali di identificazione o sono sbagliate
+          content:
+            application/json:
+              example: { resultCode: '401.00', resultDescription: 'Authentication Failed', clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
+              schema:
+                $ref: '#/components/schemas/OperationResultCodeResponse'
+        '409':
+          description: requestId già segnalato o non rielaborabile
+          content:
+            application/json:
+              example: { resultCode: '409.00', resultDescription: 'duplicated error report for requestId', clientResponseTimeStamp: '2019-08-24T14:15:22Z'}
+              schema:
+                $ref: '#/components/schemas/OperationResultCodeResponse'
+
 components:
 
   parameters:
@@ -295,3 +357,6 @@ components:
 
     PaperReplicasProgressesResponse:
       $ref: 'schemas-paper-v2.yaml#/components/schemas/PaperReplicasProgressesResponse'
+
+    PaperDeliveryReconciliationErrorReport:
+      $ref: 'schemas-paper-v2.yaml#/components/schemas/PaperDeliveryReconciliationErrorReport'
