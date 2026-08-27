@@ -690,6 +690,7 @@ components:
         - requestTimestamp
         - productType
         - courier
+        - registeredLetterCode
         - errorCategory
         - errorMessage
         - errorCause
@@ -713,7 +714,7 @@ components:
             Tipo prodotto di cui viene chiesto il recapito:  <br/>
             - __AR__: Raccomandata Andata e Ritorno nazionale,  <br/>
             - __890__: Recapito a norma della legge 890/1982,  <br/>
-            - __RS__: Raccomandata Semplice nazionale (per Avviso di mancato Recapito). <br/>
+            - __RS__: Raccomandata Semplice nazionale, <br/>
             - __RIS__: Raccomandata Internazionale Semplice,  <br/>
             - __RIR__: Raccomandata Internazionale con AR.  <br/>
           type: string
@@ -730,12 +731,6 @@ components:
           description: >-
             Il codice oggetto di tracciatura della spedizione presso il recapitista.
           example: '698547829431'
-        recAcceptanceDate:
-          type: string
-          format: date-time
-          description: >-
-            Data di affido/accettazione della spedizione da parte del recapitista.
-          example: '2026-04-21T14:42:28Z'
         errorCategory:
           type: string
           minLength: 3
