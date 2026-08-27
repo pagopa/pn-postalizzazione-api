@@ -740,14 +740,21 @@ components:
           type: string
           minLength: 3
           maxLength: 50
-          example: 'OCR_VALIDATION'
+          example: 'DATE_ERROR'
           description: >-
-            Categoria sintetica dell'errore di rendicontazione riscontrato.
+            Categoria sintetica dell'errore di rendicontazione riscontrato. Valori possibili: <br/>
+            - __INCONSISTENT_STATE__: stato incoerente riscontrato nella sequenza di eventi rendicontati 
+              (statusCode mancanti oppure giacenza 890 in stato incoerente) <br/>
+            - __RENDICONTAZIONE_SCARTATA__: rendicontazione scartata per mancato rispetto dei vincoli temporali previsti <br/>
+            - __DATE_ERROR__: errore nella validazione dei timestamp degli eventi della sequenza <br/>
+            - __REGISTERED_LETTER_CODE_ERROR__: errore nella validazione del registeredLetterCode della sequenza <br/>
+            - __DELIVERY_FAILURE_CAUSE_ERROR__: errore nella validazione del deliveryFailureCause della sequenza <br/>
+            - __ATTACHMENTS_ERROR__: errore nella validazione degli allegati della sequenza <br/>
         errorMessage:
           type: string
-          minLength: 5
+          minLength: 3
           maxLength: 250
-          example: 'Validation failed: YOLO could not detect required labels (registration number, delivery date, checkbox, or signature section)'
+          example: 'Invalid business timestamps'
           description: >-
             Messaggio descrittivo dell'errore, utile ad indirizzare le azioni correttive. <br />
             In nessun caso conterrà dettagli tecnici e/o stack trace. <br />
@@ -755,9 +762,15 @@ components:
           type: string
           minLength: 3
           maxLength: 50
-          example: 'OCR_KO'
+          example: 'VALUES_NOT_FOUND'
           description: >-
-            Causa sintetica, codificata, dell'errore di rendicontazione.
+            Causa sintetica, codificata, dell'errore di rendicontazione. Valori possibili: <br/>
+            - __VALUES_NOT_FOUND__: non sono presenti tutti i valori attesi (es. statusCode mancanti) <br/>
+            - __STOCK_890_REFINEMENT_ERROR__: il processo di refinement della giacenza 890 è terminato in KO <br/>
+            - __STOCK_890_REFINEMENT_MISSING__: stato di refinement della giacenza 890 mancante o non atteso <br/>
+            - __GIACENZA_DATE_ERROR__: tempo intercorso tra gli eventi di giacenza superiore a quello previsto <br/>
+            - __VALUES_NOT_MATCHING__: i valori presenti negli eventi della sequenza non coincidono tra loro <br/>
+            - __INVALID_VALUES__: i valori presenti negli eventi della sequenza sono nulli o vuoti <br/>
 
 
     ##########################################################################
