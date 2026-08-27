@@ -681,6 +681,94 @@ components:
 
 
     ##########################################################################
+    ###              SEGNALAZIONE ERRORE DI RENDICONTAZIONE                ###
+    ##########################################################################
+
+    PaperDeliveryReconciliationErrorReport:
+      required:
+        - requestId
+        - requestTimestamp
+        - productType
+        - courier
+        - registeredLetterCode
+        - errorCategory
+        - errorMessage
+        - errorCause
+      type: object
+      properties:
+        requestId:
+          type: string
+          minLength: 30
+          maxLength: 250
+          example: 'PREPARE_ANALOG_DOMICILE.IUN_JKVR-QEAU-XZYK-202604-Q-1.RECINDEX_0.ATTEMPT_0.PCRETRY_0'
+          description: >-
+            Identificativo della richiesta di postalizzazione impattata dall'errore di rendicontazione.
+        requestTimestamp:
+          type: string
+          format: date-time
+          example: '2026-04-17T01:40:31Z'
+          description: >-
+            Timestamp della segnalazione in UTC.
+        productType:
+          description: >-
+            Tipo prodotto di cui viene chiesto il recapito:  <br/>
+            - __AR__: Raccomandata Andata e Ritorno nazionale,  <br/>
+            - __890__: Recapito a norma della legge 890/1982,  <br/>
+            - __RS__: Raccomandata Semplice nazionale, <br/>
+            - __RIS__: Raccomandata Internazionale Semplice,  <br/>
+            - __RIR__: Raccomandata Internazionale con AR.  <br/>
+          type: string
+          minLength: 2
+          maxLength: 3
+          example: 'AR'
+        courier:
+          type: string
+          description: >-
+            Identificativo unificato del recapitista a cui è stata affidata la spedizione.
+          example: 'Poste'
+        registeredLetterCode:
+          type: string
+          description: >-
+            Il codice oggetto di tracciatura della spedizione presso il recapitista.
+          example: '698547829431'
+        errorCategory:
+          type: string
+          minLength: 3
+          maxLength: 50
+          example: 'DATE_ERROR'
+          description: >-
+            Categoria sintetica dell'errore di rendicontazione riscontrato. Valori possibili: <br/>
+            - __INCONSISTENT_STATE__: stato incoerente riscontrato nella sequenza di eventi rendicontati 
+              (statusCode mancanti oppure giacenza 890 in stato incoerente) <br/>
+            - __RENDICONTAZIONE_SCARTATA__: rendicontazione scartata per mancato rispetto dei vincoli temporali previsti <br/>
+            - __DATE_ERROR__: errore nella validazione dei timestamp degli eventi della sequenza <br/>
+            - __REGISTERED_LETTER_CODE_ERROR__: errore nella validazione del registeredLetterCode della sequenza <br/>
+            - __DELIVERY_FAILURE_CAUSE_ERROR__: errore nella validazione del deliveryFailureCause della sequenza <br/>
+            - __ATTACHMENTS_ERROR__: errore nella validazione degli allegati della sequenza <br/>
+        errorMessage:
+          type: string
+          minLength: 3
+          maxLength: 250
+          example: 'Invalid business timestamps'
+          description: >-
+            Messaggio descrittivo dell'errore, utile ad indirizzare le azioni correttive. <br />
+            In nessun caso conterrà dettagli tecnici e/o stack trace. <br />
+        errorCause:
+          type: string
+          minLength: 3
+          maxLength: 50
+          example: 'VALUES_NOT_FOUND'
+          description: >-
+            Causa sintetica, codificata, dell'errore di rendicontazione. Valori possibili: <br/>
+            - __VALUES_NOT_FOUND__: non sono presenti tutti i valori attesi (es. statusCode mancanti) <br/>
+            - __STOCK_890_REFINEMENT_ERROR__: il processo di refinement della giacenza 890 è terminato in KO <br/>
+            - __STOCK_890_REFINEMENT_MISSING__: stato di refinement della giacenza 890 mancante o non atteso <br/>
+            - __GIACENZA_DATE_ERROR__: tempo intercorso tra gli eventi di giacenza superiore a quello previsto <br/>
+            - __VALUES_NOT_MATCHING__: i valori presenti negli eventi della sequenza non coincidono tra loro <br/>
+            - __INVALID_VALUES__: i valori presenti negli eventi della sequenza sono nulli o vuoti <br/>
+
+
+    ##########################################################################
     ###                 PRECARICAMENTO FILE SU SAFESTORAGE                 ###
     ##########################################################################
 
