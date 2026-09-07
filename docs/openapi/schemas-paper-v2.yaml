@@ -427,6 +427,7 @@ components:
                   - __SCANNED__ <br/>
                   - __DIGITAL__ <br/>
                   In caso di assenza del campo, la piattaforma considererà DIGITAL gli allegati con MIME/Type application/zip.
+                nullable: false
               originType:
                 type: string
                 description: >-
@@ -435,6 +436,7 @@ components:
                   - __DUPLICATED__ <br/>
                   - altri valori da specificare in fase di approfondimento tecnico
                   In caso di assenza del campo la piattaforma considererà come originale (`ORIGINAL`) il documento
+                nullable: false
         discoveredAddress:
           description: >-
             Indirizzo del destinatario desunto dalle indagini del personale postale.
