@@ -269,7 +269,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/OperationResultCodeResponse'
 
-  /piattaforma-notifiche-ingress/v1/paper-deliveries-recon-error-report:
+  /piattaforma-notifiche-ingress/v1/paper-deliveries-error-report:
     post:
       operationId: sendPaperDeliveryReconciliationErrorReport
       summary: SEND segnala al Consolidatore un errore di rendicontazione
@@ -291,7 +291,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PaperDeliveryReconciliationErrorReport'
+              $ref: '#/components/schemas/PaperDeliveryErrorReport'
         required: true
       responses:
         '200':
@@ -358,5 +358,5 @@ components:
     PaperReplicasProgressesResponse:
       $ref: 'schemas-paper-v2.yaml#/components/schemas/PaperReplicasProgressesResponse'
 
-    PaperDeliveryReconciliationErrorReport:
-      $ref: 'schemas-paper-v2.yaml#/components/schemas/PaperDeliveryReconciliationErrorReport'
+    PaperDeliveryErrorReport:
+      $ref: 'schemas-paper-v2.yaml#/components/schemas/PaperDeliveryErrorReport'

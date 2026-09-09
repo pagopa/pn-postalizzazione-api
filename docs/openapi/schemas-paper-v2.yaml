@@ -686,7 +686,7 @@ components:
     ###              SEGNALAZIONE ERRORE DI RENDICONTAZIONE                ###
     ##########################################################################
 
-    PaperDeliveryReconciliationErrorReport:
+    PaperDeliveryErrorReport:
       required:
         - requestId
         - requestTimestamp
